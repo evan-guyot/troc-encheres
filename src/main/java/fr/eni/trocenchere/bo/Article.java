@@ -11,9 +11,14 @@ public class Article {
 	private int miseAPrix;
 	private int prixVente;
 	private boolean etatVente;
+	private int noCategorie;
+	private int noEncherisseur;
+	private int noUtilisateur;
+	
+
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente) {
+			int miseAPrix, int prixVente, boolean etatVente, int noUtilisateur, int noCategorie) {
 		this.noArticle = noArticle;
 		this.nom = nom;
 		this.description = description;
@@ -22,6 +27,12 @@ public class Article {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+	}
+	
+	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int miseAPrix, int prixVente, boolean etatVente, int noUtilisateur, int noCategorie, int noEncherisseur) {
+		this(noArticle, nom, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixVente, etatVente, noUtilisateur, noCategorie);
+		this.noEncherisseur = noEncherisseur;
 	}
 	
 	public int getNoArticle() {

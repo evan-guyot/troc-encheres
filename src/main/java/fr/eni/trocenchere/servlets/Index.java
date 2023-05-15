@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.trocenchere.bll.ArticleManager;
+
 /**
  * Servlet implementation class Index
  */
@@ -20,6 +22,8 @@ public class Index extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ArticleManager articleManager = ArticleManager.getInstance();
+		articleManager.getArticles();
 		System.out.println("=====================> TOTO");
 		doGet(request, response);
 	}
