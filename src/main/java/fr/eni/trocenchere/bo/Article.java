@@ -12,11 +12,17 @@ public class Article {
 	private int prixVente;
 	private boolean etatVente;
 	private int noCategorie;
-	private int noEncherisseur;
-	private int noUtilisateur;
+	private Utilisateur utilisateur;
+	private Utilisateur encherisseur;
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente, int noUtilisateur, int noCategorie) {
+			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie, Utilisateur encherisseur) {
+		this(noArticle, nom, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixVente, etatVente, utilisateur, noCategorie);
+		this.encherisseur = encherisseur;
+	}
+	
+	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie) {
 		this.noArticle = noArticle;
 		this.nom = nom;
 		this.description = description;
@@ -25,12 +31,31 @@ public class Article {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
 	}
 	
-	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente, int noUtilisateur, int noCategorie, int noEncherisseur) {
-		this(noArticle, nom, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixVente, etatVente, noUtilisateur, noCategorie);
-		this.noEncherisseur = noEncherisseur;
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Utilisateur getEncherisseur() {
+		return encherisseur;
+	}
+
+	public void setEncherisseur(Utilisateur encherisseur) {
+		this.encherisseur = encherisseur;
 	}
 	
 	public int getNoArticle() {

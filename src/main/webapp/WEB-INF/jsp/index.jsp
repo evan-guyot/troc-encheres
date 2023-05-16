@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
+<%@ page import="fr.eni.trocenchere.bo.Article" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,20 +50,27 @@
                 </div>
             </form>
         </div>
-        <div class="col-12 col-md-6">
-            <ul class="list-unstyled">
-                <li>
+        <div class="col-12">
+            <ul class="list-unstyled row">
+                <% for (Article article : (List<Article>) request.getAttribute("articles")) { %>
+                <li class="col-12 col-md-3">
                     <div class="card">
                         <img class="card-img-top" src="https://picsum.photos/200/300" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make
-                                up the bulk of the card's content.</p>
+                            <h2 class="card-title fw-bold"><%=article.getNom() %>
+                            </h2>
+                            <p class="card-text"><%=article.getDescription() %>
+                            </p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item"><span
+                                    class="fw-bold">Prix : </span> <%=article.getMiseAPrix() %>
+                            </li>
+                            <li class="list-group-item"><span
+                                    class="fw-bold">Fin enchères : </span><%=article.getDateFinEnchere() %>
+                            </li>
+                            <li class="list-group-item"><span class="fw-bold">Vendeur : </span><%=article.getUtilisateur().getPseudo() %>
+                            </li>
                         </ul>
                         <div class="card-body">
                             <a href="#" class="card-link">Card link</a>
@@ -69,9 +78,17 @@
                         </div>
                     </div>
                 </li>
+                <%} %>
             </ul>
         </div>
     </div>
 </div>
 </body>
+<script>
+function toto(){
+	console.log(<%=request.getAttribute("articles")%>);
+}
+
+toto();
+</script>
 </html>

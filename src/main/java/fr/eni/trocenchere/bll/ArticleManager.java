@@ -1,6 +1,7 @@
 package fr.eni.trocenchere.bll;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.dal.ArticleDAO;
@@ -21,7 +22,7 @@ public class ArticleManager {
 		return instance;
 	}
 	
-	public ArrayList<Article> getArticles(){
+	public List<Article> getArticles(){
 		try {
 			return daoArticle.getArticles();
 		} catch (Exception e) {
