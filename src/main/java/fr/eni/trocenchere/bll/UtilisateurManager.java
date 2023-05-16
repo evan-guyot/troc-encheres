@@ -1,14 +1,16 @@
 package fr.eni.trocenchere.bll;
 
+import fr.eni.trocenchere.bo.Utilisateur;
 import fr.eni.trocenchere.dal.DAOFactory;
 import fr.eni.trocenchere.dal.UtilisateurDAO;
+import fr.eni.trocenchere.dal.jdbc.UtilisateurDaoJdbcImpl;
 
 public class UtilisateurManager {
 	private UtilisateurDAO daoUtilisateur;
 
 	private static UtilisateurManager instance;
 
-	private UtilisateurManager() {
+	public UtilisateurManager() {
 		daoUtilisateur =  DAOFactory.getUtilisateurDAO();
 	}
 
@@ -28,5 +30,39 @@ public class UtilisateurManager {
 
 		if (sb.length() > 0)
 			throw new Exception(sb.toString());
+	}
+	
+	public void creationProfile(Utilisateur utilisateur) throws Exception {
+		StringBuilder sb = new StringBuilder();
+		
+		System.out.println("TEST3535");
+		
+		if (utilisateur.getPseudo().isBlank())
+			sb.append("Il manque : pseudo");
+		if (utilisateur.getNom().isBlank())
+			sb.append("Il manque : nom");
+		if (utilisateur.getPrenom().isBlank())
+			sb.append("Il manque : prenom");
+		if (utilisateur.getEmail().isBlank())
+			sb.append("Il manque : email");
+		if (utilisateur.getTelephone().isBlank())
+			sb.append("Il manque : tel");
+		if (utilisateur.getRue().isBlank())
+			sb.append("Il manque : rue");
+		if (utilisateur.getCodePostal().isBlank())
+			sb.append("Il manque : codepostal");
+		if (utilisateur.getVille().isBlank())
+			sb.append("Il manque : ville");
+		if (utilisateur.getMotDePasse().isBlank())
+			sb.append("Il manque : mdp");
+		
+		
+		if (sb.length() > 0)
+			throw new Exception(sb.toString());
+		
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		conn.newProfile(utilisateur);
+		
+	
 	}
 }
