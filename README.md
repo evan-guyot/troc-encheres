@@ -9,11 +9,11 @@ gagnés en vendant des objets, puis peuvent être utilisés pour acquérir d’a
 
 ## 👨‍💼 L'équipe 
 
-| Nom                              | Rôle           |
-| :------------------------------- | -------------- |
-| [Alexeïs](https://www.github.com)| Développeur    |
-| [Mathis](https://www.github.com) | Développeur    |
-| [Evan](https://www.github.com)   | Développeur    |
+| Nom                                              | Rôle           |
+| :----------------------------------------------- | -------------- |
+| [Alexeïs](https://www.github.com/alexeisviscaino)| Développeur    |
+| [Mathis](https://github.com/MatekMathis)         | Développeur    |
+| [Evan](https://www.github.com/evan-guyot)        | Développeur    |
 
 ## 🔗 Liens
 
