@@ -29,7 +29,13 @@ public class Index extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Article> listArticles = articleManager.getArticles();
         request.setAttribute("articles", listArticles);
-        request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        
+		if (request.getSession().getAttribute("idConnectedUser") == null) {
+			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+			Integer.parseInt("20");
+		} else {
+			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
+		}        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

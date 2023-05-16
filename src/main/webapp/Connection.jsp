@@ -27,8 +27,6 @@ form>* {
 	<main class="form-signin w-50 m-auto">
 		<form action="ConnectionUtilisateur" method="post">
 			<h1 class="h3 mb-3 fw-normal">Connectez-vous</h1>
-			<%=isCorrect%>
-			<%=request.getAttribute("erreur") == null %>
 			<div class="form-floating">
 				<input type="text" class="form-control" id="identifiant"
 					name="identifiant" placeholder="Pseudo ou adresse mail"> <label
