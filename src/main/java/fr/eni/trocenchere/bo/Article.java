@@ -13,13 +13,6 @@ public class Article {
 	private boolean etatVente;
 	private int noCategorie;
 	private Utilisateur utilisateur;
-	private Utilisateur encherisseur;
-	
-	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie, Utilisateur encherisseur) {
-		this(noArticle, nom, description, dateDebutEnchere, dateFinEnchere, miseAPrix, prixVente, etatVente, utilisateur, noCategorie);
-		this.encherisseur = encherisseur;
-	}
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie) {
@@ -48,14 +41,6 @@ public class Article {
 
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
-	}
-
-	public Utilisateur getEncherisseur() {
-		return encherisseur;
-	}
-
-	public void setEncherisseur(Utilisateur encherisseur) {
-		this.encherisseur = encherisseur;
 	}
 	
 	public int getNoArticle() {

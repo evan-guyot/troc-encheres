@@ -19,9 +19,9 @@ import fr.eni.trocenchere.bo.Article;
 @WebServlet("/")
 public class Index extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static ArticleManager articleManager = ArticleManager.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArticleManager articleManager = ArticleManager.getInstance();
         List<Article> listArticles = articleManager.getArticles();
         request.setAttribute("articles", listArticles);
         request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
@@ -29,7 +29,6 @@ public class Index extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        System.out.println("=====================> TOTO");
         doGet(request, response);
     }
 
