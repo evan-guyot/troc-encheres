@@ -59,9 +59,41 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 
 	@Override
-	public Utilisateur login(String identifiant, String motDePasse) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur login(String identifiant, String motDePasse) throws Exception {
+		Utilisateur utilisateur = null;
+
+		System.out.println("tries");
+		try (Connection cnx = ConnectionProvider.connection()) {
+			try {
+				System.out.println("successed");
+				cnx.setAutoCommit(false);
+				PreparedStatement stm = cnx.prepareStatement(LOGIN_REQ);
+
+				stm.setString(1, identifiant);
+				stm.setString(2, motDePasse);
+				stm.setString(3, identifiant);
+				stm.setString(4, motDePasse);
+
+				ResultSet rs = stm.executeQuery();
+
+				if (rs.next()) {
+					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+				}
+				stm.close();
+				cnx.commit();
+			} catch (Exception e) {
+				cnx.rollback();
+				throw e;
+			}
+
+		} catch (SQLException e) {
+			throw new SQLException(e);
+		}
+
+		return utilisateur;
 	}
 
 }
