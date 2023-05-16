@@ -15,8 +15,6 @@ public class Article {
 	private int noEncherisseur;
 	private int noUtilisateur;
 	
-
-	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int miseAPrix, int prixVente, boolean etatVente, int noUtilisateur, int noCategorie) {
 		this.noArticle = noArticle;
