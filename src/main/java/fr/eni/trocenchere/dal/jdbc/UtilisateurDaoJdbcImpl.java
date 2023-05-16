@@ -53,19 +53,17 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-		
-	}
+		}		
 
+	}
+	
 
 	@Override
 	public Utilisateur login(String identifiant, String motDePasse) throws Exception {
 		Utilisateur utilisateur = null;
 
-		System.out.println("tries");
 		try (Connection cnx = ConnectionProvider.connection()) {
 			try {
-				System.out.println("successed");
 				cnx.setAutoCommit(false);
 				PreparedStatement stm = cnx.prepareStatement(LOGIN_REQ);
 
