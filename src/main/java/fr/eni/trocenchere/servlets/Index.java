@@ -19,7 +19,12 @@ import fr.eni.trocenchere.bo.Article;
 @WebServlet("/")
 public class Index extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static ArticleManager articleManager = ArticleManager.getInstance();
+    private static ArticleManager articleManager;
+
+    public Index(){
+        super();
+        articleManager = ArticleManager.getInstance();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Article> listArticles = articleManager.getArticles();
