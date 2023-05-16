@@ -17,8 +17,9 @@
             <h1>ENI - Encheres</h1>
         </div>
         <div class="col-6">
-            <a href="">s'inscrire</a>
-            <a href="ConnectionUtilisateur">se connecter</a>
+            <a href="" class="d-block float-end">se connecter</a>
+            <span class="d-block float-end"> / </span>
+            <a href="ConnectionUtilisateur" class="d-block float-end">s'inscrire</a>
         </div>
         <div class="col-12">
             <h2 class="text-center">
@@ -33,7 +34,7 @@
                             <label for="article">Filtres :</label>
                             <input type="text" name="article" id="article" placeholder="le nom de l'article contient">
                         </div>
-                        <div class="form-label">
+             	           <div class="form-label">
                             <label for="categorie">Catégories :</label>
                             <select name="categorie" id="categorie">
                                 <option value="décoration">décoration</option>
@@ -69,7 +70,11 @@
                             <li class="list-group-item"><span
                                     class="fw-bold">Fin enchères : </span><%=article.getDateFinEnchere() %>
                             </li>
-                            <li class="list-group-item"><span class="fw-bold">Vendeur : </span><%=article.getUtilisateur().getPseudo() %>
+                            <li class="list-group-item">
+                                <span class="fw-bold">Vendeur : </span>
+                                <a href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
+                                    <span><%=article.getUtilisateur().getPseudo() %></span>
+                                </a>
                             </li>
                         </ul>
                         <div class="card-body">
@@ -84,11 +89,4 @@
     </div>
 </div>
 </body>
-<script>
-function toto(){
-	console.log(<%=request.getAttribute("articles")%>);
-}
-
-toto();
-</script>
 </html>
