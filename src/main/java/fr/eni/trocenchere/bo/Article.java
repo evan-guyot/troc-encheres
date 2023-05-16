@@ -11,9 +11,11 @@ public class Article {
 	private int miseAPrix;
 	private int prixVente;
 	private boolean etatVente;
+	private int noCategorie;
+	private Utilisateur utilisateur;
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente) {
+			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie) {
 		this.noArticle = noArticle;
 		this.nom = nom;
 		this.description = description;
@@ -22,6 +24,23 @@ public class Article {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
+	}
+	
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	
 	public int getNoArticle() {
