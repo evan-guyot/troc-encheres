@@ -17,4 +17,4 @@ gagnés en vendant des objets, puis peuvent être utilisés pour acquérir d’a
 
 ## 🔗 Liens
 
-- [Trello](https://www.github.com/octokatherine)
+- [Trello](https://trello.com/invite/b/eDtZNND2/ATTIa408abd98058b04a1658fbdd1f37fca245ADFBF4/tableau-avancement-taches-troc-encheres)
