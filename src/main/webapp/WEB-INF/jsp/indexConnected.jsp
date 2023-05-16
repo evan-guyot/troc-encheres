@@ -2,6 +2,7 @@
          pageEncoding="ISO-8859-1" %>
 <%@ page import="fr.eni.trocenchere.bo.Article" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.lang.Integer" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +13,17 @@
 </head>
 <body>
 <div class="container">
+	<%
+		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+	%>
     <div class="row">
         <div class="col-6">
-            <h1>ENI - Encheres</h1>
+            <h1>ENI - Encheres youhouu </h1>
+    
         </div>
         <div class="col-6">
-            <a href="">s'inscrire</a>
-            <a href="ConnectionUtilisateur">se connecter</a>
+            <a href="utilisateur?id=<%=	idConnectedUser%>">voir mon profil</a>
+            <a href="#">se déconnecter</a>
         </div>
         <div class="col-12">
             <h2 class="text-center">

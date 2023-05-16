@@ -57,12 +57,13 @@ public class ConnectionUtilisateur extends HttpServlet {
 			try {
 				utilisateur = utilisateurManager.connecterUtilisateur(request.getParameter("identifiant"),
 						request.getParameter("motDePasse"));
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			if (utilisateur != null) {
-				session.setAttribute("idConnectedUser", utilisateur.getNoUtilisateur());
+				session.setAttribute("connectedUserId", utilisateur.getNoUtilisateur());
 			} else {
 				redirectWithError(request, response);
 			}
