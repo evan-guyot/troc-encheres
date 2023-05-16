@@ -1,25 +1,23 @@
 package fr.eni.trocenchere.dal.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import fr.eni.trocenchere.bo.Article;
-import fr.eni.trocenchere.bo.Utilisateur;
 import fr.eni.trocenchere.dal.ArticleDAO;
+import fr.eni.trocenchere.dal.ConnectionProvider;
 
 public class ArticleDaoJdbcImpl implements ArticleDAO {
-	private static final String GET_ALL_ARTICLES = "select * from Articles";
+	private static final String GET_ALL_ARTICLES = "select * from ARTICLES_VENDUS";
 
 	@Override
 	public ArrayList<Article> getArticles() throws Exception {
 		ArrayList<Article> listArticle = null;
 		
-		try (Connection conn = JdbcTools.getConnection();
+		try (Connection conn = ConnectionProvider.connection();
 				Statement stmt = conn.createStatement();) {
 
 			ResultSet rs = stmt.executeQuery(GET_ALL_ARTICLES);

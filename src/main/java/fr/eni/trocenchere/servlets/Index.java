@@ -17,13 +17,13 @@ public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArticleManager articleManager = ArticleManager.getInstance();
+		articleManager.getArticles();
 		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArticleManager articleManager = ArticleManager.getInstance();
-		articleManager.getArticles();
 		System.out.println("=====================> TOTO");
 		doGet(request, response);
 	}
