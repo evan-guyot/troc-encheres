@@ -21,6 +21,11 @@ public class UtilisateurManager {
 		return instance;
 	}
 
+
+	public Utilisateur connecterUtilisateur(String identifiant, String motDePasse) throws Exception {
+		validConnectionUtilisateur(identifiant, motDePasse);
+		return daoUtilisateur.login(identifiant, motDePasse);
+	}
 	
 	public void validConnectionUtilisateur(String identifiant, String motDePasse) throws Exception {
 		StringBuilder sb = new StringBuilder();
