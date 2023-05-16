@@ -1,11 +1,14 @@
 package fr.eni.trocenchere.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Utilisateur;
@@ -18,39 +21,52 @@ public class ConnectionUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtilisateurManager utilisateurManager;
 
-
-    public ConnectionUtilisateur() {
-        super();
-        utilisateurManager = UtilisateurManager.getInstance();
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public ConnectionUtilisateur() {
+		super();
+		utilisateurManager = UtilisateurManager.getInstance();
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur utilisateur = null;
 
-		System.out.println(request.getParameter("identifiant"));
-		System.out.println(request.getParameter("motDePasse"));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher requestDispatcher;
 
-		try {
-			utilisateur = utilisateurManager.connecterUtilisateur(request.getParameter("identifiant"), request.getParameter("motDePasse"));
-		} catch (Exception e) {
+		if (request.getSession().getAttribute("idConnectedUser") == null) {
+			requestDispatcher = request.getRequestDispatcher("Connection.jsp");
+		} else {
+			requestDispatcher = request.getRequestDispatcher("/");
+		}
+
+		requestDispatcher.forward(request, response);
+	}
+
+	protected void redirectWithError(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setAttribute("erreur", true);
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("Connection.jsp");
+
+		requestDispatcher.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("connectedUserId") == null) {
+			Utilisateur utilisateur = null;
 			
-			e.printStackTrace();
-		}
+			try {
+				utilisateur = utilisateurManager.connecterUtilisateur(request.getParameter("identifiant"),
+						request.getParameter("motDePasse"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-		if(utilisateur != null) {
-			System.out.println(utilisateur.toString());			
+			if (utilisateur != null) {
+				session.setAttribute("idConnectedUser", utilisateur.getNoUtilisateur());
+			} else {
+				redirectWithError(request, response);
+			}
+			doGet(request, response);
 		}
-		else {
-			System.out.println("informations invalides");
-		}
-		doGet(request, response);
 	}
-
 }
