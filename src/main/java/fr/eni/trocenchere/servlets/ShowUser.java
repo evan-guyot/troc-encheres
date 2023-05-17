@@ -28,7 +28,12 @@ public class ShowUser extends HttpServlet {
 		int utilisateurID = Integer.parseInt(request.getParameter("id"));
 		Utilisateur utilisateur = utilisateurManager.getUserById(utilisateurID);
 		request.setAttribute("utilisateur", utilisateur);
-		request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
+
+		if (request.getSession().getAttribute("connectedUserId") == null) {
+			request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/WEB-INF/jsp/userConnected.jsp").forward(request, response);
+		}        
 	}
 
 }

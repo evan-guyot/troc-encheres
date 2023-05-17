@@ -16,16 +16,21 @@ Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 	crossorigin="anonymous">
 </head>
 <body>
+	<%
+	int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+	%>
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
 				<h1>ENI - Encheres</h1>
 			</div>
-			
-        <div class="col-6">
-            <a href="ConnectionUtilisateur" class="btn btn-primary active" role="button" aria-pressed="true">Se connecter</a>
-            <a href="#" class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
-        </div>
+
+			<div class="col-6">
+				<a href="utilisateur?id=<%=idConnectedUser%>"
+					class="btn btn-primary active" role="button" aria-pressed="true">Voir
+					mon profil</a> <a href="DeconnectionUtilisateur" class=" btn btn-dark
+					active" role="button" aria-pressed="true">Se déconnecter</a>
+			</div>
 			<div class="col-12">
 				<h2 class="text-center">Utilisateur</h2>
 			</div>
@@ -44,8 +49,8 @@ Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 									<span>Pseudo : </span><span><%=utilisateur.getPseudo()%></span>
 								</p>
 								<p class="card-text">
-									<span>Adresse : </span><span><%=utilisateur.getRue()%>
-										<%=utilisateur.getVille()%> <%=utilisateur.getCodePostal()%></span>
+									<span>Adresse : </span><span><%=utilisateur.getRue()%> <%=utilisateur.getVille()%>
+										<%=utilisateur.getCodePostal()%></span>
 								</p>
 								<p class="card-text">
 									<span>Tel : </span><span><%=utilisateur.getTelephone()%></span>
