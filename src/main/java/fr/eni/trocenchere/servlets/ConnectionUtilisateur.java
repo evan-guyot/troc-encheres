@@ -31,13 +31,10 @@ public class ConnectionUtilisateur extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 
 		if (request.getSession().getAttribute("connectedUserId") == null) {
-			System.out.println("non connecté");
 			requestDispatcher = request.getRequestDispatcher("Connection.jsp");
 			requestDispatcher.forward(request, response);
 		} else {
-			System.out.println("connecté");
-			requestDispatcher = request.getRequestDispatcher("/");
-			requestDispatcher.forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/");
 		}
 
 	}
