@@ -18,8 +18,13 @@ public class UtilisateurManager {
 	
 	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws Exception {
 		try {
+			if(utilisateur.getMotDePasse() == null) {
+				Utilisateur utilisateurPassword = getUserById(id);
+				utilisateur.setMotDePasse(utilisateurPassword.getMotDePasse());
+			}
+			System.out.println("==============> : " + utilisateur.getNom());
 			validationUserId(id);
-			validationUtilisateur(utilisateur);
+			//validationUtilisateur(utilisateur);
 			return daoUtilisateur.updateUserById(utilisateur, id);
 		} catch (Exception e1) {
 			throw new Exception("mise à jour de l'utilisateur échec");
@@ -130,7 +135,6 @@ public class UtilisateurManager {
 			sb.append("Il manque : ville");
 		if (utilisateur.getMotDePasse().isBlank())
 			sb.append("Il manque : mdp");
-		
 		
 		if (sb.length() > 0)
 			throw new Exception(sb.toString());

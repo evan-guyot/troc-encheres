@@ -39,7 +39,6 @@ public class ShowUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int utilisateurID = Integer.parseInt(request.getParameter("id"));
 		Utilisateur updateProfile;
-		System.out.println("TEST");
 		try {
 			if(request.getParameter("mdp") != null) {
 				updateProfile = new Utilisateur(

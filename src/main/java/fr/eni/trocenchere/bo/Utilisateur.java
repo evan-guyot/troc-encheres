@@ -71,6 +71,12 @@ public class Utilisateur {
 		this.noUtilisateur = noUtilisateur;
 	}
 	
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, int credit, boolean administrateur, String motDePasse) {
+		this(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit, administrateur);
+		this.motDePasse = motDePasse;
+	}
+	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

@@ -64,7 +64,7 @@ Boolean isDeleted = (Boolean) request.getAttribute("articles");
 										<div class="col-12 col-md-6">
 											<div class="form-label">
 												<label for="name" class="d-block">Nom</label> <input
-													type="text" id="name" value="<%=utilisateur.getNom()%>" required>
+													type="text" id="name" name="name" value="<%=utilisateur.getNom()%>" required>
 											</div>
 
 											<div class="form-label">
@@ -109,7 +109,7 @@ Boolean isDeleted = (Boolean) request.getAttribute("articles");
 
 											<div class="form-label">
 												<label for="password" class="d-block">mot de passe</label> <input
-													type="password" id="password" name="password" required>
+													type="password" id="password" name="password">
 											</div>
 										</div>
 									</div>

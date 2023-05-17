@@ -202,8 +202,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
-				}
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"),
+    						rs.getString("mot_de_passe"));
+                }
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -236,7 +237,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
                 	PreparedStatement pstmtDelete;
                 	pstmtDelete = cnx.prepareStatement(DELETE_USER_BY_ID);
                 	pstmtDelete.setInt(1, id);
-                	int rsDelete = pstmtDelete.executeUpdate();
+                	pstmtDelete.executeUpdate();
                 	return true;
                 } else {
                 	return false;
