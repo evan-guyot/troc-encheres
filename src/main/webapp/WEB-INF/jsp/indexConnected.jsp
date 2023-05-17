@@ -18,12 +18,12 @@
 	%>
     <div class="row">
         <div class="col-6">
-            <h1>ENI - Encheres youhouu </h1>
+            <h1>ENI - Encheres</h1>
     
         </div>
         <div class="col-6">
             <a href="utilisateur?id=<%=	idConnectedUser%>">voir mon profil</a>
-            <a href="#">se déconnecter</a>
+            <a href="DeconnectionUtilisateur">se déconnecter</a>
         </div>
         <div class="col-12">
             <h2 class="text-center">

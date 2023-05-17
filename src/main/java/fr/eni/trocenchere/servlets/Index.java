@@ -29,9 +29,8 @@ public class Index extends HttpServlet {
         List<Article> listArticles = articleManager.getArticles();
         request.setAttribute("articles", listArticles);
         
-		if (request.getSession().getAttribute("idConnectedUser") == null) {
+		if (request.getSession().getAttribute("connectedUserId") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
-			Integer.parseInt("20");
 		} else {
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
 		}        
