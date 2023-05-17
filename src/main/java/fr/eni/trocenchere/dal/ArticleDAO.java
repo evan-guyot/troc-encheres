@@ -6,5 +6,5 @@ import java.util.List;
 import fr.eni.trocenchere.bo.Article;
 
 public interface ArticleDAO {
-	public List<Article> getArticles() throws Exception;
+	public List<Article> getArticles(int idCategorie , String caractereCompris) throws Exception;
 }
