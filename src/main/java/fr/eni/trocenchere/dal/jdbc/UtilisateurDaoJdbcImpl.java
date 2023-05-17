@@ -4,17 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import fr.eni.trocenchere.dal.ConnectionProvider;
 import fr.eni.trocenchere.bo.Utilisateur;
 import fr.eni.trocenchere.dal.UtilisateurDAO;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
-	private static final String LOGIN_REQ = "select * from UTILISATEURS where (pseudo = ? and mot_de_passe = ?) or (email = ? and mot_de_passe = ?)";
-	private static final String NEW_PROFILE_REQ = "insert into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String LOGIN_REQ = "SELECT * from UTILISATEURS where (pseudo = ? and mot_de_passe = ?) or (email = ? and mot_de_passe = ?)";
+	private static final String NEW_PROFILE_REQ = "INSERT into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
-	private static final String GET_USER_BY_ID = "select * from UTILISATEURS where no_utilisateur=?";
+	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
+    private static final String DELETE_USER_BY_ID = "DELETE from UTILISATEURS where no_utilisateur=?";
 
 	@Override
 	public void newProfile(Utilisateur utilisateur) throws SQLException {
@@ -188,4 +191,49 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return utilisateur;
 	}
 
+
+	@Override
+	public Boolean deleteUserById(String password, int id) throws SQLException {
+		Utilisateur utilisateur = null;
+
+		try (Connection cnx = ConnectionProvider.connection();
+				PreparedStatement pstmt = cnx.prepareStatement(GET_USER_BY_ID);) {
+            try {
+                pstmt.setInt(1, id);
+                ResultSet rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    utilisateur = new Utilisateur(
+						rs.getInt("no_utilisateur"),
+						rs.getString("mot_de_passe"));
+                } else {
+                	throw new Exception("l'id utilisateur est invalide");
+                }
+
+                System.out.println("!!!!!!!!!!!!!utilisateur.getMotDePasse().equals(password) :" + utilisateur.getMotDePasse().equals(password));
+
+                if(utilisateur.getMotDePasse().equals(password)) {
+                	PreparedStatement pstmtDelete;
+                	pstmtDelete = cnx.prepareStatement(DELETE_USER_BY_ID);
+                	pstmtDelete.setInt(1, id);
+                	int rsDelete = pstmtDelete.executeUpdate();
+                	System.out.println("rsDelete :" + rsDelete);
+                	return true;
+                } else {
+                	return false;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return false;
+	}
+
+	public Utilisateur updateUserById(int id) throws SQLException{
+		return null;
+	}
 }
