@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ page import="fr.eni.trocenchere.bo.Article" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -17,12 +17,13 @@
             <h1>ENI - Encheres</h1>
         </div>
         <div class="col-6">
-            <a href="">s'inscrire</a>
-            <a href="ConnectionUtilisateur">se connecter</a>
+            <a href="" class="d-block float-end">se connecter</a>
+            <span class="d-block float-end"> / </span>
+            <a href="ConnectionUtilisateur" class="d-block float-end">s'inscrire</a>
         </div>
         <div class="col-12">
             <h2 class="text-center">
-                Liste des enchères
+                Liste des enchÃ¨res
             </h2>
         </div>
         <div class="col-12">
@@ -33,10 +34,10 @@
                             <label for="article">Filtres :</label>
                             <input type="text" name="article" id="article" placeholder="le nom de l'article contient">
                         </div>
-                        <div class="form-label">
-                            <label for="categorie">Catégories :</label>
+             	           <div class="form-label">
+                            <label for="categorie">CatÃ©gories :</label>
                             <select name="categorie" id="categorie">
-                                <option value="décoration">décoration</option>
+                                <option value="dÃ©coration">dÃ©coration</option>
                                 <option value="voitures">voitures</option>
                                 <option value="location">location</option>
                                 <option value="informatique">informatique</option>
@@ -67,9 +68,13 @@
                                     class="fw-bold">Prix : </span> <%=article.getMiseAPrix() %>
                             </li>
                             <li class="list-group-item"><span
-                                    class="fw-bold">Fin enchères : </span><%=article.getDateFinEnchere() %>
+                                    class="fw-bold">Fin enchÃ¨res : </span><%=article.getDateFinEnchere() %>
                             </li>
-                            <li class="list-group-item"><span class="fw-bold">Vendeur : </span><%=article.getUtilisateur().getPseudo() %>
+                            <li class="list-group-item">
+                                <span class="fw-bold">Vendeur : </span>
+                                <a href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
+                                    <span><%=article.getUtilisateur().getPseudo() %></span>
+                                </a>
                             </li>
                         </ul>
                         <div class="card-body">
@@ -84,11 +89,4 @@
     </div>
 </div>
 </body>
-<script>
-function toto(){
-	console.log(<%=request.getAttribute("articles")%>);
-}
-
-toto();
-</script>
 </html>
