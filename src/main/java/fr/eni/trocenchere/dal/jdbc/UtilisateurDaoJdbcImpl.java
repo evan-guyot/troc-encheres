@@ -12,7 +12,8 @@ import fr.eni.trocenchere.dal.UtilisateurDAO;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String LOGIN_REQ = "select * from UTILISATEURS where (pseudo = ? and mot_de_passe = ?) or (email = ? and mot_de_passe = ?)";
 	private static final String NEW_PROFILE_REQ = "insert into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	
+	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
+	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
 
 	@Override
 	public void newProfile(Utilisateur utilisateur)throws SQLException {
@@ -57,7 +58,78 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	}
 	
+	@Override
+	public boolean verifEmail(String email) throws SQLException {
 
+		try (Connection cnx = ConnectionProvider.connection()) {
+			try {
+				Utilisateur utilisateur = null;
+				cnx.setAutoCommit(false);
+				PreparedStatement stm = cnx.prepareStatement(VERIF_EMAIL);
+
+				stm.setString(1, email);
+				ResultSet rs = stm.executeQuery();
+
+				if (rs.next()) {
+					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+				}
+				stm.close();
+				cnx.commit();
+				if (utilisateur != null) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				cnx.rollback();
+				throw e;
+			}
+
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+
+	}
+
+
+	@Override
+	public boolean verifPseudo(String pseudo) throws SQLException {
+
+		try (Connection cnx = ConnectionProvider.connection()) {
+			try {
+				Utilisateur utilisateur = null;
+				cnx.setAutoCommit(false);
+				PreparedStatement stm = cnx.prepareStatement(VERIF_PSEUDO);
+
+				stm.setString(1, pseudo);
+				ResultSet rs = stm.executeQuery();
+
+				if (rs.next()) {
+					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+				}
+				stm.close();
+				cnx.commit();
+				if (utilisateur != null) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				cnx.rollback();
+				throw e;
+			}
+
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}
+
+	}
 	@Override
 	public Utilisateur login(String identifiant, String motDePasse) throws Exception {
 		Utilisateur utilisateur = null;

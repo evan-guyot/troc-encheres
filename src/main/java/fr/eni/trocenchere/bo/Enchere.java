@@ -6,15 +6,16 @@ public class Enchere {
 	private int noEnchere;
 	private LocalDate dateEnchere;
 	private int montantEnchere;
-	private Utilisateur utilisateur;
-	private Article article;
+	private Utilisateur acheteur;
 	
-	public Enchere(int noEnchere, LocalDate dateEnchere, int montantEnchere, Utilisateur utilisateur, Article article) {
+	
+	public Enchere(int noEnchere, LocalDate dateEnchere, int montantEnchere, Utilisateur acheteur) {
+		super();
 		this.noEnchere = noEnchere;
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		this.utilisateur = utilisateur;
-		this.article = article;
+		this.acheteur = acheteur;
+		
 	}
 	
 	public int getNoEnchere() {
@@ -36,15 +37,12 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 	public Utilisateur getUtilisateur() {
-		return utilisateur;
+		return acheteur;
 	}
 	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+		this.acheteur = utilisateur;
 	}
-	public Article getArticle() {
-		return article;
-	}
-	public void setArticle(Article article) {
-		this.article = article;
-	}
+	
+	
+	
 }

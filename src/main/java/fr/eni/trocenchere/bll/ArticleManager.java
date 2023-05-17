@@ -32,4 +32,14 @@ public class ArticleManager {
 		return null;
 		
 	}
+	public Article getArticleById(int id){
+		try {
+			return daoArticle.getArticleById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 }
