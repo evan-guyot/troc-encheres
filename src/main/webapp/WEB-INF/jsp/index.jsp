@@ -17,9 +17,8 @@
             <h1>ENI - Encheres</h1>
         </div>
         <div class="col-6">
-            <a href="" class="d-block float-end">se connecter</a>
-            <span class="d-block float-end"> / </span>
-            <a href="ConnectionUtilisateur" class="d-block float-end">s'inscrire</a>
+            <a href="ConnectionUtilisateur" class="btn btn-primary active" role="button" aria-pressed="true">Se connecter</a>
+            <a href="#" class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
         </div>
         <div class="col-12">
             <h2 class="text-center">
