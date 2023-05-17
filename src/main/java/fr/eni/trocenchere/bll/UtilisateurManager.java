@@ -16,15 +16,14 @@ public class UtilisateurManager {
 		daoUtilisateur =  DAOFactory.getUtilisateurDAO();
 	}
 	
-	public Utilisateur updateUserById(int id) {
+	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws Exception {
 		try {
 			validationUserId(id);
-			return daoUtilisateur.updateUserById(id);
+			validationUtilisateur(utilisateur);
+			return daoUtilisateur.updateUserById(utilisateur, id);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			throw new Exception("mise à jour de l'utilisateur échec");
 		}
-		return null;
 	}
 	
 	public Boolean deleteUserById(String mdp, int id){
@@ -75,11 +74,11 @@ public class UtilisateurManager {
 	{
 		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
 		boolean result = false;
-		try 
+		try
 		{
 			result = conn.verifEmail(email);
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -91,11 +90,11 @@ public class UtilisateurManager {
 	{
 		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
 		boolean result = false;
-		try 
+		try
 		{
 			result = conn.verifPseudo(pseudo);
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -104,9 +103,15 @@ public class UtilisateurManager {
 	}
 	public void creationProfile(Utilisateur utilisateur) throws Exception {
 
+		validationUtilisateur(utilisateur);
+
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		conn.newProfile(utilisateur);
+
+	}
+
+	public void validationUtilisateur(Utilisateur utilisateur) throws Exception {
 		StringBuilder sb = new StringBuilder();
-		
-		
 		if (utilisateur.getPseudo().isBlank())
 			sb.append("Il manque : pseudo");
 		if (utilisateur.getNom().isBlank())
@@ -129,10 +134,6 @@ public class UtilisateurManager {
 		
 		if (sb.length() > 0)
 			throw new Exception(sb.toString());
-		
-		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
-		conn.newProfile(utilisateur);
-			
 	}
 	
 	public void validationUserId(int id) {

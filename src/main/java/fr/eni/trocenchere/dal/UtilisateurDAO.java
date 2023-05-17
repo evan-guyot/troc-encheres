@@ -11,5 +11,5 @@ public interface UtilisateurDAO {
 	public boolean verifPseudo(String pseudo)throws SQLException;
   	public Utilisateur getUserById(int id) throws SQLException;
 	public Boolean deleteUserById(String password, int id) throws SQLException;
-	public Utilisateur updateUserById(int id) throws SQLException;
+	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws SQLException;
 }

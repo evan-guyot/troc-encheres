@@ -59,57 +59,57 @@ Boolean isDeleted = (Boolean) request.getAttribute("articles");
 							if (idConnectedUser != null && idConnectedUser == Integer.parseInt(request.getParameter("id"))) {
 							%>
 							<div class="card-body">
-								<form action="<%=request.getContextPath()%>/UpdateUserById" method="POST">
+								<form action="<%=request.getContextPath()%>/utilisateur?id=<%=request.getParameter("id")%>" method="POST">
 									<div class="row">
 										<div class="col-12 col-md-6">
 											<div class="form-label">
 												<label for="name" class="d-block">Nom</label> <input
-													type="text" id="name" value="<%=utilisateur.getNom()%>">
+													type="text" id="name" value="<%=utilisateur.getNom()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="firstname" class="d-block">Prenom</label> <input
 													type="text" id="firstname" name="firstname"
-													value="<%=utilisateur.getPrenom()%>">
+													value="<%=utilisateur.getPrenom()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="pseudo" class="d-block">Pseudo</label> <input
 													type="text" id="pseudo" name="pseudo"
-													value="<%=utilisateur.getPseudo()%>">
+													value="<%=utilisateur.getPseudo()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="adress" class="d-block">Rue</label> <input
-													type="text" id="adress" name="adress" value="<%=utilisateur.getRue()%>">
+													type="text" id="adress" name="adress" value="<%=utilisateur.getRue()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="city" class="d-block">Ville</label> <input
-													type="text" id="city" name="city" value="<%=utilisateur.getVille()%>">
+													type="text" id="city" name="city" value="<%=utilisateur.getVille()%>" required>
 											</div>
 										</div>
 										<div class="col-12 col-md-6">
 											<div class="form-label">
 												<label for="postal-code" class="d-block">code
 													postale</label> <input type="text" id="postal-code" name="postal-code"
-													value="<%=utilisateur.getCodePostal()%>">
+													value="<%=utilisateur.getCodePostal()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="phone" class="d-block">telephone</label> <input
 													type="text" id="phone" name="phone"
-													value="<%=utilisateur.getTelephone()%>">
+													value="<%=utilisateur.getTelephone()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="email" class="d-block">email</label> <input
-													type="email" id="email" name="email" value="<%=utilisateur.getEmail()%>">
+													type="email" id="email" name="email" value="<%=utilisateur.getEmail()%>" required>
 											</div>
 
 											<div class="form-label">
 												<label for="password" class="d-block">mot de passe</label> <input
-													type="password" id="password" name="password">
+													type="password" id="password" name="password" required>
 											</div>
 										</div>
 									</div>

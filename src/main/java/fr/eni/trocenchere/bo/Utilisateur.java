@@ -14,11 +14,14 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	
+
+	/*modèle utilisé pour la suppression d'utilisateur*/
 	public Utilisateur( int noUtilisateur, String mdp) {
 		this.noUtilisateur = noUtilisateur;
 		this.motDePasse = mdp;
 	}
 
+	/*modèle utilisé pour la creation d'utilisateur*/
 	public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String mdp) {
 		this.pseudo = pseudo;
@@ -34,6 +37,19 @@ public class Utilisateur {
 		this.motDePasse = mdp;
 	}
 	
+	/*modèle utilisé pour la creation d'utilisateur*/
+	public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville) {
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.credit = 100;
+	}
 
 	public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, int credit, boolean administrateur) {

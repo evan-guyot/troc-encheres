@@ -35,5 +35,43 @@ public class ShowUser extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/userConnected.jsp").forward(request, response);
 		}        
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int utilisateurID = Integer.parseInt(request.getParameter("id"));
+		Utilisateur updateProfile;
+		System.out.println("TEST");
+		try {
+			if(request.getParameter("mdp") != null) {
+				updateProfile = new Utilisateur(
+					request.getParameter("pseudo"),
+					request.getParameter("nom"),
+					request.getParameter("prenom"),
+					request.getParameter("mail"),
+					request.getParameter("tel"),
+					request.getParameter("rue"),
+					request.getParameter("codepostal"),
+					request.getParameter("ville"),
+					request.getParameter("mdp")
+					);
+			} else {
+				updateProfile = new Utilisateur(
+					request.getParameter("pseudo"),
+					request.getParameter("nom"),
+					request.getParameter("prenom"),
+					request.getParameter("mail"),
+					request.getParameter("tel"),
+					request.getParameter("rue"),
+					request.getParameter("codepostal"),
+					request.getParameter("ville")
+					);
+			}
+			
+				utilisateurManager.updateUserById(updateProfile, utilisateurID);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }

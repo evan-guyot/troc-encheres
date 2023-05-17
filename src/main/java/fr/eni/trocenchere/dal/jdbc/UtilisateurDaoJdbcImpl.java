@@ -17,44 +17,68 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
 	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
+    private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
     private static final String DELETE_USER_BY_ID = "DELETE from UTILISATEURS where no_utilisateur=?";
 
 	@Override
 	public void newProfile(Utilisateur utilisateur) throws SQLException {
 
-		try (Connection cnx = ConnectionProvider.connection()) {
-			try {
-
-				cnx.setAutoCommit(false);
-				PreparedStatement pstmt;
-				pstmt = cnx.prepareStatement(NEW_PROFILE_REQ);
-				pstmt.setString(1, utilisateur.getPseudo());
-				pstmt.setString(2, utilisateur.getNom());
-				pstmt.setString(3, utilisateur.getPrenom());
-				pstmt.setString(4, utilisateur.getEmail());
-				pstmt.setString(5, utilisateur.getTelephone());
-				pstmt.setString(6, utilisateur.getRue());
-				pstmt.setString(7, utilisateur.getCodePostal());
-				pstmt.setString(8, utilisateur.getVille());
-				pstmt.setString(9, utilisateur.getMotDePasse());
-				pstmt.setInt(10, utilisateur.getCredit());
-				pstmt.setBoolean(11, utilisateur.isAdministrateur());
+        try (Connection cnx = ConnectionProvider.connection()) {
+            try {
+                cnx.setAutoCommit(false);
+                PreparedStatement pstmt;
+                pstmt = cnx.prepareStatement(NEW_PROFILE_REQ);
+                pstmt.setString(1, utilisateur.getPseudo());
+                pstmt.setString(2, utilisateur.getNom());
+                pstmt.setString(3, utilisateur.getPrenom());
+                pstmt.setString(4, utilisateur.getEmail());
+                pstmt.setString(5, utilisateur.getTelephone());
+                pstmt.setString(6, utilisateur.getRue());
+                pstmt.setString(7, utilisateur.getCodePostal());
+                pstmt.setString(8, utilisateur.getVille());
+                pstmt.setString(9, utilisateur.getMotDePasse());
+                pstmt.setInt(10, utilisateur.getCredit());
+                pstmt.setBoolean(11, utilisateur.isAdministrateur());
 
 				pstmt.executeUpdate();
 				pstmt.close();
 				cnx.commit();
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				cnx.rollback();
-				throw e;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            } catch (Exception e) {
+                e.printStackTrace();
+                cnx.rollback();
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws SQLException{
+		Utilisateur utilisateurCreated = null;
+
+		try (Connection cnx = ConnectionProvider.connection(); PreparedStatement pstmt = cnx.prepareStatement(UPDATE_USER_BY_ID);) {
+			pstmt.setString(1, utilisateur.getPseudo());
+            pstmt.setString(2, utilisateur.getNom());
+            pstmt.setString(3, utilisateur.getPrenom());
+            pstmt.setString(4, utilisateur.getEmail());
+            pstmt.setString(5, utilisateur.getTelephone());
+            pstmt.setString(6, utilisateur.getRue());
+            pstmt.setString(7, utilisateur.getCodePostal());
+            pstmt.setString(8, utilisateur.getVille());
+            pstmt.setString(9, utilisateur.getMotDePasse());
+            pstmt.setInt(10, id);
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            cnx.commit();
+
+            return utilisateurCreated;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return utilisateurCreated;
 	}
-
 	@Override
 	public boolean verifEmail(String email) throws SQLException {
 
@@ -163,9 +187,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return utilisateur;
 	}
 
-	@Override
-	public Utilisateur getUserById(int id) {
-		Utilisateur utilisateur = null;
+    @Override
+    public Utilisateur getUserById(int id) {
+        Utilisateur utilisateur = null;
 
 		try (Connection cnx = ConnectionProvider.connection()) {
 			try {
@@ -191,7 +215,6 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return utilisateur;
 	}
 
-
 	@Override
 	public Boolean deleteUserById(String password, int id) throws SQLException {
 		Utilisateur utilisateur = null;
@@ -209,15 +232,11 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
                 } else {
                 	throw new Exception("l'id utilisateur est invalide");
                 }
-
-                System.out.println("!!!!!!!!!!!!!utilisateur.getMotDePasse().equals(password) :" + utilisateur.getMotDePasse().equals(password));
-
                 if(utilisateur.getMotDePasse().equals(password)) {
                 	PreparedStatement pstmtDelete;
                 	pstmtDelete = cnx.prepareStatement(DELETE_USER_BY_ID);
                 	pstmtDelete.setInt(1, id);
                 	int rsDelete = pstmtDelete.executeUpdate();
-                	System.out.println("rsDelete :" + rsDelete);
                 	return true;
                 } else {
                 	return false;
@@ -231,9 +250,5 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
             e.printStackTrace();
         }
 		return false;
-	}
-
-	public Utilisateur updateUserById(int id) throws SQLException{
-		return null;
 	}
 }
