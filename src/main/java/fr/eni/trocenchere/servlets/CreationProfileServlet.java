@@ -44,7 +44,6 @@ public class CreationProfileServlet extends HttpServlet {
 		}else {
 			request.setAttribute("emailDejaPrit",true);
 			request.setAttribute("pseudoDejaPrit",true);
-			//request.getRequestDispatcher("NewProfile.jsp");
 			response.sendRedirect("NewProfile.jsp");
 		}
 	}

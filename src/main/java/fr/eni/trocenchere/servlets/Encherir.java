@@ -29,7 +29,7 @@ public class Encherir extends HttpServlet {
 		System.out.println("DEBUT TEST");
 		System.out.println(articleId);
 		System.out.println(articleCourrant.getCategorie());
-		request.getRequestDispatcher("EncherirPage.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/EncherirPage.jsp").forward(request, response);
 	}
 
 	
