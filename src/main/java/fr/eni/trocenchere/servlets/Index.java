@@ -36,21 +36,15 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println(request.getParameter("categorie"));
-    	System.out.println(request.getParameter("nomArticle"));
-
     	listArticles = articleManager.getArticles(paramCategorie,paramNomArticle);
     	request.setAttribute("articles", listArticles);
     	
     	listCategories = categorieManager.getCategories();
     	request.setAttribute("categories", listCategories);
+    	
+    	request.setAttribute("filtreCategorie", paramCategorie);
+    	request.setAttribute("filtreArticle", paramNomArticle);    	
 
-    	System.out.println("-----"+paramCategorie);
-    	
-    	request.setAttribute("noCategorie", paramCategorie);
-    	request.setAttribute("nomArticle", paramNomArticle);
-    	
-    	System.out.println("GetAttSYSO : "+request.getAttribute("noCategorie"));
         
 		if (request.getSession().getAttribute("connectedUserId") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
@@ -60,8 +54,10 @@ public class Index extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	paramCategorie = Integer.parseInt(request.getParameter("categorie"));
-    	paramNomArticle = request.getParameter("nomArticle");
+    	paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
+    	paramNomArticle = request.getParameter("filtreArticle");
+    	
+    	System.out.println(paramCategorie);
     	
         doGet(request, response);
     }

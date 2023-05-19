@@ -19,16 +19,16 @@
 	
 	int noCategorie = 0;
 
-	if(request.getParameter("noCategorie") != null){
-		noCategorie = Integer.parseInt(request.getParameter("noCategorie"));
+	if (request.getAttribute("filtreCategorie") != null) {
+		noCategorie = (int) request.getAttribute("filtreCategorie");
 	}
-	
-	String nomArticle = request.getParameter("nomArticle");
+
+	String nomArticle = (String) request.getAttribute("filtreArticle");
 	%>
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
-				<h1>ENI - Encheres</h1><%= noCategorie %><%=request.getParameter("noCategorie") %>
+				<h1>ENI - Encheres</h1>
 			</div>
 			<div class="col-6">
 				<a href="ConnectionUtilisateur" class="btn btn-primary active"
@@ -49,14 +49,14 @@
 								<%
 								if (nomArticle != null) {
 								%>
-								<input type="text" name="nomArticle" id="nomArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle"
 									placeholder="le nom de l'article contient"
 									value="<%=nomArticle%>">
 
 								<%
 								} else {
 								%>
-								<input type="text" name="nomArticle" id="nomArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle"
 									placeholder="le nom de l'article contient">
 								<%
 								}
@@ -64,19 +64,19 @@
 							</div>
 							<div class="form-label">
 								<label for="categorie">Catégories :</label> <select
-									name="categorie" id="categorie">
+									name="filtreCategorie" id="filtreCategorie">
 									<option value="0">Toutes les catégories</option>
 									<%
 									for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
 										if (noCategorie == categorie.getNoCategorie()) {
 									%>
 
-									<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%><%=categorie.getNoCategorie()%></option>
+									<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%></option>
 									<%
 									} else {
 									%>
 
-									<option value="<%=categorie.getNoCategorie()%>" ><%=categorie.getLibelle()%><%=categorie.getNoCategorie()%></option>
+									<option value="<%=categorie.getNoCategorie()%>"><%=categorie.getLibelle()%></option>
 									<%
 									}
 									}
