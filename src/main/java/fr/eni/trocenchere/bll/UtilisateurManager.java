@@ -54,11 +54,40 @@ public class UtilisateurManager {
 		if (sb.length() > 0)
 			throw new Exception(sb.toString());
 	}
-	
+	public boolean verifEmail(String email)
+	{
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		boolean result = false;
+		try 
+		{
+			result = conn.verifEmail(email);
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public boolean verifPseudo(String pseudo)
+	{
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		boolean result = false;
+		try 
+		{
+			result = conn.verifPseudo(pseudo);
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	public void creationProfile(Utilisateur utilisateur) throws Exception {
 		StringBuilder sb = new StringBuilder();
 		
-		System.out.println("TEST3535");
 		
 		if (utilisateur.getPseudo().isBlank())
 			sb.append("Il manque : pseudo");

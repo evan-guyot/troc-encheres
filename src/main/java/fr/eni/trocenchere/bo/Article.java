@@ -11,11 +11,13 @@ public class Article {
 	private int miseAPrix;
 	private int prixVente;
 	private boolean etatVente;
-	private int noCategorie;
+	private Categorie categorie;
 	private Utilisateur utilisateur;
+	private Enchere enchere;
+	private Retrait retrait;
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
-			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, int noCategorie) {
+			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, Categorie categorie, Enchere enchere, Retrait retrait) {
 		this.noArticle = noArticle;
 		this.nom = nom;
 		this.description = description;
@@ -25,14 +27,17 @@ public class Article {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+		this.enchere = enchere;
+		this.retrait = retrait;
 	}
 	
-	public int getNoCategorie() {
-		return noCategorie;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	public Utilisateur getUtilisateur() {
@@ -90,5 +95,21 @@ public class Article {
 	}
 	public void setEtatVente(boolean etatVente) {
 		this.etatVente = etatVente;
+	}
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
 }

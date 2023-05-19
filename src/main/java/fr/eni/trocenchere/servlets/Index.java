@@ -36,6 +36,7 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
     	listArticles = articleManager.getArticles(paramCategorie,paramNomArticle);
     	request.setAttribute("articles", listArticles);
     	
@@ -47,6 +48,7 @@ public class Index extends HttpServlet {
 
         
 		if (request.getSession().getAttribute("connectedUserId") == null) {
+
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);

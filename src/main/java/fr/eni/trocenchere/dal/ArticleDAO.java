@@ -7,4 +7,5 @@ import fr.eni.trocenchere.bo.Article;
 
 public interface ArticleDAO {
 	public List<Article> getArticles(int idCategorie , String caractereCompris) throws Exception;
+	public Article getArticleById(int id) throws Exception;	
 }
