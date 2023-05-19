@@ -150,7 +150,7 @@ public class UtilisateurManager {
 	}
 	
 	public void validationUserPassword(String mdp) throws Exception{
-		if (mdp == null || mdp.equals("") || mdp.trim().equals("")) {
+		if (mdp == null || mdp.trim().equals("")) {
 			throw new Exception("le mot de passe est invalide");
 		}
 	}

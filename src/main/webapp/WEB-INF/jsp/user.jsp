@@ -24,9 +24,8 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 						href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
 				</h1>
 			</div>
-
-        <div class="col-6">
-            <%
+			<div class="col-6">
+				<%
 				if (idConnectedUser != null) {
 				%>
 				<a href="utilisateur?id=<%=idConnectedUser%>">voir mon profil</a>
@@ -34,12 +33,13 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 				<%
 				} else {
 				%>
-				<a href="ConnectionUtilisateur" class="btn btn-primary active" role="button" aria-pressed="true">Se connecter</a>
-            <a href="#" class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
+				<a href="ConnectionUtilisateur" class="d-block float-end">se connecter</a> <span
+					class="d-block float-end"> / </span> <a href=""
+					class="d-block float-end">s'inscrire</a>
 				<%
 				}
 				%>
-        </div>
+			</div>
 			<div class="col-12">
 				<h2 class="text-center">Utilisateur</h2>
 			</div>
@@ -51,76 +51,6 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 								alt="user profil img">
 						</div>
 						<div class="col-sm-9">
-							<%
-							if (idConnectedUser != null && idConnectedUser == Integer.parseInt(request.getParameter("id"))) {
-							%>
-							<div class="card-body">
-								<form action="<%=request.getContextPath()%>/utilisateur?id=<%=request.getParameter("id")%>" method="POST">
-									<div class="row">
-										<div class="col-12 col-md-6">
-											<div class="form-label">
-												<label for="nom" class="d-block">Nom</label> <input
-													type="text" id="nom" name="nom" value="<%=utilisateur.getNom()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="prenom" class="d-block">Prenom</label> <input
-													type="text" id="prenom" name="prenom"
-													value="<%=utilisateur.getPrenom()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="pseudo" class="d-block">Pseudo</label> <input
-													type="text" id="pseudo" name="pseudo"
-													value="<%=utilisateur.getPseudo()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="rue" class="d-block">Rue</label> <input
-													type="text" id="rue" name="rue" value="<%=utilisateur.getRue()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="ville" class="d-block">Ville</label> <input
-													type="text" id="ville" name="ville" value="<%=utilisateur.getVille()%>" required>
-											</div>
-										</div>
-										<div class="col-12 col-md-6">
-											<div class="form-label">
-												<label for="codepostal" class="d-block">code
-													postale</label> <input type="text" id="codepostal" name="codepostal"
-													value="<%=utilisateur.getCodePostal()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="tel" class="d-block">telephone</label> <input
-													type="text" id="tel" name="tel"
-													value="<%=utilisateur.getTelephone()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="mail" class="d-block">email</label> <input
-													type="email" id="mail" name="mail" value="<%=utilisateur.getEmail()%>" required>
-											</div>
-
-											<div class="form-label">
-												<label for="mdp" class="d-block">mot de passe</label> <input
-													type="password" id="mdp" name="mdp">
-											</div>
-										</div>
-									</div>
-									<div class="mt-2">
-										<button type="submit" class="btn btn-primary">
-											modifier mon compte</button>
-										<button type="button" class="btn btn-primary"
-											data-toggle="modal" data-target="#modal">supprimer
-											mon compte</button>
-									</div>
-								</form>
-							</div>
-							<%
-							} else {
-							%>
 							<div class="card-body">
 								<h2 class="card-title"><%=utilisateur.getPrenom()%>
 									<%=utilisateur.getNom()%>
@@ -139,9 +69,6 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 									<span>Email : </span><span><%=utilisateur.getEmail()%></span>
 								</p>
 							</div>
-							<%
-							}
-							%>
 						</div>
 					</div>
 				</div>
@@ -185,7 +112,7 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 	if (hasBeenUpdated) {
 	%>
 	<!-- Toast -->
-	  <div class="toast" data-autohide="true" data-delay="3000" style="position: absolute; top: 20px; right: 20px;">
+	  <div class="toast" data-autohide="true"  style="position: absolute; top: 20px; right: 20px;">
 	    <div class="toast-header">
 	      <strong class="mr-auto text-primary">Modification utilisateur</strong>
 	      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>
