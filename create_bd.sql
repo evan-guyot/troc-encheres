@@ -1,10 +1,10 @@
--- Script de création de la base de données TROC_ENCHERES
+-- Script de création de la base de données ENCHERES
 --   type :      SQL Server 2012
 --
 
-CREATE DATABASE TROC_ENCHERE;
+CREATE DATABASE PROC_ENCHERE;
 
-USE TROC_ENCHERE;
+USE PROC_ENCHERE;
 
 CREATE TABLE CATEGORIES (
     no_categorie   INTEGER IDENTITY(1,1) NOT NULL,
