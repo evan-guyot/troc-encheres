@@ -27,6 +27,7 @@ public class Article {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 		this.utilisateur = utilisateur;
+		this.categorie = categorie;
 		this.enchere = enchere;
 		this.retrait = retrait;
 	}

@@ -26,8 +26,10 @@ public class Encherir extends HttpServlet {
 		int articleId = Integer.parseInt(request.getParameter("id"));
 		articleCourrant = articleManager.getArticleById(articleId);
 		request.setAttribute("articleCourrant", articleCourrant);
-		
-		response.sendRedirect("EncherirPage.jsp");
+		System.out.println("DEBUT TEST");
+		System.out.println(articleId);
+		System.out.println(articleCourrant.getCategorie());
+		request.getRequestDispatcher("EncherirPage.jsp").forward(request, response);
 	}
 
 	
