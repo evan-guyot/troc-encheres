@@ -31,7 +31,7 @@ public class ConnectionUtilisateur extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 
 		if (request.getSession().getAttribute("connectedUserId") == null) {
-			requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Connection.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/Connection.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath()+"/");
 		}
@@ -42,7 +42,7 @@ public class ConnectionUtilisateur extends HttpServlet {
 			throws ServletException, IOException {
 		request.setAttribute("erreur", true);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/jsp/Connection.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/Connection.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
