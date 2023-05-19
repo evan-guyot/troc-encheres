@@ -16,7 +16,7 @@
 </head>
 <body>
 	<%
-	
+
 	int noCategorie = 0;
 
 	if (request.getAttribute("filtreCategorie") != null) {
@@ -28,11 +28,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6">
-				<h1>ENI - Encheres</h1>
+				<h1>
+                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
+            </h1>
 			</div>
 			<div class="col-6">
 				<a href="ConnectionUtilisateur" class="btn btn-primary active"
-					role="button" aria-pressed="true">Se connecter</a> <a href="#"
+					role="button" aria-pressed="true">Se connecter</a> <a href="CreationProfileServlet"
 					class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
 			</div>
 			<div class="col-12">

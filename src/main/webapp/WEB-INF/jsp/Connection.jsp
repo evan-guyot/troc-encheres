@@ -47,6 +47,7 @@ form>* {
 			%>
 			<button class="w-100 btn btn-lg btn-primary" type="submit">Se
 				connecter</button>
+			<a href="/TrocEncheres/" class="w-100 btn btn-lg btn-secondary">Annuler</a>
 		</form>
 	</main>
 </body>
