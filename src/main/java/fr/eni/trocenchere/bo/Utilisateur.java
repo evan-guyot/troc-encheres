@@ -13,7 +13,6 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
-	
 
 	/*modèle utilisé pour la suppression d'utilisateur*/
 	public Utilisateur( int noUtilisateur, String mdp) {
@@ -36,20 +35,6 @@ public class Utilisateur {
 		this.administrateur = false;
 		this.motDePasse = mdp;
 	}
-	
-	/*modèle utilisé pour la creation d'utilisateur*/
-	public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville) {
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.credit = 100;
-	}
 
 	public Utilisateur( String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, int credit, boolean administrateur) {
@@ -65,18 +50,42 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 	
+	/*modèle utilisé pour le login d'utilisateur*/
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, int credit, boolean administrateur) {
 		this(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit, administrateur);
 		this.noUtilisateur = noUtilisateur;
 	}
-	
+
+	/*modèle utilisé pour la mise à jour d'utilisateur*/
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, int credit, boolean administrateur, String motDePasse) {
-		this(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, credit, administrateur);
+			String rue, String codePostal, String ville) {
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+	
+	/*modèle utilisé pour la mise à jour d'utilisateur*/
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) {
+		this(noUtilisateur, pseudo, nom, prenom, email,  telephone,rue, codePostal, ville);
 		this.motDePasse = motDePasse;
 	}
 	
+	/*modèle utilisé pour get un utilisateur*/
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		this(noUtilisateur, pseudo, nom, prenom, email,  telephone,rue, codePostal, ville, motDePasse);
+		this.credit = credit;
+		this.administrateur = administrateur;
+	}
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
@@ -149,4 +158,13 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + "]";
+	}
+
 }

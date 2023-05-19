@@ -16,6 +16,8 @@ import fr.eni.trocenchere.bo.Utilisateur;
 @WebServlet("/utilisateur")
 public class ShowUser extends HttpServlet {
     private static UtilisateurManager utilisateurManager;
+    Boolean hasBeenUpdated = false;
+
 
     public ShowUser(){
         super();
@@ -27,21 +29,27 @@ public class ShowUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		int utilisateurID = Integer.parseInt(request.getParameter("id"));
 		Utilisateur utilisateur = utilisateurManager.getUserById(utilisateurID);
+		hasBeenUpdated = false;
 		request.setAttribute("utilisateur", utilisateur);
 
 		if (request.getSession().getAttribute("connectedUserId") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("/WEB-INF/jsp/userConnected.jsp").forward(request, response);
-		}        
+		}
+		request.setAttribute("hasBeenUpdated", hasBeenUpdated);
+		request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int utilisateurID = Integer.parseInt(request.getParameter("id"));
+		Boolean passwordChanges = request.getParameter("mdp").isBlank() || request.getParameter("mdp").isEmpty();
 		Utilisateur updateProfile;
+
 		try {
-			if(request.getParameter("mdp") != null) {
+			if(!passwordChanges) {
 				updateProfile = new Utilisateur(
+					utilisateurID,
 					request.getParameter("pseudo"),
 					request.getParameter("nom"),
 					request.getParameter("prenom"),
@@ -54,6 +62,7 @@ public class ShowUser extends HttpServlet {
 					);
 			} else {
 				updateProfile = new Utilisateur(
+					utilisateurID,
 					request.getParameter("pseudo"),
 					request.getParameter("nom"),
 					request.getParameter("prenom"),
@@ -65,10 +74,21 @@ public class ShowUser extends HttpServlet {
 					);
 			}
 			
-				utilisateurManager.updateUserById(updateProfile, utilisateurID);
-			
+			Utilisateur updatedProfile = utilisateurManager.updateUserById(updateProfile, utilisateurID);
+			if(!passwordChanges) {
+				response.sendRedirect(request.getContextPath()+"/DeconnectionUtilisateur");
+			} else {
+				hasBeenUpdated = true;
+				request.setAttribute("utilisateur", updatedProfile);
+				request.setAttribute("hasBeenUpdated", hasBeenUpdated);
+				request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			hasBeenUpdated = false;
+			request.setAttribute("hasBeenUpdated", hasBeenUpdated);
+			request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
 		}
 		
 	}

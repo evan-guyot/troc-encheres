@@ -73,7 +73,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
             pstmt.close();
             cnx.commit();
 
-            return utilisateurCreated;
+            return getUserById(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,10 +168,18 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				ResultSet rs = stm.executeQuery();
 
 				if (rs.next()) {
-					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
-							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
-							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+					utilisateur = new Utilisateur(
+                    		rs.getInt("no_utilisateur"),
+                    		rs.getString("pseudo"),
+							rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getString("email"),
+							rs.getString("telephone"),
+                            rs.getString("rue"),
+                            rs.getString("code_postal"),
+							rs.getString("ville"),
+                            rs.getInt("credit"),
+                            rs.getBoolean("administrateur"));
 				}
 				stm.close();
 				cnx.commit();
@@ -202,8 +210,10 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"),
-    						rs.getString("mot_de_passe"));
+							rs.getString("ville"), rs.getString("mot_de_passe"),
+    						rs.getInt("credit"),
+    						rs.getBoolean("administrateur")
+    						);
                 }
 
 			} catch (Exception e) {

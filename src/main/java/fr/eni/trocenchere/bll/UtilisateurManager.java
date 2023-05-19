@@ -18,13 +18,16 @@ public class UtilisateurManager {
 	
 	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws Exception {
 		try {
-			if(utilisateur.getMotDePasse() == null) {
-				Utilisateur utilisateurPassword = getUserById(id);
+			Utilisateur utilisateurPassword = null;
+			
+			if(utilisateur.getMotDePasse() == null || utilisateur.getMotDePasse().isBlank() || utilisateur.getMotDePasse().isEmpty()) {
+				utilisateurPassword = getUserById(id);
 				utilisateur.setMotDePasse(utilisateurPassword.getMotDePasse());
 			}
-			System.out.println("==============> : " + utilisateur.getNom());
+
 			validationUserId(id);
-			//validationUtilisateur(utilisateur);
+			validationUtilisateur(utilisateur);
+			
 			return daoUtilisateur.updateUserById(utilisateur, id);
 		} catch (Exception e1) {
 			throw new Exception("mise à jour de l'utilisateur échec");
