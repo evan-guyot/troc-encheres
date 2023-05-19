@@ -34,7 +34,7 @@
 			</div>
 			<div class="col-6">
 				<a href="ConnectionUtilisateur" class="btn btn-primary active"
-					role="button" aria-pressed="true">Se connecter</a> <a href="#"
+					role="button" aria-pressed="true">Se connecter</a> <a href="CreationProfileServlet"
 					class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
 			</div>
 			<div class="col-12">

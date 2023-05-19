@@ -17,7 +17,7 @@ public class CreationProfileServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.getRequestDispatcher("/WEB-INF/jsp/NewProfile.jsp").forward(request, response);
 	}
 
 	@SuppressWarnings("null")
