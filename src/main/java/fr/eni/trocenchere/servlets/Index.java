@@ -56,9 +56,7 @@ public class Index extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
     	paramNomArticle = request.getParameter("filtreArticle");
-    	
-    	System.out.println(paramCategorie);
-    	
+    	    	
         doGet(request, response);
     }
 

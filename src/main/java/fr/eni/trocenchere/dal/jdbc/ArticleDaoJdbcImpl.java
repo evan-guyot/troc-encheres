@@ -33,7 +33,6 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 				requete.append(operatorPicker(requete));
 				requete.append("nom_article like '%" + caractereCompris + "%'");
 			}
-			System.out.println(requete.toString());
 
 			ResultSet rs = stmt.executeQuery(requete.toString());
 			while (rs.next()) {
