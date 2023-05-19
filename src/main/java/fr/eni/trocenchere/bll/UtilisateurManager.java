@@ -22,7 +22,23 @@ public class UtilisateurManager {
 
 		return instance;
 	}
-
+	
+	public Utilisateur getUserById(int id){
+		validationUserId(id);
+		try {
+			return daoUtilisateur.getUserById(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void validationUserId(int id) {
+		if(id != (int)id) {
+			throw new NumberFormatException();
+		}
+	}
 
 	public Utilisateur connecterUtilisateur(String identifiant, String motDePasse) throws Exception {
 		validConnectionUtilisateur(identifiant, motDePasse);

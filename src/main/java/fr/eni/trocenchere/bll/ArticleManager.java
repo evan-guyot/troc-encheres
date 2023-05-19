@@ -22,9 +22,9 @@ public class ArticleManager {
 		return instance;
 	}
 	
-	public List<Article> getArticles(){
+	public List<Article> getArticles(int categorieArticle, String caractereCompris){
 		try {
-			return daoArticle.getArticles();
+			return daoArticle.getArticles(categorieArticle, caractereCompris);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

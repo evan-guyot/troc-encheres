@@ -37,8 +37,6 @@ form>* {
 					name="motDePasse" placeholder="Password"> <label
 					for="motDePasse">Mot de passe</label>
 			</div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">Se
-				connecter</button>
 			<%
 			if (!isCorrect) {
 			%>
@@ -47,7 +45,8 @@ form>* {
 			<%
 			}
 			%>
-
+			<button class="w-100 btn btn-lg btn-primary" type="submit">Se
+				connecter</button>
 		</form>
 	</main>
 </body>

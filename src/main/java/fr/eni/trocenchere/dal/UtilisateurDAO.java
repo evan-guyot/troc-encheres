@@ -9,4 +9,5 @@ public interface UtilisateurDAO {
 	public void newProfile(Utilisateur utilisateur)throws SQLException;
 	public boolean verifEmail(String email)throws SQLException;
 	public boolean verifPseudo(String pseudo)throws SQLException;
+  public Utilisateur getUserById(int id) throws SQLException;
 }

@@ -30,13 +30,13 @@ public class ConnectionUtilisateur extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher requestDispatcher;
 
-		if (request.getSession().getAttribute("idConnectedUser") == null) {
+		if (request.getSession().getAttribute("connectedUserId") == null) {
 			requestDispatcher = request.getRequestDispatcher("Connection.jsp");
+			requestDispatcher.forward(request, response);
 		} else {
-			requestDispatcher = request.getRequestDispatcher("/");
+			response.sendRedirect(request.getContextPath()+"/");
 		}
 
-		requestDispatcher.forward(request, response);
 	}
 
 	protected void redirectWithError(HttpServletRequest request, HttpServletResponse response)

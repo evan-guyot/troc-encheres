@@ -1,7 +1,6 @@
 package fr.eni.trocenchere.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.trocenchere.bll.ArticleManager;
+import fr.eni.trocenchere.bll.CategorieManager;
 import fr.eni.trocenchere.bo.Article;
+import fr.eni.trocenchere.bo.Categorie;
 
 /**
  * Servlet implementation class Index
@@ -19,26 +20,45 @@ import fr.eni.trocenchere.bo.Article;
 @WebServlet("/")
 public class Index extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static ArticleManager articleManager;
+    private ArticleManager articleManager;
+    private CategorieManager categorieManager;
+    private List<Article> listArticles;
+    private List<Categorie> listCategories;
+    private int paramCategorie;
+    private String paramNomArticle;
 
     public Index(){
         super();
         articleManager = ArticleManager.getInstance();
+        categorieManager = CategorieManager.getInstance();
+        paramCategorie = 0;
+        paramNomArticle = null;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Article> listArticles = articleManager.getArticles();
-        request.setAttribute("articles", listArticles);
-		if (request.getSession().getAttribute("idConnectedUser") == null) {
+      
+    	listArticles = articleManager.getArticles(paramCategorie,paramNomArticle);
+    	request.setAttribute("articles", listArticles);
+    	
+    	listCategories = categorieManager.getCategories();
+    	request.setAttribute("categories", listCategories);
+    	
+    	request.setAttribute("filtreCategorie", paramCategorie);
+    	request.setAttribute("filtreArticle", paramNomArticle);    	
+
+        
+		if (request.getSession().getAttribute("connectedUserId") == null) {
+
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
-			Integer.parseInt("20");
 		} else {
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
 		}        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+    	paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
+    	paramNomArticle = request.getParameter("filtreArticle");
+    	    	
         doGet(request, response);
     }
 
