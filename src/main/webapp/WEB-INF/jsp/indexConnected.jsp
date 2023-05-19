@@ -11,11 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ENI - Encheres</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
@@ -48,7 +44,7 @@
 				%>
 				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
 					<a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">Voir
-					mon profil</a> 
+					mon profil</a>
 					<a href="DeconnectionUtilisateur" class="btn btn-secondary" role="button" aria-pressed="true">Se	déconnecter</a>
 			</div>
 			<div class="col-12">
@@ -62,89 +58,103 @@
 							<div class="form-label">
 								<label for="nomArticle">Filtres :</label>
 
-								<%
-								if (nomArticle != null) {
-								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
-									placeholder="le nom de l'article contient"
-									value="<%=nomArticle%>">
+							<%
+							if (nomArticle != null) {
+							%>
+							<input type="text" name="filtreArticle" id="filtreArticle"
+								placeholder="le nom de l'article contient"
+								value="<%=nomArticle%>" class="w-100">
 
+							<%
+							} else {
+							%>
+							<input type="text" name="filtreArticle" id="filtreArticle"
+								placeholder="le nom de l'article contient" class="w-100">
+							<%
+							}
+							%>
+						</div>
+
+						<div class="form-label">
+							<label for="categorie">Catégories :</label>
+							<select class="w-100"
+								name="filtreCategorie" id="filtreCategorie">
+								<option value="0">Toutes les catégories</option>
+								<%
+								for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
+									if (noCategorie == categorie.getNoCategorie()) {
+								%>
+
+								<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%></option>
 								<%
 								} else {
 								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
-									placeholder="le nom de l'article contient">
+
+								<option value="<%=categorie.getNoCategorie()%>"><%=categorie.getLibelle()%></option>
 								<%
 								}
+								}
 								%>
-							</div>
-							<div class="form-label">
-								<label for="categorie">Catégories :</label> <select
-									name="filtreCategorie" id="filtreCategorie">
-									<option value="0">Toutes les catégories</option>
-									<%
-									for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
-										if (noCategorie == categorie.getNoCategorie()) {
-									%>
-
-									<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%></option>
-									<%
-									} else {
-									%>
-
-									<option value="<%=categorie.getNoCategorie()%>"><%=categorie.getLibelle()%></option>
-									<%
-									}
-									}
-									%>
-								</select>
-							</div>
-
+							</select>
 						</div>
-						<div class="col-12 col-md-6">
-							<button class="btn btn-primary" type="submit">Rechercher</button>
+
+						<div class="form-label">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<label for="age1">0 - 30</label>
+									<input type="radio" id="age1" name="age" value="30">
+
+								</div>
+								<div class="col-12 col-md-6">
+									<label for="age2">31 - 60</label>
+									<input type="radio" id="age2" name="age" value="60">
+								</div>
+							</div>
 						</div>
+
 					</div>
-				</form>
-			</div>
-			<div class="col-12">
-				<ul class="list-unstyled row">
-					<%
-					for (Article article : (List<Article>) request.getAttribute("articles")) {
-					%>
-					<li class="col-12 col-md-3">
-						<div class="card">
-							<img class="card-img-top" src="https://picsum.photos/200/300"
-								alt="Card image cap">
-							<div class="card-body">
-								<h2 class="card-title fw-bold"><%=article.getNom()%>
-								</h2>
-								<p class="card-text"><%=article.getDescription()%>
-								</p>
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> <%
+					<div class="col-12 col-md-6">
+						<button class="btn btn-primary w-100 mt-4" type="submit">Rechercher</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-12">
+			<ul class="list-unstyled row">
+				<%
+				for (Article article : (List<Article>) request.getAttribute("articles")) {
+				%>
+				<li class="col-12 col-md-3">
+					<div class="card">
+						<img class="card-img-top" src="https://picsum.photos/200/300"
+							alt="Card image cap">
+						<div class="card-body">
+							<h2 class="card-title fw-bold"><%=article.getNom()%>
+							</h2>
+							<p class="card-text"><%=article.getDescription()%>
+							</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><span class="fw-bold">Prix
+									: </span><%
  if (article.getEnchere() != null) {
- %>
-									<p style="color: blue; font-weight: 500;" class="card-text">
-										<%=article.getEnchere().getMontantEnchere()%></p> <%
- } else {
- %>
-									<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%></p>
-									<%
+ %>									<p style="color: blue; font-weight: 500;" class="card-text">
+											<%=article.getEnchere().getMontantEnchere()%></p>
+<%
+ } else {%>
+											<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%></p><%
 									}
 									%></li>
-								<li class="list-group-item"><span class="fw-bold">Fin
-										enchères : </span><%=article.getDateFinEnchere()%></li>
-								<li class="list-group-item"><span class="fw-bold">Vendeur
-										: </span> <a
-									href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
-										<span><%=article.getUtilisateur().getPseudo()%></span>
-								</a></li>
-							</ul>
-							<div class="card-body">
-								<%
+							<li class="list-group-item"><span class="fw-bold">Fin
+									enchères : </span><%=article.getDateFinEnchere()%></li>
+							<li class="list-group-item"><span class="fw-bold">Vendeur
+									: </span> <a
+								href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
+									<span><%=article.getUtilisateur().getPseudo()%></span>
+							</a></li>
+						</ul>
+						<div class="card-body">
+							<%
 								if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
 								%>
 								<a href="Encherir?id=<%=article.getNoArticle()%>"
@@ -153,18 +163,18 @@
 								} else {
 								%>
 								<a href="FinEnchere?id=<%=article.getNoArticle()%>"
-									class="Encherir btn btn-primary">Fiche article</a>
+								class="Encherir btn btn-primary">Fiche article</a>
 								<%
 								}
 								%>
 
-							</div>
 						</div>
-					</li>
-					<%
-					}
-					%>
-				</ul>
+					</div>
+				</li>
+				<%
+				}
+				%>
+			</ul>
 			</div>
 		</div>
 	</div>

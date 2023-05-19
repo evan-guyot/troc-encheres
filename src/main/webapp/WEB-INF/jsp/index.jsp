@@ -9,11 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ENI - Encheres</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%
@@ -48,27 +44,27 @@
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-label">
-								<label for="nomArticle">Filtres :</label>
+								<label for="nomArticle" class="d-block">Filtres :</label>
 
 								<%
 								if (nomArticle != null) {
 								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle" class="w-100"
 									placeholder="le nom de l'article contient"
 									value="<%=nomArticle%>">
 
 								<%
 								} else {
 								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle" class="w-100"
 									placeholder="le nom de l'article contient">
 								<%
 								}
 								%>
 							</div>
 							<div class="form-label">
-								<label for="categorie">Catégories :</label> <select
-									name="filtreCategorie" id="filtreCategorie">
+								<label for="categorie" class="d-block">Catégories :</label> <select
+									name="filtreCategorie" id="filtreCategorie" class="w-100">
 									<option value="0">Toutes les catégories</option>
 									<%
 									for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
@@ -90,7 +86,7 @@
 
 						</div>
 						<div class="col-12 col-md-6">
-							<button class="btn btn-primary" type="submit">Rechercher</button>
+							<button class="btn btn-primary w-100" type="submit">Rechercher</button>
 						</div>
 					</div>
 				</form>
@@ -121,7 +117,7 @@
 										<span><%=article.getUtilisateur().getPseudo()%></span>
 								</a></li>
 							</ul>
-							
+
 						</div>
 					</li>
 					<%

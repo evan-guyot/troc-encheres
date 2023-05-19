@@ -12,7 +12,7 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 <head>
 <meta charset="UTF-8">
 <title>ENI - Encheres</title>
-<link rel="stylesheet"
+	<link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
