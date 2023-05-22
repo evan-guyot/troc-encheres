@@ -1,6 +1,7 @@
 package fr.eni.trocenchere.bo;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 public class Article {
 	private int noArticle;
@@ -15,6 +16,21 @@ public class Article {
 	private Utilisateur utilisateur;
 	private Enchere enchere;
 	private Retrait retrait;
+
+	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, Categorie categorie, Enchere enchere, Retrait retrait) {
+		this.nom = nom;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+		this.enchere = enchere;
+		this.retrait = retrait;
+	}
 	
 	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, Categorie categorie, Enchere enchere, Retrait retrait) {
@@ -111,5 +127,33 @@ public class Article {
 
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
+	}
+
+	public StringBuilder isValid() {
+		StringBuilder errors = new StringBuilder();
+
+		if(nom.trim().length() < 3) {
+			errors.append("Le nom de l'article doit être plus long.<br />");
+		}
+		if(description.trim().length() < 3) {
+			errors.append("Votre description doit être plus longue.<br />");
+		}		
+		if(miseAPrix < 1) {
+			errors.append("Votre mise à prix doit être au minimum égale à 1 P$.<br />");
+		}
+		if(dateDebutEnchere.isAfter(dateDebutEnchere)) {
+			errors.append("La date de début des enchères ne peut pas être supérieur à celle de fin.<br />");			
+		}
+		if(retrait.getRue().trim().length() < 3 ) {
+			errors.append("Préciser le type/nom de votre rue.<br />");
+		}
+		if(!Pattern.matches("[0-9]{5}", retrait.getCodePostal().trim())) {
+			errors.append("Votre code postal est incorrect.<br />");
+		}
+		if(retrait.getVille().trim().length() < 3 ) {
+			errors.append("Préciser le nom de votre ville.<br />");
+		}		
+		
+		return errors;	
 	}
 }

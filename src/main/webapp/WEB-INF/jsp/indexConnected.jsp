@@ -35,7 +35,8 @@
         </div>
         <div class="col-6">
             <a href="utilisateur?id=<%= idConnectedUser%>"class="btn btn-primary active" role="button" aria-pressed="true">Voir
-					mon profil</a> <a href="DeconnectionUtilisateur"
+					mon profil</a>
+<a class="btn btn-success" href="VendreArticle">Vendre un article</button> <a href="DeconnectionUtilisateur"
 					class="btn btn-dark active" role="button" aria-pressed="true">Se
 					déconnecter</a>
 			</div>
