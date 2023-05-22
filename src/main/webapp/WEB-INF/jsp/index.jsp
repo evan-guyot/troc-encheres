@@ -33,9 +33,10 @@
             </h1>
 			</div>
 			<div class="col-6">
-				<a href="ConnectionUtilisateur" class="btn btn-primary active"
-					role="button" aria-pressed="true">Se connecter</a> <a href="CreationProfileServlet"
-					class="btn btn-dark active" role="button" aria-pressed="true">S'inscrire</a>
+				<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
+				 justify-content-center"
+					role="button" aria-pressed="true" style="width: fit-content;
+    float: right;">Se connecter/S'inscrire</a>
 			</div>
 			<div class="col-12">
 				<h2 class="text-center">Liste des enchères</h2>
@@ -119,10 +120,7 @@
 										<span><%=article.getUtilisateur().getPseudo()%></span>
 								</a></li>
 							</ul>
-							<div class="card-body">
-								 <a href="#"
-									class="card-link">Another link</a>
-							</div>
+							
 						</div>
 					</li>
 					<%

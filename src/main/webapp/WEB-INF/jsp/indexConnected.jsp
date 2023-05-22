@@ -3,6 +3,8 @@
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.time.LocalDate"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +17,9 @@
 	crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <%
-        int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+	<div class="container">
+		<%
+		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 
 		int noCategorie = 0;
 
@@ -27,14 +29,15 @@
 
 		String nomArticle = (String) request.getAttribute("filtreArticle");
 		%><div class="row">
-        <div class="col-6">
-            <h1>
-                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI -
-                    Encheres</a>
-            </h1>
-        </div>
-        <div class="col-6">
-            <a href="utilisateur?id=<%= idConnectedUser%>"class="btn btn-primary active" role="button" aria-pressed="true">Voir
+			<div class="col-6">
+				<h1>
+					<a class="text-secondary text-decoration-none"
+						href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
+				</h1>
+			</div>
+			<div class="col-6">
+				<a href="utilisateur?id=<%=idConnectedUser%>"
+					class="btn btn-primary active" role="button" aria-pressed="true">Voir
 					mon profil</a> <a href="DeconnectionUtilisateur"
 					class="btn btn-dark active" role="button" aria-pressed="true">Se
 					déconnecter</a>
@@ -112,7 +115,15 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> <%=article.getMiseAPrix()%></li>
+										: </span> 
+										<% if (article.getEnchere() != null) { %>
+											<p style="color: blue; font-weight: 500;" class="card-text">
+											<%=article.getEnchere().getMontantEnchere()%></p>
+											
+										<% } else {%>
+											<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%></p> 
+										<%}%>
+							   </li>
 								<li class="list-group-item"><span class="fw-bold">Fin
 										enchères : </span><%=article.getDateFinEnchere()%></li>
 								<li class="list-group-item"><span class="fw-bold">Vendeur
@@ -122,8 +133,20 @@
 								</a></li>
 							</ul>
 							<div class="card-body">
-								<a href="Encherir?id=<%=article.getNoArticle() %>" class="Encherir">Enchérir</a> <a href="#"
-									class="card-link">Another link</a>
+								<%
+								if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
+								%>
+								<a href="Encherir?id=<%=article.getNoArticle()%>"
+									class="Encherir btn btn-primary">Enchérir</a>
+								<%
+								} else {
+								%>
+								<a href="FinEnchere?id=<%=article.getNoArticle()%>"
+									class="Encherir btn btn-primary">Fiche article</a>
+								<%
+								}
+								%>
+								
 							</div>
 						</div>
 					</li>
