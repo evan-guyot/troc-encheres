@@ -25,9 +25,9 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
 			+ "JOIN RETRAITS r ON r.no_article = a.no_article " + "LEFT JOIN ENCHERES e ON e.no_article = a.no_article "
 			+ "LEFT JOIN UTILISATEURS u2 ON u2.no_utilisateur = e.no_utilisateur "
-			+ "WHERE e.date_enchere IN (select max(e.date_enchere) " + "FROM ARTICLES_VENDUS a2 "
+			+ "WHERE (e.date_enchere IN (select max(e.date_enchere) " + "FROM ARTICLES_VENDUS a2 "
 			+ "JOIN ENCHERES e ON e.no_article = a2.no_article " + "GROUP BY a2.no_article) "
-			+ "OR e.no_enchere is null";
+			+ "OR e.no_enchere is null) ";
 	private static final String GET_ARTICLE_BY_ID = "SELECT a.*, u.*,c.*,e.*, r.*, u2.no_utilisateur no_utilisateur_acheteur, u2.pseudo pseudo_acheteur, u2.nom nom_acheteur, u2.prenom prenom_acheteur, u2.email email_acheteur, u2.telephone telephone_acheteur, u2.rue rue_acheteur, u2.code_postal code_postal_acheteur, u2.ville ville_acheteur, u2.mot_de_passe mot_de_passe_acheteur, u2.credit credit_acheteur, u2.administrateur administrateur_acheteur "
 			+ "FROM ARTICLES_VENDUS a " + "JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur "
 			+ "JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
