@@ -15,6 +15,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
 	private static final String GET_USER_BY_ID = "select * from UTILISATEURS where no_utilisateur=?";
+	private static final String NOUVEAU_SOLDE = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 
 	@Override
 	public void newProfile(Utilisateur utilisateur) throws SQLException {
@@ -186,6 +187,33 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 		return utilisateur;
+	}
+
+	@Override
+	public void nouveauSolde(Utilisateur user) throws SQLException {
+		
+		try (Connection cnx = ConnectionProvider.connection()) {
+			try {
+
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				pstmt = cnx.prepareStatement(NOUVEAU_SOLDE);
+				pstmt.setInt(1, user.getCredit());
+				pstmt.setInt(2, user.getNoUtilisateur());
+				
+
+				pstmt.executeUpdate();
+				pstmt.close();
+				cnx.commit();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

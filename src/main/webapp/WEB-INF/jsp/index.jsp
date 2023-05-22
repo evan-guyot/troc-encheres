@@ -118,7 +118,7 @@
 								</a></li>
 							</ul>
 							<div class="card-body">
-								<a href="Encherir?id=<%=article.getNoArticle() %>" class="Encherir">Enchérir</a> <a href="#"
+								 <a href="#"
 									class="card-link">Another link</a>
 							</div>
 						</div>

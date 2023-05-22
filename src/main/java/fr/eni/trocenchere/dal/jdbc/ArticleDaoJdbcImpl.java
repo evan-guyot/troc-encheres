@@ -1,5 +1,6 @@
 package fr.eni.trocenchere.dal.jdbc;
-
+import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -60,7 +61,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 						rs.getString("ville_acheteur"), rs.getInt("credit_acheteur"),
 						rs.getBoolean("administrateur_acheteur"));
 
-				Enchere enchere = new Enchere(rs.getInt("no_enchere"), rs.getDate("date_enchere").toLocalDate(),
+				Enchere enchere = new Enchere(rs.getInt("no_enchere"), rs.getTimestamp("date_enchere").toLocalDateTime(),
 						rs.getInt("montant_enchere"), acheteur);
 
 				Retrait retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
@@ -108,7 +109,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 							rs.getString("code_postal_acheteur"), rs.getString("ville_acheteur"),
 							rs.getInt("credit_acheteur"), rs.getBoolean("administrateur_acheteur"));
 
-					Enchere enchere = new Enchere(rs.getInt("no_enchere"), rs.getDate("date_enchere").toLocalDate(),
+					Enchere enchere = new Enchere(rs.getInt("no_enchere"), rs.getTimestamp("date_enchere").toLocalDateTime(),
 							rs.getInt("montant_enchere"), acheteur);
 
 					Retrait retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"),

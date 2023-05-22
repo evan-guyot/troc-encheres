@@ -60,7 +60,7 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 			</div>
 			</div>
 			<div class="btnn">
-				<input type="submit" class="btn btn-light">
+				<input type="submit" class="btn btn-light"/>
 				<a href="/TrocEncheres/MainPage.jsp" class="btn btn-light">Annuler</a>
 			</div>
 		</form>

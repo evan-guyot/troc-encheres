@@ -26,6 +26,8 @@ Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 			</div>
 
 			<div class="col-6">
+			<a
+							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Accueil</a>
 				<a href="utilisateur?id=<%=idConnectedUser%>"
 					class="btn btn-primary active" role="button" aria-pressed="true">Voir
 					mon profil</a> <a href="DeconnectionUtilisateur" class=" btn btn-dark

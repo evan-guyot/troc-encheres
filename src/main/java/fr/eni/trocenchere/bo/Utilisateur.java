@@ -51,6 +51,10 @@ public class Utilisateur {
 		this.noUtilisateur = noUtilisateur;
 	}
 	
+	public Utilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

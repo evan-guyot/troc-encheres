@@ -69,6 +69,20 @@ public class UtilisateurManager {
 
 		return result;
 	}
+	public void nouveauSolde(Utilisateur user)
+	{
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		try 
+		{
+			conn.nouveauSolde(user);
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+
+		
+	}
 
 	public boolean verifPseudo(String pseudo)
 	{
