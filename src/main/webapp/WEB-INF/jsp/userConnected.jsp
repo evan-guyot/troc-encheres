@@ -28,6 +28,8 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 			</div>
 
 			<div class="col-6">
+			<a
+							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Accueil</a>
 				<a href="utilisateur?id=<%=idConnectedUser%>"
 					class="btn btn-primary active" role="button" aria-pressed="true">Voir
 					mon profil</a> <a href="DeconnectionUtilisateur" class=" btn btn-dark

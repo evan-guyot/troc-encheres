@@ -16,9 +16,14 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String NEW_PROFILE_REQ = "INSERT into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
+
+	
+	private static final String NOUVEAU_SOLDE = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
+
 	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
     private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
     private static final String DELETE_USER_BY_ID = "DELETE from UTILISATEURS where no_utilisateur=?";
+
 
 	@Override
 	public void newProfile(Utilisateur utilisateur) throws SQLException {
@@ -227,6 +232,34 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
+
+	public void nouveauSolde(Utilisateur user) throws SQLException {
+		
+		try (Connection cnx = ConnectionProvider.connection()) {
+			try {
+
+				cnx.setAutoCommit(false);
+				PreparedStatement pstmt;
+				pstmt = cnx.prepareStatement(NOUVEAU_SOLDE);
+				pstmt.setInt(1, user.getCredit());
+				pstmt.setInt(2, user.getNoUtilisateur());
+				
+
+				pstmt.executeUpdate();
+				pstmt.close();
+				cnx.commit();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	public Boolean deleteUserById(String password, int id) throws SQLException {
 		Utilisateur utilisateur = null;
 
@@ -262,4 +295,5 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
         }
 		return false;
 	}
+
 }

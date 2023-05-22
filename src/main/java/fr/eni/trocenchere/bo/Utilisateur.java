@@ -57,6 +57,13 @@ public class Utilisateur {
 		this.noUtilisateur = noUtilisateur;
 	}
 
+	
+	public Utilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	
+
+
 	/*modèle utilisé pour la mise à jour d'utilisateur*/
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) {
@@ -79,6 +86,7 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
+
 
 	public int getNoUtilisateur() {
 		return noUtilisateur;
