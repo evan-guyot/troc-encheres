@@ -46,7 +46,7 @@ public class Encherir extends HttpServlet {
 		
 		articleCourrant = articleManager.getArticleById(articleId);
 		request.setAttribute("articleCourrant", articleCourrant);
-		
+
 		request.getRequestDispatcher("/WEB-INF/jsp/EncherirPage.jsp").forward(request, response);
 	}
 

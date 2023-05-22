@@ -20,11 +20,11 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 				</div>
 				<div class="ligneForm">
 					
-					<input placeholder="Prénom"  type="text" name="prenom"  class="form-control">
+					<input placeholder="PrÃ©nom"  type="text" name="prenom"  class="form-control">
 				</div>
 				<div class="ligneForm">
 					
-					<input placeholder="Téléphone"  type="text" name="tel"  class="form-control">
+					<input placeholder="TÃ©lÃ©phone"  type="text" name="tel"  class="form-control">
 				</div>
 				<div class="ligneForm">
 					
@@ -60,8 +60,10 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
 			</div>
 			</div>
 			<div class="btnn">
-				<input type="submit" class="btn btn-light"/>
-				<a href="/TrocEncheres/MainPage.jsp" class="btn btn-light">Annuler</a>
+
+				<input type="submit" class="btn btn-light">
+				<a href="/TrocEncheres/" class="btn btn-light">Annuler</a>
+
 			</div>
 		</form>
 	</div>

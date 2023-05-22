@@ -15,9 +15,9 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
-		<%
-		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+<div class="container">
+    <%
+        int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 
 		int noCategorie = 0;
 
@@ -26,14 +26,15 @@
 		}
 
 		String nomArticle = (String) request.getAttribute("filtreArticle");
-		%>
-		<div class="row">
-			<div class="col-6">
-				<h1>ENI - Encheres</h1>
-			</div>
-			<div class="col-6">
-				<a href="utilisateur?id=<%=idConnectedUser%>"
-					class="btn btn-primary active" role="button" aria-pressed="true">Voir
+		%><div class="row">
+        <div class="col-6">
+            <h1>
+                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI -
+                    Encheres</a>
+            </h1>
+        </div>
+        <div class="col-6">
+            <a href="utilisateur?id=<%= idConnectedUser%>"class="btn btn-primary active" role="button" aria-pressed="true">Voir
 					mon profil</a> <a href="DeconnectionUtilisateur"
 					class="btn btn-dark active" role="button" aria-pressed="true">Se
 					déconnecter</a>

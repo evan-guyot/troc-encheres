@@ -15,6 +15,36 @@ public class UtilisateurManager {
 	public UtilisateurManager() {
 		daoUtilisateur =  DAOFactory.getUtilisateurDAO();
 	}
+	
+	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws Exception {
+		try {
+			Utilisateur utilisateurPassword = null;
+			
+			if(utilisateur.getMotDePasse() == null || utilisateur.getMotDePasse().isBlank() || utilisateur.getMotDePasse().isEmpty()) {
+				utilisateurPassword = getUserById(id);
+				utilisateur.setMotDePasse(utilisateurPassword.getMotDePasse());
+			}
+
+			validationUserId(id);
+			validationUtilisateur(utilisateur);
+			
+			return daoUtilisateur.updateUserById(utilisateur, id);
+		} catch (Exception e1) {
+			throw new Exception("mise à jour de l'utilisateur échec");
+		}
+	}
+	
+	public Boolean deleteUserById(String mdp, int id){
+		try {
+			validationUserId(id);
+			validationUserPassword(mdp);
+			return daoUtilisateur.deleteUserById(mdp, id);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	}
 
 	public static UtilisateurManager getInstance() {
 		if (instance == null)
@@ -34,12 +64,6 @@ public class UtilisateurManager {
 		return null;
 	}
 	
-	public void validationUserId(int id) {
-		if(id != (int)id) {
-			throw new NumberFormatException();
-		}
-	}
-
 	public Utilisateur connecterUtilisateur(String identifiant, String motDePasse) throws Exception {
 		validConnectionUtilisateur(identifiant, motDePasse);
 		return daoUtilisateur.login(identifiant, motDePasse);
@@ -58,11 +82,11 @@ public class UtilisateurManager {
 	{
 		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
 		boolean result = false;
-		try 
+		try
 		{
 			result = conn.verifEmail(email);
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -88,11 +112,11 @@ public class UtilisateurManager {
 	{
 		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
 		boolean result = false;
-		try 
+		try
 		{
 			result = conn.verifPseudo(pseudo);
-		} 
-		catch (SQLException e) 
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
@@ -100,9 +124,16 @@ public class UtilisateurManager {
 		return result;
 	}
 	public void creationProfile(Utilisateur utilisateur) throws Exception {
+
+		validationUtilisateur(utilisateur);
+
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		conn.newProfile(utilisateur);
+
+	}
+
+	public void validationUtilisateur(Utilisateur utilisateur) throws Exception {
 		StringBuilder sb = new StringBuilder();
-		
-		
 		if (utilisateur.getPseudo().isBlank())
 			sb.append("Il manque : pseudo");
 		if (utilisateur.getNom().isBlank())
@@ -122,13 +153,19 @@ public class UtilisateurManager {
 		if (utilisateur.getMotDePasse().isBlank())
 			sb.append("Il manque : mdp");
 		
-		
 		if (sb.length() > 0)
 			throw new Exception(sb.toString());
-		
-		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
-		conn.newProfile(utilisateur);
-		
+	}
 	
+	public void validationUserId(int id) {
+		if(id != (int)id) {
+			throw new NumberFormatException();
+		}
+	}
+	
+	public void validationUserPassword(String mdp) throws Exception{
+		if (mdp == null || mdp.trim().equals("")) {
+			throw new Exception("le mot de passe est invalide");
+		}
 	}
 }
