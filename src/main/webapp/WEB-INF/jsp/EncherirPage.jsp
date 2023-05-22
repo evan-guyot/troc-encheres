@@ -16,8 +16,7 @@
 	%>
 	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
 		<div class="col-md-6">
-			<div
-				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col-auto d-none d-lg-block">
 					<img class="tailleImage" src="https://picsum.photos/200/300"
 						alt="Card image cap">
@@ -103,6 +102,7 @@
 					</div>
 				</div>
 			</div>
+	</div>
 	</form>
 </body>
 <style>
@@ -138,7 +138,6 @@
 .inputNumber {
 	height: 30px;
 	width: auto;
-}
 }
 </style>
 </html>

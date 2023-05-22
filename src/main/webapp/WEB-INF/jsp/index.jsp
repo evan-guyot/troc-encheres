@@ -30,17 +30,18 @@
             </h1>
 			</div>
 			<div class="col-6">
-				<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
-				 justify-content-center"
-					role="button" aria-pressed="true" style="width: fit-content;
+				<div class="mt-3 float-right">
+					<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
+				 justify-content-center" role="button" aria-pressed="true"style="width: fit-content;
     float: right;">Se connecter/S'inscrire</a>
+				</div>
 			</div>
 			<div class="col-12">
 				<h2 class="text-center">Liste des enchères</h2>
 			</div>
 			<div class="col-12">
 				<form action="<%=request.getContextPath() + "/"%>" method="POST"
-					class="mt-5">
+					class="mt-5 mb-5">
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-label">
@@ -86,7 +87,7 @@
 
 						</div>
 						<div class="col-12 col-md-6">
-							<button class="btn btn-primary w-100" type="submit">Rechercher</button>
+							<button class="btn btn-primary w-100 mt-4" type="submit">Rechercher</button>
 						</div>
 					</div>
 				</form>
@@ -96,8 +97,8 @@
 					<%
 					for (Article article : (List<Article>) request.getAttribute("articles")) {
 					%>
-					<li class="col-12 col-md-3">
-						<div class="card">
+					<li class="col-12 col-md-4 col-lg-3">
+						<div class="card mb-5">
 							<img class="card-img-top" src="https://picsum.photos/200/300"
 								alt="Card image cap">
 							<div class="card-body">
@@ -117,7 +118,6 @@
 										<span><%=article.getUtilisateur().getPseudo()%></span>
 								</a></li>
 							</ul>
-
 						</div>
 					</li>
 					<%

@@ -53,7 +53,7 @@
         </div>
         <div class="col-12">
             <form action="<%=request.getContextPath() + "/"%>" method="POST"
-                  class="mt-5">
+                  class="mt-5 mb-5">
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="d-flex flex-wrap">
@@ -105,55 +105,56 @@
                             <div class="form-label w-100 order-1 order-md-3">
                                 <div class="row">
                                     <div class="col-12 col-md-8 col-lg-6">
-                                        <div class="mt-3 radio_group">
+                                        <div class="mt-3 radio_group radio_group_achat">
                                             <label for="1">Achat</label>
-                                            <input type="radio" class="radio_select" id="1" name="select" value="1">
+                                            <input type="radio" class="radio_select" id="1" name="select" value="1"
+                                                   checked>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="enchere_ouvertes">enchères
                                                     ouvertes</label>
-                                                <input class="radio_elem" type="checkbox" id="enchere_ouvertes"
-                                                       name="enchere_ouvertes">
+                                                <input class="radio_elem" type="radio" id="enchere_ouvertes"
+                                                       name="select-1" value="enchere_ouvertes">
                                             </div>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="mes_enchere">mes enchères</label>
-                                                <input class="radio_elem" type="checkbox" id="mes_enchere"
-                                                       name="mes_enchere">
+                                                <input class="radio_elem" type="radio" id="mes_enchere"
+                                                       name="select-1" value="mes_enchere">
                                             </div>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="mes_enchere_remportes">mes enchères
                                                     remportées</label>
-                                                <input class="radio_elem" type="checkbox" id="mes_enchere_remportes"
-                                                       name="mes_enchere_remportes">
+                                                <input class="radio_elem" type="radio" id="mes_enchere_remportes"
+                                                       name="select-1" value="mes_enchere_remportes">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-8 col-lg-6">
-                                        <div class="mt-3 radio_group">
+                                        <div class="mt-3 radio_group radio_group_ventes">
                                             <label for="2">Mes ventes</label>
                                             <input type="radio" class="radio_select" id="2" name="select" value="2">
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="mes_ventes_en_cours">mes ventes en
                                                     cours</label>
-                                                <input class="radio_elem" type="checkbox" id="mes_ventes_en_cours"
-                                                       name="mes_ventes_en_cours">
+                                                <input class="radio_elem" type="radio" id="mes_ventes_en_cours"
+                                                       name="select-2" value="mes_ventes_en_cours">
                                             </div>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="ventes_non_debutes">ventes non
                                                     débutées</label>
-                                                <input class="radio_elem" type="checkbox" id="ventes_non_debutes"
-                                                       name="ventes_non_debutes">
+                                                <input class="radio_elem" type="radio" id="ventes_non_debutes"
+                                                       name="select-2" value="ventes_non_debutes">
                                             </div>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="ventes_terminees">ventes
                                                     terminées</label>
-                                                <input class="radio_elem" type="checkbox" id="ventes_terminees"
-                                                       name="ventes_terminees">
+                                                <input class="radio_elem" type="radio" id="ventes_terminees"
+                                                       name="select-2" value="ventes_terminees">
                                             </div>
                                         </div>
                                     </div>
@@ -172,8 +173,8 @@
                 <%
                     for (Article article : (List<Article>) request.getAttribute("articles")) {
                 %>
-                <li class="col-12 col-md-3">
-                    <div class="card">
+                <li class="col-12 col-md-4 col-lg-3">
+                    <div class="card mb-5">
                         <img class="card-img-top" src="https://picsum.photos/200/300"
                              alt="Card image cap">
                         <div class="card-body">
@@ -240,5 +241,26 @@
         pointer-events: all;
     }
 </style>
+<script>
+    const radio_input = [...document.querySelectorAll(".radio_group > input[type=radio]")];
+    const radio_group_ventes = [...document.querySelectorAll(".radio_group_ventes input[type=radio]")]
+    const radio_group_achat = [...document.querySelectorAll(".radio_group_achat input[type=radio]")]
+
+    function uncheck(elems) {
+        elems.map(elem => {
+            elem.checked = false;
+        })
+    }
+
+    radio_input.forEach(elem => {
+        elem.addEventListener("change", (e) => {
+            if (e.target.value === "1") {
+                uncheck(radio_group_ventes);
+            } else {
+                uncheck(radio_group_achat);
+            }
+        });
+    })
+</script>
 </body>
 </html>
