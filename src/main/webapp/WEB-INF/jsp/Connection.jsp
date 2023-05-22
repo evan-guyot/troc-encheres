@@ -45,9 +45,14 @@ form>* {
 			<%
 			}
 			%>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">Se
+			<div class="d-flex">
+			<button class="w-50 btn btn-lg btn-primary" type="submit">Se
 				connecter</button>
-			<a href="/TrocEncheres/" class="w-100 btn btn-lg btn-secondary">Annuler</a>
+			<a href="/TrocEncheres/" class="w-50 btn btn-lg btn-secondary">Annuler</a>
+			</div>
+			
+			<a href="CreationProfileServlet"
+					class="w-100 btn btn-lg btn-dark active">S'inscrire</a>
 		</form>
 	</main>
 </body>
