@@ -18,7 +18,7 @@
 	<%
 	Article article = (Article) request.getAttribute("articleCourrant");
 	%>
-	<form class="row mb-2 grandeDiv" method="post" action="Encherir" >
+	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
 		<div class="col-md-6">
 			<div
 				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -41,9 +41,22 @@
 					</div>
 					<div class="dpf">
 						<div class="bold">Meilleure offre:</div>
-						<p class="card-text"><%=article.getEnchere().getMontantEnchere()%>
+
+						<%
+						if (article.getEnchere() != null) {
+						%>
+						<p class="card-text">
+							<span style="color: blue; font-weight: 500;"><%=article.getEnchere().getMontantEnchere()%></span>
 							Pokédolar par
 							<%=article.getEnchere().getUtilisateur().getPseudo()%></p>
+						<%
+						} else {
+						%>
+						<p class="card-text">Pas d'enchère faite à cette heure</p>
+						<%
+						}
+						%>
+
 					</div>
 					<div class="dpf">
 						<div class="bold">Mise à prix:</div>
@@ -68,18 +81,27 @@
 					</div>
 					<div class="dpf">
 						<div class="bold">Ma proposition:</div>
-						<input type="number" class="form-control inputNumber" id="number" name="nouveauMontant" 
-							aria-describedby="number"
-							value="<%=article.getEnchere().getMontantEnchere()%>" />
+						<input type="number" class="form-control inputNumber" id="number"
+							name="nouveauMontant" aria-describedby="number"
+							value="<%=article.getEnchere() != null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
 					</div>
+					<%
+					if (request.getAttribute("messageErreur") != null) {
+					%>
+					<p class="messageErr card-text"><%=request.getAttribute("messageErreur").toString()%></p>
+					<%
+					}
+					%>
 					<div class="btnn">
-						<input type="hidden" name="noArticle" value="<%=article.getNoArticle()%>"/>
-						<input type="submit" class="btn btn-light" value="Enchérir" /> <a
+
+						<input type="hidden" name="noArticle"
+							value="<%=article.getNoArticle()%>" /> <input type="submit"
+							class="btn btn-light" value="Enchérir" /> <a
 							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Retour</a>
 					</div>
 				</div>
 			</div>
-		</form>
+	</form>
 </body>
 <style>
 .dpf {
@@ -103,6 +125,12 @@
 
 .bold {
 	font-weight: bold;
+}
+
+.messageErr {
+	font-style: italic;
+	color: red;
+	font-weight: 800;
 }
 
 .inputNumber {
