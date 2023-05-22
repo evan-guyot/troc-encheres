@@ -23,10 +23,10 @@ public class EnchereDaoJdbcImpl implements EnchereDAO{
 	        stm.setInt(2, enchere.getMontantEnchere());
 	        stm.setInt(3, noArticle);
 	        stm.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
-	        System.out.println(enchere.getDateEnchere().toString());
+	       
 	        stm.executeUpdate();
 	    } catch (Exception e) {
-	    	System.out.println(enchere.getDateEnchere().toString());
+	    	
 	        e.printStackTrace();
 	        throw e;
 	    }

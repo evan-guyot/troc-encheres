@@ -114,15 +114,15 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
 							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
 
-					Utilisateur acheteur = new Utilisateur(rs.getInt("no_utilisateur_acheteur"),
-							rs.getString("pseudo_acheteur"), rs.getString("nom_acheteur"),
-							rs.getString("prenom_acheteur"), rs.getString("email_acheteur"),
+					Utilisateur acheteur = rs.getInt("no_utilisateur_acheteur") != 0 ? new Utilisateur(
+							rs.getInt("no_utilisateur_acheteur"), rs.getString("pseudo_acheteur"),
+							rs.getString("nom_acheteur"), rs.getString("prenom_acheteur"), rs.getString("email_acheteur"),
 							rs.getString("telephone_acheteur"), rs.getString("rue_acheteur"),
 							rs.getString("code_postal_acheteur"), rs.getString("ville_acheteur"),
-							rs.getInt("credit_acheteur"), rs.getBoolean("administrateur_acheteur"));
+							rs.getInt("credit_acheteur"), rs.getBoolean("administrateur_acheteur")) : null;
 
-					Enchere enchere = new Enchere(rs.getInt("no_enchere"), rs.getTimestamp("date_enchere").toLocalDateTime(),
-							rs.getInt("montant_enchere"), acheteur);
+					Enchere enchere = rs.getInt("no_enchere") != 0 ? new Enchere(rs.getInt("no_enchere"),
+							rs.getTimestamp("date_enchere").toLocalDateTime(), rs.getInt("montant_enchere"), acheteur) : null;
 
 					Retrait retrait = new Retrait(rs.getString("rue"), rs.getString("code_postal"),
 							rs.getString("ville"));
@@ -130,9 +130,9 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 					articleCourrant = new Article(rs.getInt("no_article"), rs.getString("nom_article"),
 							rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
 							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-							rs.getInt("prix_vente"), rs.getInt("prix_vente") == 0, vendeur, categorieArticle, enchere,
-							retrait);
-
+							rs.getInt("prix_vente"), rs.getDate("date_fin_encheres").toLocalDate().isAfter(LocalDate.now()),
+							vendeur, categorieArticle, enchere, retrait);
+					
 				}
 
 				stm.close();

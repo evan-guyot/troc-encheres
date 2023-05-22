@@ -17,39 +17,47 @@ import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Enchere;
 import fr.eni.trocenchere.bo.Utilisateur;
 
-
 @WebServlet("/Encherir")
 public class Encherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static ArticleManager articleManager;
 	private static EnchereManager enchereManager;
-	private static UtilisateurManager  utilisateurManager;
+	private static UtilisateurManager utilisateurManager;
 	private static Article articleCourrant;
 	private static Enchere enchereModifier;
-	
-	
-	public Encherir(){
-        articleManager = ArticleManager.getInstance();
-        enchereManager = EnchereManager.getInstance();
-        utilisateurManager = UtilisateurManager.getInstance();
-    }
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	public Encherir() {
+		articleManager = ArticleManager.getInstance();
+		enchereManager = EnchereManager.getInstance();
+		utilisateurManager = UtilisateurManager.getInstance();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		int articleId;
-		if(request.getParameter("id") == null) {
+		if (request.getParameter("id") == null) {
 			articleId = (int) request.getAttribute("numArticle");
-		}
-		else {
+		} else {
 			articleId = Integer.parseInt(request.getParameter("id"));
 		}
-		
+
 		articleCourrant = articleManager.getArticleById(articleId);
+		
 		request.setAttribute("articleCourrant", articleCourrant);
+		
+		request.setAttribute("messageErreur", request.getAttribute("messageErreur"));
 
 		request.getRequestDispatcher("/WEB-INF/jsp/EncherirPage.jsp").forward(request, response);
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -59,30 +67,45 @@ public class Encherir extends HttpServlet {
 		int idUser = (int) request.getSession().getAttribute("connectedUserId");
 		Utilisateur acheteur = utilisateurManager.getUserById(idUser);
 		LocalDateTime nouvelleDateEnchere = LocalDateTime.now();
+		StringBuilder stringBuilder = new StringBuilder();
+
 		
 		
 		
-		if(articleCourrantPost.getEnchere().getMontantEnchere() < nouveauMontant) 
+		if((articleCourrantPost.getEnchere()!=null && articleCourrantPost.getEnchere().getMontantEnchere() < nouveauMontant) ||  (articleCourrantPost.getEnchere()==null && articleCourrantPost.getMiseAPrix()< nouveauMontant)) 
 		{
-			if(acheteur.getCredit() >= nouveauMontant) 
+			if( articleCourrantPost.getUtilisateur().getNoUtilisateur() != idUser) 
 			{
-				//Crediter et Debiter
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
-				acheteur.setCredit(acheteur.getCredit() - nouveauMontant);
-				utilisateurManager.nouveauSolde(acheteur);
-				System.out.println(articleCourrantPost.getPrixVente());
-				articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getPrixVente());
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
-				utilisateurManager.nouveauSolde(articleCourrantPost.getUtilisateur());
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
 				
-				//Insert enchere
-				enchereModifier = new Enchere(nouvelleDateEnchere, nouveauMontant, acheteur);
-				enchereManager.InsertEnchere(enchereModifier, noArticle);
+				if(acheteur.getCredit() >= nouveauMontant) 
+				{
+					//Crediter et Debiter
+					//Debiter nouveau enchérisseur
+					acheteur.setCredit(acheteur.getCredit() - nouveauMontant);
+					utilisateurManager.nouveauSolde(acheteur);
+					//crediter dernier enchérisseur si c'est pas le vendeur
+					articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getPrixVente());
+					utilisateurManager.nouveauSolde(articleCourrantPost.getUtilisateur());
+					
+					
+					
 				
+					
+					//Insert enchere
+					enchereModifier = new Enchere(nouvelleDateEnchere, nouveauMontant, acheteur);
+					enchereManager.InsertEnchere(enchereModifier, noArticle);
+					
+				}else {
+					stringBuilder.append(" Vous n'avez pas assez de crédit ");
+				}
+			}else {
+				stringBuilder.append(" Le créateur d'une enchère ne peux pas y participer ");
 			}
-			
+		}else {
+			stringBuilder.append(" Vous ne pouvez pas enchérir sous " + articleCourrantPost.getEnchere().getMontantEnchere() + "Pokédollars");
 		}
+		String messageErreur = stringBuilder.toString();
+		request.setAttribute("messageErreur", messageErreur);
 		request.setAttribute("numArticle", noArticle);
 		doGet(request, response);
 		

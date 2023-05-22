@@ -35,16 +35,16 @@ public class CreationProfileServlet extends HttpServlet {
 						request.getParameter("tel"), request.getParameter("rue"), request.getParameter("codepostal"),
 						request.getParameter("ville"), request.getParameter("mdp"));
 				utilisateurManager.creationProfile(nouveauProfile);
-				response.sendRedirect("Connection.jsp");
+				response.sendRedirect(request.getContextPath()+"/");
 			} catch (Exception e) 
 			{
 				e.printStackTrace();
-				response.sendRedirect("NewProfile.jsp");
+				response.sendRedirect("CreationProfileServlet");
 			}
 		}else {
 			request.setAttribute("emailDejaPrit",true);
 			request.setAttribute("pseudoDejaPrit",true);
-			response.sendRedirect("NewProfile.jsp");
+			response.sendRedirect(request.getContextPath()+"/");
 		}
 	}
 }
