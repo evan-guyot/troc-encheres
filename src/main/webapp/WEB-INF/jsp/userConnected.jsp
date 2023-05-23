@@ -9,7 +9,7 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>ENI - Encheres</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
