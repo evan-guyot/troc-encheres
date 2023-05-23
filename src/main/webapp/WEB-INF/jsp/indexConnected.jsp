@@ -21,7 +21,7 @@
 	<div class="container">
 		<%
 		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
-		Utilisateur utilisateur = (Utilisateur)request.getAttribute("utilisateur");
+		Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 		int noCategorie = 0;
 
 		if (request.getAttribute("filtreCategorie") != null) {
@@ -38,20 +38,18 @@
 				</h1>
 			</div>
 			<div class="col-6">
-				<%if(utilisateur.isAdministrateur()){ %>
-				<a href="PanelAdministration"
-					class="btn btn-warning active" role="button" aria-pressed="true">Administration</a>
-				<% } %>
-				<a href="utilisateur?id=<%=idConnectedUser%>"
-					class="btn btn-primary active" role="button" aria-pressed="true">Voir
-					mon profil</a>
-					
-				 <a href="DeconnectionUtilisateur"
-
-<a class="btn btn-success" href="VendreArticle">Vendre un article</button> <a href="DeconnectionUtilisateur"
-
-					class="btn btn-dark active" role="button" aria-pressed="true">Se
-					déconnecter</a>
+				<%
+				if (utilisateur.isAdministrateur()) {
+				%>
+				<a href="PanelAdministration" class="btn btn-warning "
+					role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
+				<%
+				}
+				%>
+				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
+					<a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">Voir
+					mon profil</a> 
+					<a href="DeconnectionUtilisateur" class="btn btn-secondary" role="button" aria-pressed="true">Se	déconnecter</a>
 			</div>
 			<div class="col-12">
 				<h2 class="text-center">Liste des enchères</h2>
@@ -126,15 +124,17 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> 
-										<% if (article.getEnchere() != null) { %>
-											<p style="color: blue; font-weight: 500;" class="card-text">
-											<%=article.getEnchere().getMontantEnchere()%></p>
-											
-										<% } else {%>
-											<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%></p> 
-										<%}%>
-							   </li>
+										: </span> <%
+ if (article.getEnchere() != null) {
+ %>
+									<p style="color: blue; font-weight: 500;" class="card-text">
+										<%=article.getEnchere().getMontantEnchere()%></p> <%
+ } else {
+ %>
+									<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%></p>
+									<%
+									}
+									%></li>
 								<li class="list-group-item"><span class="fw-bold">Fin
 										enchères : </span><%=article.getDateFinEnchere()%></li>
 								<li class="list-group-item"><span class="fw-bold">Vendeur
@@ -157,7 +157,7 @@
 								<%
 								}
 								%>
-								
+
 							</div>
 						</div>
 					</li>
