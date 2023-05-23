@@ -1,7 +1,7 @@
 package fr.eni.trocenchere.dal.jdbc;
-import java.time.LocalDateTime;
-import java.sql.Timestamp;
+
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +36,8 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "WHERE e.date_enchere IN (select max(e.date_enchere) " + "FROM ARTICLES_VENDUS a "
 			+ "JOIN ENCHERES e ON e.no_article = a.no_article " + "WHERE a.no_article = ? " + "GROUP BY a.no_article) "
 			+ "OR e.no_enchere is null " + "AND a.no_article = ?";
-
+	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	
 	@Override
 	public List<Article> getArticles(int idCategorie, String caractereCompris) throws Exception {
 		List<Article> listArticle = new ArrayList<Article>();
@@ -150,6 +151,32 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 
 		return articleCourrant;
 	}
+	
+	@Override
+	public int insertArticle(Article article, int idUtilisateur, int idCategorie) throws Exception {
+		  try (Connection cnx = ConnectionProvider.connection();
+			         PreparedStatement stm = cnx.prepareStatement(INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS)) {
+
+			  		stm.setString(1, article.getNom());
+			        stm.setString(2, article.getDescription());
+			        stm.setDate(3, Date.valueOf(article.getDateDebutEnchere()));
+			        stm.setDate(4, Date.valueOf(article.getDateFinEnchere()));
+			        stm.setInt(5, article.getMiseAPrix());
+			        stm.setInt(6, article.getPrixVente());
+			        stm.setInt(7, idUtilisateur);
+			        stm.setInt(8, idCategorie);
+			        stm.executeUpdate();
+			        ResultSet rs = stm.getGeneratedKeys();
+			        
+			        if(rs.next()) {
+			        	return rs.getInt(1);
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        throw e;
+			    }
+		  return 0;
+	}	
 
 	private String operatorPicker(StringBuilder sb) {
 		if (sb.toString().contains("WHERE")) {

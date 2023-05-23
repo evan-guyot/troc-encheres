@@ -30,4 +30,14 @@ public class CategorieManager {
 		}
 		return null;
 	}
+	public Categorie getCategorieById(int id){
+		try {
+		return daoCategorie.getCategorieById(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+				
+	}
 }

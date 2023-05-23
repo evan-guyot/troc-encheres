@@ -65,8 +65,7 @@ public class Encherir extends HttpServlet {
 		if((articleCourrantPost.getEnchere()!=null && articleCourrantPost.getEnchere().getMontantEnchere() < nouveauMontant) ||  (articleCourrantPost.getEnchere()==null && articleCourrantPost.getMiseAPrix()< nouveauMontant)) 
 		{
 			if( articleCourrantPost.getUtilisateur().getNoUtilisateur() != idUser) 
-			{
-				
+			{				
 				if(acheteur.getCredit() >= nouveauMontant) 
 				{
 					//Crediter et Debiter

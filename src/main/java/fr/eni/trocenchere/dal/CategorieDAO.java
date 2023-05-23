@@ -6,4 +6,5 @@ import fr.eni.trocenchere.bo.Categorie;
 
 public interface CategorieDAO {
 	public List<Categorie> getCategories() throws Exception ;
+	public Categorie getCategorieById(int id) throws Exception;
 }

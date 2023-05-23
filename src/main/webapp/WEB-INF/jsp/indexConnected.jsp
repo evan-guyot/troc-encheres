@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>ENI - Encheres</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
@@ -30,6 +30,7 @@
 
 		String nomArticle = (String) request.getAttribute("filtreArticle");
 		%><div class="row">
+
 			<div class="col-6">
 				<h1>
 					<a class="text-secondary text-decoration-none"
@@ -46,11 +47,14 @@
 					mon profil</a>
 					
 				 <a href="DeconnectionUtilisateur"
+
+<a class="btn btn-success" href="VendreArticle">Vendre un article</button> <a href="DeconnectionUtilisateur"
+
 					class="btn btn-dark active" role="button" aria-pressed="true">Se
-					déconnecter</a>
+					dÃ©connecter</a>
 			</div>
 			<div class="col-12">
-				<h2 class="text-center">Liste des enchères</h2>
+				<h2 class="text-center">Liste des enchÃ¨res</h2>
 			</div>
 			<div class="col-12">
 				<form action="<%=request.getContextPath() + "/"%>" method="POST"
@@ -77,9 +81,9 @@
 								%>
 							</div>
 							<div class="form-label">
-								<label for="categorie">Catégories :</label> <select
+								<label for="categorie">CatÃ©gories :</label> <select
 									name="filtreCategorie" id="filtreCategorie">
-									<option value="0">Toutes les catégories</option>
+									<option value="0">Toutes les catÃ©gories</option>
 									<%
 									for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
 										if (noCategorie == categorie.getNoCategorie()) {
@@ -132,7 +136,7 @@
 										<%}%>
 							   </li>
 								<li class="list-group-item"><span class="fw-bold">Fin
-										enchères : </span><%=article.getDateFinEnchere()%></li>
+										enchÃ¨res : </span><%=article.getDateFinEnchere()%></li>
 								<li class="list-group-item"><span class="fw-bold">Vendeur
 										: </span> <a
 									href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
@@ -144,7 +148,7 @@
 								if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
 								%>
 								<a href="Encherir?id=<%=article.getNoArticle()%>"
-									class="Encherir btn btn-primary">Enchérir</a>
+									class="Encherir btn btn-primary">EnchÃ©rir</a>
 								<%
 								} else {
 								%>

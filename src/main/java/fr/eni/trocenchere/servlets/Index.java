@@ -55,8 +55,10 @@ public class Index extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
+
 			Utilisateur utilisateur = utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId"));
 			request.setAttribute("utilisateur", utilisateur);
+
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
 		}        
     }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
 <%@ page import="fr.eni.trocenchere.bo.Enchere"%>
@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -28,7 +28,7 @@
 				</div>
 				<div class="col p-4 d-flex flex-column position-static">
 					<h3 class="mb-3">
-						Détail de vente pour:
+						DÃ©tail de vente pour :
 						<%=article.getNom()%></h3>
 
 					<div class="dpf">
@@ -36,7 +36,7 @@
 						<p class="card-text"><%=article.getDescription()%></p>
 					</div>
 					<div class="dpf">
-						<div class="bold">Catégorie:</div>
+						<div class="bold">CatÃ©gorie:</div>
 						<p class="card-text"><%=article.getCategorie().getLibelle()%></p>
 					</div>
 					<div class="dpf">
@@ -47,23 +47,23 @@
 						%>
 						<p class="card-text">
 							<span style="color: blue; font-weight: 500;"><%=article.getEnchere().getMontantEnchere()%></span>
-							Pokédolar par
+							PokÃ©dolar par
 							<%=article.getEnchere().getUtilisateur().getPseudo()%></p>
 						<%
 						} else {
 						%>
-						<p class="card-text">Pas d'enchère faite à cette heure</p>
+						<p class="card-text">Pas d'enchï¿½re faite ï¿½ cette heure</p>
 						<%
 						}
 						%>
 
 					</div>
 					<div class="dpf">
-						<div class="bold">Mise à prix:</div>
+						<div class="bold">Mise Ã  prix:</div>
 						<p class="card-text"><%=article.getMiseAPrix()%></p>
 					</div>
 					<div class="dpf">
-						<div class="bold">Fin de l'enchère:</div>
+						<div class="bold">Fin de l'enchÃ¨re:</div>
 						<p class="card-text"><%=article.getDateFinEnchere()%></p>
 					</div>
 					<div class="dpf">
@@ -79,6 +79,7 @@
 							<span><%=article.getUtilisateur().getPseudo()%></span>
 						</a>
 					</div>
+					<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
 					<div class="dpf">
 						<div class="bold">Ma proposition:</div>
 						<input type="number" class="form-control inputNumber" id="number"
@@ -86,6 +87,7 @@
 							value="<%=article.getEnchere() != null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
 					</div>
 					<%
+					}
 					if (request.getAttribute("messageErreur") != null) {
 					%>
 					<p class="messageErr card-text"><%=request.getAttribute("messageErreur").toString()%></p>
@@ -95,8 +97,12 @@
 					<div class="btnn">
 
 						<input type="hidden" name="noArticle"
-							value="<%=article.getNoArticle()%>" /> <input type="submit"
-							class="btn btn-light" value="Enchérir" /> <a
+							value="<%=article.getNoArticle()%>" /> 
+							<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
+							<input type="submit" class="btn btn-light" value="Encherir" /> 
+							<% } %>
+							
+							<a
 							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Retour</a>
 					</div>
 				</div>
