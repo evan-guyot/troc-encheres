@@ -14,11 +14,25 @@
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
 </head>
-<body>
-	<%
+<body><%
 	Article article = (Article) request.getAttribute("articleCourrant");
 	%>
-	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
+	<h1 style="text-align: center;">Enchère remporté pour <%
+						if (article.getEnchere() != null) {
+						%>
+						
+							<span style="color: blue; font-weight: 500;"><%=article.getEnchere().getMontantEnchere()%></span>
+							Pokédolar par
+							<%=article.getEnchere().getUtilisateur().getPseudo()%>
+						<%
+						} else {
+						%>
+						Personne n'a voulu de cette objet
+						<%
+						}
+						%></h1>
+	
+	<div class="row mb-2 grandeDiv">
 		<div class="col-md-6">
 			<div
 				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -78,30 +92,14 @@
 							href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
 							<span><%=article.getUtilisateur().getPseudo()%></span>
 						</a>
+						
+						
 					</div>
-					<div class="dpf">
-						<div class="bold">Ma proposition:</div>
-						<input type="number" class="form-control inputNumber" id="number"
-							name="nouveauMontant" aria-describedby="number"
-							value="<%=article.getEnchere() != null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
-					</div>
-					<%
-					if (request.getAttribute("messageErreur") != null) {
-					%>
-					<p class="messageErr card-text"><%=request.getAttribute("messageErreur").toString()%></p>
-					<%
-					}
-					%>
-					<div class="btnn">
-
-						<input type="hidden" name="noArticle"
-							value="<%=article.getNoArticle()%>" /> <input type="submit"
-							class="btn btn-light" value="Enchérir" /> <a
-							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Retour</a>
-					</div>
+					
 				</div>
 			</div>
-	</form>
+			<a href="/TrocEncheres/" style="margin-left: 25%;" class="btn btn-light w-50">Retour</a>
+	</div>
 </body>
 <style>
 .dpf {
