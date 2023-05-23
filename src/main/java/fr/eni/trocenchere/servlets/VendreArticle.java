@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.trocenchere.bll.ArticleManager;
 import fr.eni.trocenchere.bll.CategorieManager;
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
@@ -22,12 +23,13 @@ public class VendreArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UtilisateurManager utilisateurManager;
 	private CategorieManager categorieManager;
+	private ArticleManager articleManager;
 
-	
 	public VendreArticle() {
 		super();
 		utilisateurManager = UtilisateurManager.getInstance();
 		categorieManager = CategorieManager.getInstance();
+		articleManager = ArticleManager.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,14 +83,18 @@ public class VendreArticle extends HttpServlet {
 					Integer.parseInt(request.getParameter("miseAPrixArticle")), 
 					Integer.parseInt(request.getParameter("miseAPrixArticle")), 
 					false, 
-					utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId")),
-					categorieManager.getCategorieById(Integer.parseInt(request.getParameter("articleCategorie"))), 
+					null,
+					null, 
 					null, 
 					retraitArticle);
 		
 		sbErreurs.append(nouvelArticle.isValid().toString());
 		
 		if(sbErreurs.length() == 0) {
+			articleManager.insertArticle(
+					nouvelArticle, 
+					(int) request.getSession().getAttribute("connectedUserId"), 
+					Integer.parseInt(request.getParameter("articleCategorie")));
 			response.sendRedirect(request.getContextPath() + "/");
 		}else {
 			request.setAttribute("erreursFormulaire",sbErreurs.toString());

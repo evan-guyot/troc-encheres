@@ -51,6 +51,7 @@ public class Index extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
+			
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
 		}        
     }

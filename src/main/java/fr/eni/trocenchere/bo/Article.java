@@ -133,26 +133,38 @@ public class Article {
 		StringBuilder errors = new StringBuilder();
 
 		if(nom.trim().length() < 3) {
-			errors.append("Le nom de l'article doit être plus long.<br />");
+			errors.append("Le nom de votre article est trop court! Soyez plus précis.<br />");
 		}
-		if(description.trim().length() < 3) {
-			errors.append("Votre description doit être plus longue.<br />");
+		if(nom.length() > 29) {
+			errors.append("Le nom de votre article doit être plus long! Vous êtes un peu trop bavard.<br />");
+		}
+		if(description.trim().length() < 10) {
+			errors.append("Votre description est trop courte! Ne gardez pas votre langue dans votre poche.<br />");
+		}	
+		if(description.length() > 299) {
+			errors.append("Votre description est trop longue! Vous êtes bavard commme une mouette ma parole.<br />");
 		}		
 		if(miseAPrix < 1) {
-			errors.append("Votre mise à prix doit être au minimum égale à 1 P$.<br />");
+			errors.append("Votre mise à prix doit être au minimum égale à 1 P$! Demandez plus de flouz.<br />");
+		}
+		if(dateDebutEnchere.isBefore(LocalDate.now())) {
+			errors.append("Les enchères ne peuvent pas commencer avant aujourd'hui! Ne vivez pas dans le passé.<br />");			
+		}
+		if(dateFinEnchere.isBefore(LocalDate.now())) {
+			errors.append("Les enchères ne peuvent pas se terminer avant aujourd'hui! Projetez vous plus dans le futur.<br />");			
 		}
 		if(dateDebutEnchere.isAfter(dateDebutEnchere)) {
-			errors.append("La date de début des enchères ne peut pas être supérieur à celle de fin.<br />");			
+			errors.append("La date de début des enchères ne peut pas être supérieur à celle de fin! C'est le serpant qui se mort la queue mon cher.<br />");			
 		}
 		if(retrait.getRue().trim().length() < 3 ) {
-			errors.append("Préciser le type/nom de votre rue.<br />");
+			errors.append("Préciser le type/nom de rue du retrait! On va pas vendre vos données à la russie quand même. <br />");
 		}
 		if(!Pattern.matches("[0-9]{5}", retrait.getCodePostal().trim())) {
-			errors.append("Votre code postal est incorrect.<br />");
+			errors.append("Le code postal est incorrect! En CINQ chiffres.<br />");
 		}
 		if(retrait.getVille().trim().length() < 3 ) {
-			errors.append("Préciser le nom de votre ville.<br />");
-		}		
+			errors.append("Préciser le nom de la ville du retrait! Faut bien qu'on le récupère quelque part.<br />");
+		}
 		
 		return errors;	
 	}

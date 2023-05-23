@@ -1,24 +1,25 @@
 package fr.eni.trocenchere.bll;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.dal.ArticleDAO;
 import fr.eni.trocenchere.dal.DAOFactory;
+import fr.eni.trocenchere.dal.RetraitDAO;
 
 public class ArticleManager {
 	private ArticleDAO daoArticle;
+	private RetraitDAO daoRetrait;
 	private static ArticleManager instance;
 
 	private ArticleManager() {
 		daoArticle =  DAOFactory.getArticleDAO();
+		daoRetrait = DAOFactory.getRetraitDAO();
 	}
 
 	public static ArticleManager getInstance() {
 		if (instance == null)
 			instance = new ArticleManager();
-
 		return instance;
 	}
 	
@@ -26,21 +27,27 @@ public class ArticleManager {
 		try {
 			return daoArticle.getArticles(categorieArticle, caractereCompris);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 		
 	}
 	public Article getArticleById(int id){
-		try {
-			
+		try {			
 			return daoArticle.getArticleById(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
-		
+		return null;		
 	}
+	
+	public void insertArticle(Article article, int idUtilisateur, int idCategorie) {
+		try {
+			int noArticle = daoArticle.insertArticle(article, idUtilisateur, idCategorie);
+			daoRetrait.insertRetrait(article.getRetrait(), noArticle);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
