@@ -5,6 +5,7 @@
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,19 +19,12 @@
         int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 		Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
         int noCategorie = 0;
-        String radioFilterParameter = null;
-        String selectFilterParameter = null;
+
+        String radioFilterParameter = (String) request.getAttribute("radioFilterParameter") != null ? (String) request.getAttribute("radioFilterParameter") : "";
+        Boolean selectFilterParameter = (Boolean) request.getAttribute("selectFilterParameter") != null ? (Boolean) request.getAttribute("selectFilterParameter") : true;
 
         if (request.getAttribute("filtreCategorie") != null) {
             noCategorie = (int) request.getAttribute("filtreCategorie");
-        }
-
-        if (request.getAttribute("radioFilterParameter") != null) {
-            radioFilterParameter = (String) request.getAttribute("radioFilterParameter");
-        }
-
-        if (request.getAttribute("selectFilterParameter") != null) {
-            selectFilterParameter = (String) request.getAttribute("selectFilterParameter");
         }
 
         String nomArticle = (String) request.getAttribute("filtreArticle");
@@ -38,8 +32,9 @@
     <div class="row">
         <div class="col-6">
             <h1>
-                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI -
-                    Encheres</a>
+                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">
+                    ENI - Encheres
+                </a>
             </h1>
         </div>
         <div class="col-6">
@@ -60,8 +55,6 @@
         </div>
         <div class="col-12">
             <h2 class="text-center">Liste des enchères</h2>
-            <h2><%=radioFilterParameter%></h2>
-            <h2><%=selectFilterParameter%></h2>
         </div>
         <div class="col-12">
             <form action="<%=request.getContextPath() + "/"%>" method="POST"
@@ -120,30 +113,29 @@
                                         <div class="mt-3 radio_group radio_group_achat">
                                             <label for="1">Achat</label>
                                             <input type="radio" class="radio_select" id="1" name="select" value="1"
-                                                    <%= radioFilterParameter == "1" ? "checked" : ""%>>
+                                                    <%= selectFilterParameter ? "checked" : ""%>>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="enchere_ouvertes">enchères
                                                     ouvertes</label>
                                                 <input class="radio_elem" type="radio" id="enchere_ouvertes"
                                                        name="paramFilter" value="enchere_ouvertes"
-                                                    <%= selectFilterParameter == "enchere_ouvertes" ? "checked" : ""%>>
+                                                    <%= radioFilterParameter.equalsIgnoreCase("enchere_ouvertes") ? "checked" : ""%>>
                                             </div>
 
                                             <div class="form-label">
-                                                <label class="radio_elem" for="mes_enchere">mes enchères</label>
-                                                <input class="radio_elem" type="radio" id="mes_enchere"
-                                                       name="paramFilter" value="mes_enchere"
-                                                    <%= selectFilterParameter == "mes_enchere" ? "checked" : ""%>>
+                                                <label class="radio_elem" for="mes_encheres">mes enchères</label>
+                                                <input class="radio_elem" type="radio" id="mes_encheres"
+                                                       name="paramFilter" value="mes_encheres"
+                                                    <%= radioFilterParameter.equalsIgnoreCase("mes_encheres") ? "checked" : ""%>>
                                             </div>
-                                            <h2><%= selectFilterParameter.contains("mes_enchere") ? "true" : "false"%></h2>
 
                                             <div class="form-label">
-                                                <label class="radio_elem" for="mes_enchere_remportes">mes enchères
+                                                <label class="radio_elem" for="mes_encheres_remportes">mes enchères
                                                     remportées</label>
-                                                <input class="radio_elem" type="radio" id="mes_enchere_remportes"
-                                                       name="paramFilter" value="mes_enchere_remportes"
-                                                    <%= selectFilterParameter == "mes_enchere_remportes" ? "checked" : ""%>>
+                                                <input class="radio_elem" type="radio" id="mes_encheres_remportes"
+                                                       name="paramFilter" value="mes_encheres_remportes"
+                                                    <%= radioFilterParameter.equalsIgnoreCase("mes_encheres_remportes") ? "checked" : ""%>>
                                             </div>
                                         </div>
                                     </div>
@@ -151,14 +143,14 @@
                                         <div class="mt-3 radio_group radio_group_ventes">
                                             <label for="2">Mes ventes</label>
                                             <input type="radio" class="radio_select" id="2" name="select" value="2"
-                                                <%= radioFilterParameter == "2" ? "checked" : ""%>>
+                                                <%= selectFilterParameter ? "" : "checked"%>>
 
                                             <div class="form-label">
                                                 <label class="radio_elem" for="mes_ventes_en_cours">mes ventes en
                                                     cours</label>
                                                 <input class="radio_elem" type="radio" id="mes_ventes_en_cours"
                                                        name="paramFilter" value="mes_ventes_en_cours"
-                                                    <%= selectFilterParameter == "mes_ventes_en_cours" ? "checked" : ""%>>
+                                                    <%= radioFilterParameter.equalsIgnoreCase("mes_ventes_en_cours") ? "checked" : ""%>>
                                             </div>
 
                                             <div class="form-label">
@@ -166,7 +158,7 @@
                                                     débutées</label>
                                                 <input class="radio_elem" type="radio" id="ventes_non_debutes"
                                                        name="paramFilter" value="ventes_non_debutes"
-                                                    <%= selectFilterParameter == "ventes_non_debutes" ? "checked" : ""%>>
+                                                    <%= radioFilterParameter.equalsIgnoreCase("ventes_non_debutes") ? "checked" : ""%>>
                                             </div>
 
                                             <div class="form-label">
@@ -174,7 +166,7 @@
                                                     terminées</label>
                                                 <input class="radio_elem" type="radio" id="ventes_terminees"
                                                        name="paramFilter" value="ventes_terminees"
-                                                    <%= selectFilterParameter == "ventes_terminees" ? "checked" : ""%>>
+                                                    <%= radioFilterParameter.equalsIgnoreCase("ventes_terminees") ? "checked" : ""%>>
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +193,8 @@
                         <img class="card-img-top" src="https://picsum.photos/200/300"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h2 class="card-title fw-bold"><%=article.getNom()%>
+                            <h2 class="card-title fw-bold">
+                                <%=article.getNom()%>
                             </h2>
                             <p class="card-text"><%=article.getDescription()%>
                             </p>

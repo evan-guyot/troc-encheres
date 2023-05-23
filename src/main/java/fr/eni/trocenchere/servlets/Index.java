@@ -14,7 +14,6 @@ import fr.eni.trocenchere.bll.CategorieManager;
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Categorie;
-import fr.eni.trocenchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class Index
@@ -30,9 +29,6 @@ public class Index extends HttpServlet {
     private int paramCategorie;
     private String paramNomArticle;
 
-    private String radioFilterParameter;
-    private String selectFilterParameter;
-
     public Index() {
         super();
         utilisateurManager = UtilisateurManager.getInstance();
@@ -40,23 +36,18 @@ public class Index extends HttpServlet {
         categorieManager = CategorieManager.getInstance();
         paramCategorie = 0;
         paramNomArticle = null;
-        radioFilterParameter = null;
-        selectFilterParameter = null;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        listArticles = articleManager.getArticles(paramCategorie, paramNomArticle, radioFilterParameter, (Integer) request.getSession().getAttribute("connectedUserId"));
-        request.setAttribute("articles", listArticles);
 
+        listArticles = articleManager.getArticles(paramCategorie, paramNomArticle, (String) request.getAttribute("radioFilterParameter"), (Integer) request.getSession().getAttribute("connectedUserId"));
         listCategories = categorieManager.getCategories();
+
+    	request.setAttribute("filtreCategorie", paramCategorie);
+		request.setAttribute("filtreArticle", paramNomArticle);
+
         request.setAttribute("categories", listCategories);
-
-        request.setAttribute("filtreCategorie", paramCategorie);
-        request.setAttribute("filtreArticle", paramNomArticle);
-
-        request.setAttribute("radioFilterParameter", radioFilterParameter);
-        request.setAttribute("selectFilterParameter", selectFilterParameter);
-
+        request.setAttribute("articles", listArticles);
 
         if (request.getSession().getAttribute("connectedUserId") == null) {
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
@@ -69,10 +60,11 @@ public class Index extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
         paramNomArticle = request.getParameter("filtreArticle");
-    	radioFilterParameter = request.getParameter("paramFilter");
-    	selectFilterParameter = request.getParameter("select");
 
-        doGet(request, response);
+        request.setAttribute("radioFilterParameter", request.getParameter("paramFilter"));
+    	request.setAttribute("selectFilterParameter", "1".equals(request.getParameter("select")));
+
+    	doGet(request, response);
     }
 
 }

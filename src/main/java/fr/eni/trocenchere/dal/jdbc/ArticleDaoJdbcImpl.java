@@ -58,12 +58,12 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
                             + "	AND CAST(GETDATE() AS DATE) < a.date_fin_encheres ");
                     break;
 
-                case "mes_enchere":
+                case "mes_encheres":
                     requete.append(" AND CAST(GETDATE() AS DATE) < a.date_fin_encheres "
                             + "	And u2.no_utilisateur=" + id);
                     break;
 
-                case "mes_enchere_remportes":
+                case "mes_encheres_remportes":
                     requete.append(" AND CAST(GETDATE() AS DATE) > a.date_debut_encheres"
                             + "	AND CAST(GETDATE() AS DATE) > a.date_fin_encheres "
                             + "	And u2.no_utilisateur=" + id);
