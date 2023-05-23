@@ -67,14 +67,10 @@ public class Encherir extends HttpServlet {
 			if(acheteur.getCredit() >= nouveauMontant) 
 			{
 				//Crediter et Debiter
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
 				acheteur.setCredit(acheteur.getCredit() - nouveauMontant);
-				utilisateurManager.nouveauSolde(acheteur);
-				System.out.println(articleCourrantPost.getPrixVente());
+				utilisateurManager.nouveauSolde(acheteur);				
 				articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getPrixVente());
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
 				utilisateurManager.nouveauSolde(articleCourrantPost.getUtilisateur());
-				System.out.println(articleCourrantPost.getUtilisateur().getCredit());
 				
 				//Insert enchere
 				enchereModifier = new Enchere(nouvelleDateEnchere, nouveauMontant, acheteur);
