@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
+<%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.time.LocalDate"%>
 
@@ -20,7 +21,7 @@
 	<div class="container">
 		<%
 		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
-
+		Utilisateur utilisateur = (Utilisateur)request.getAttribute("utilisateur");
 		int noCategorie = 0;
 
 		if (request.getAttribute("filtreCategorie") != null) {
@@ -29,16 +30,26 @@
 
 		String nomArticle = (String) request.getAttribute("filtreArticle");
 		%><div class="row">
-        <div class="col-6">
-            <h1>
-                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI -
-                    Encheres</a>
-            </h1>
-        </div>
-        <div class="col-6">
-            <a href="utilisateur?id=<%= idConnectedUser%>"class="btn btn-primary active" role="button" aria-pressed="true">Voir
+
+			<div class="col-6">
+				<h1>
+					<a class="text-secondary text-decoration-none"
+						href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
+				</h1>
+			</div>
+			<div class="col-6">
+				<%if(utilisateur.isAdministrateur()){ %>
+				<a href="PanelAdministration"
+					class="btn btn-warning active" role="button" aria-pressed="true">Administration</a>
+				<% } %>
+				<a href="utilisateur?id=<%=idConnectedUser%>"
+					class="btn btn-primary active" role="button" aria-pressed="true">Voir
 					mon profil</a>
+					
+				 <a href="DeconnectionUtilisateur"
+
 <a class="btn btn-success" href="VendreArticle">Vendre un article</button> <a href="DeconnectionUtilisateur"
+
 					class="btn btn-dark active" role="button" aria-pressed="true">Se
 					déconnecter</a>
 			</div>

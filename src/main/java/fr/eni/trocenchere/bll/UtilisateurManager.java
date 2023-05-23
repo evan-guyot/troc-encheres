@@ -1,6 +1,7 @@
 package fr.eni.trocenchere.bll;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.eni.trocenchere.bo.Utilisateur;
 import fr.eni.trocenchere.dal.DAOFactory;
@@ -58,7 +59,7 @@ public class UtilisateurManager {
 		try {
 			return daoUtilisateur.getUserById(id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null;
@@ -93,6 +94,26 @@ public class UtilisateurManager {
 
 		return result;
 	}
+	
+	
+	public List<Utilisateur> selectAllUser()
+	{
+		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();
+		List<Utilisateur> utilisateurs = null;
+		try 
+		{
+			utilisateurs = conn.selectAllUser();
+			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			
+		}
+		return utilisateurs;
+		
+	}
+	
 	public void nouveauSolde(Utilisateur user)
 	{
 		UtilisateurDaoJdbcImpl conn = new UtilisateurDaoJdbcImpl();

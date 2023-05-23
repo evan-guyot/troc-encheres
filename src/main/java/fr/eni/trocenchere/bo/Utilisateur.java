@@ -1,5 +1,7 @@
 package fr.eni.trocenchere.bo;
 
+import java.util.regex.Pattern;
+
 public class Utilisateur {
 	private int noUtilisateur;
 	private String pseudo;
@@ -13,6 +15,96 @@ public class Utilisateur {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private boolean actif;
+	
+	public StringBuilder isValid() 
+	{ 
+		StringBuilder errors = new StringBuilder(); 
+		if(!Pattern.matches("[A-Za-z0-9]+", pseudo)) 
+		{ 
+			errors.append("Le pseudo doit être composé de chiffres et de lettres.<br />"); 
+		}
+		
+		if(nom.trim().length() < 3 ) 
+		{ 
+			errors.append("Le nom est trop court.<br />"); 
+		}
+		if(nom.trim().length() > 30) 
+		{ 
+			errors.append("Le nom est trop long.<br />"); 
+		}
+		if(prenom.trim().length() < 3) 
+		{ 
+			errors.append("Le prénom est trop court.<br />"); 
+		}
+		if(prenom.trim().length() > 30) 
+		{ 
+			errors.append("Le prénom est trop long.<br />"); 
+		}
+		if(!Pattern.matches("([0-9]){10}", telephone)) 
+		{ 
+			errors.append("Format téléphone : 0606060606.<br />"); 
+		}
+		
+		if(!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", email)) 
+		{ 
+			errors.append("Format email : jeanne@hotmail.fr.<br />"); 
+		}
+		if(email.length() > 50) 
+		{ 
+			errors.append("Le mail est trop long.<br />"); 
+		}
+		if(rue.trim().length() < 3) 
+		{ 
+			errors.append("Le nom de la rue est trop court.<br />"); 
+		}
+		if(ville.trim().length() > 30) 
+		{ 
+			errors.append("Le nom de la rue est trop long.<br />"); 
+		}
+		if(!Pattern.matches("([0-9]){5}", codePostal)) 
+		{ 
+			errors.append("Le code postal doit être composé de 5 chiffres.<br />"); 
+		}
+		
+		if(ville.trim().length() < 3) 
+		{ 
+			errors.append("Le nom de la ville est trop court.<br />"); 
+		}
+		if(ville.trim().length() > 30) 
+		{ 
+			errors.append("Le nom de la ville est trop long.<br />"); 
+		}
+		if(motDePasse.trim().length() < 3) 
+		{ 
+			errors.append("Le mot de passe est trop court.<br />"); 
+		}
+		if(motDePasse.trim().length() > 30) 
+		{ 
+			errors.append("Le mot de passe est trop long.<br />"); 
+		}
+		
+		
+		return errors; 
+	}
+
+	
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, int credit, boolean administrateur, boolean actif) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.credit = credit;
+		this.administrateur = administrateur;
+		this.actif = actif;
+	}
 
 	/*modèle utilisé pour la suppression d'utilisateur*/
 	public Utilisateur( int noUtilisateur, String mdp) {
@@ -81,10 +173,21 @@ public class Utilisateur {
 
 	/*modèle utilisé pour get un utilisateur*/
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur, boolean actif) {
 		this(noUtilisateur, pseudo, nom, prenom, email,  telephone,rue, codePostal, ville, motDePasse);
 		this.credit = credit;
 		this.administrateur = administrateur;
+		this.actif = actif;
+	}
+
+
+	public boolean isActif() {
+		return actif;
+	}
+
+
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 
 

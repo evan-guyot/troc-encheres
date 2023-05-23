@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
+<%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 	<%
 
 	int noCategorie = 0;
-
+	
 	if (request.getAttribute("filtreCategorie") != null) {
 		noCategorie = (int) request.getAttribute("filtreCategorie");
 	}

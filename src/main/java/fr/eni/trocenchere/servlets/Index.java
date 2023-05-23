@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.trocenchere.bll.ArticleManager;
 import fr.eni.trocenchere.bll.CategorieManager;
+import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Categorie;
+import fr.eni.trocenchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class Index
@@ -22,6 +24,7 @@ public class Index extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ArticleManager articleManager;
     private CategorieManager categorieManager;
+    private UtilisateurManager utilisateurManager;
     private List<Article> listArticles;
     private List<Categorie> listCategories;
     private int paramCategorie;
@@ -29,6 +32,7 @@ public class Index extends HttpServlet {
 
     public Index(){
         super();
+        utilisateurManager = UtilisateurManager.getInstance();
         articleManager = ArticleManager.getInstance();
         categorieManager = CategorieManager.getInstance();
         paramCategorie = 0;
@@ -51,7 +55,10 @@ public class Index extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
-			
+
+			Utilisateur utilisateur = utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId"));
+			request.setAttribute("utilisateur", utilisateur);
+
 			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
 		}        
     }

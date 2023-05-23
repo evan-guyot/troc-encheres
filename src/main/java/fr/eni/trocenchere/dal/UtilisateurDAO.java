@@ -1,6 +1,7 @@
 package fr.eni.trocenchere.dal;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.eni.trocenchere.bo.Utilisateur;
 
@@ -9,7 +10,7 @@ public interface UtilisateurDAO {
 	public void newProfile(Utilisateur utilisateur)throws SQLException;
 	public boolean verifEmail(String email)throws SQLException;
 	public boolean verifPseudo(String pseudo)throws SQLException;
-
+	public List<Utilisateur> selectAllUser()throws SQLException;
 	public Utilisateur getUserById(int id) throws SQLException;
 	public void nouveauSolde(Utilisateur user)throws SQLException;
 
