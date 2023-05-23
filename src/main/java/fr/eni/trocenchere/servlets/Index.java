@@ -14,7 +14,6 @@ import fr.eni.trocenchere.bll.CategorieManager;
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Categorie;
-import fr.eni.trocenchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class Index
@@ -30,7 +29,7 @@ public class Index extends HttpServlet {
     private int paramCategorie;
     private String paramNomArticle;
 
-    public Index(){
+    public Index() {
         super();
         utilisateurManager = UtilisateurManager.getInstance();
         articleManager = ArticleManager.getInstance();
@@ -40,34 +39,32 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
-    	listArticles = articleManager.getArticles(paramCategorie,paramNomArticle);
-    	request.setAttribute("articles", listArticles);
-    	
-    	listCategories = categorieManager.getCategories();
-    	request.setAttribute("categories", listCategories);
-    	
+
+        listArticles = articleManager.getArticles(paramCategorie, paramNomArticle, (String) request.getAttribute("radioFilterParameter"), (Integer) request.getSession().getAttribute("connectedUserId"));
+        listCategories = categorieManager.getCategories();
+
     	request.setAttribute("filtreCategorie", paramCategorie);
-    	request.setAttribute("filtreArticle", paramNomArticle);    	
+		request.setAttribute("filtreArticle", paramNomArticle);
 
-        
-		if (request.getSession().getAttribute("connectedUserId") == null) {
+        request.setAttribute("categories", listCategories);
+        request.setAttribute("articles", listArticles);
 
-			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
-		} else {
-
-			Utilisateur utilisateur = utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId"));
-			request.setAttribute("utilisateur", utilisateur);
-
-			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
-		}        
+        if (request.getSession().getAttribute("connectedUserId") == null) {
+            request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        } else {
+            Utilisateur utilisateur = utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId"));
+			request.setAttribute("utilisateur", utilisateur);request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
-    	paramNomArticle = request.getParameter("filtreArticle");
-    	    	
-        doGet(request, response);
+        paramCategorie = Integer.parseInt(request.getParameter("filtreCategorie"));
+        paramNomArticle = request.getParameter("filtreArticle");
+
+        request.setAttribute("radioFilterParameter", request.getParameter("paramFilter"));
+    	request.setAttribute("selectFilterParameter", "1".equals(request.getParameter("select")));
+
+    	doGet(request, response);
     }
 
 }

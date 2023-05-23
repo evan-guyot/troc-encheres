@@ -8,11 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%
@@ -20,8 +16,7 @@
 	%>
 	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
 		<div class="col-md-6">
-			<div
-				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col-auto d-none d-lg-block">
 					<img class="tailleImage" src="https://picsum.photos/200/300"
 						alt="Card image cap">
@@ -82,9 +77,9 @@
 					<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
 					<div class="dpf">
 						<div class="bold">Ma proposition:</div>
-						<input type="number" class="form-control inputNumber" id="number"
-							name="nouveauMontant" aria-describedby="number"
-							value="<%=article.getEnchere() != null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
+						<input type="number" class="form-control inputNumber" id="number" name="nouveauMontant"
+							aria-describedby="number"
+							value="<%=article.getEnchere()!= null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
 					</div>
 					<%
 					}
@@ -97,16 +92,17 @@
 					<div class="btnn">
 
 						<input type="hidden" name="noArticle"
-							value="<%=article.getNoArticle()%>" /> 
+							value="<%=article.getNoArticle()%>" />
 							<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
-							<input type="submit" class="btn btn-light" value="Encherir" /> 
+							<input type="submit" class="btn btn-light" value="Encherir" />
 							<% } %>
-							
+
 							<a
 							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Retour</a>
 					</div>
 				</div>
 			</div>
+	</div>
 	</form>
 </body>
 <style>
@@ -142,7 +138,6 @@
 .inputNumber {
 	height: 30px;
 	width: auto;
-}
 }
 </style>
 </html>

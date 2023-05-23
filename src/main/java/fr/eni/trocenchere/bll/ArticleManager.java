@@ -23,24 +23,23 @@ public class ArticleManager {
 		return instance;
 	}
 	
-	public List<Article> getArticles(int categorieArticle, String caractereCompris){
+	public List<Article> getArticles(int categorieArticle, String caractereCompris, String getArticles, Integer id){
 		try {
-			return daoArticle.getArticles(categorieArticle, caractereCompris);
+			return daoArticle.getArticles(categorieArticle, caractereCompris, getArticles, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
+
 	public Article getArticleById(int id){
-		try {			
+		try {
 			return daoArticle.getArticleById(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;		
-	}
-	
+		return null;}
+
 	public void insertArticle(Article article, int idUtilisateur, int idCategorie) {
 		try {
 			int noArticle = daoArticle.insertArticle(article, idUtilisateur, idCategorie);
@@ -49,5 +48,5 @@ public class ArticleManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
