@@ -61,10 +61,11 @@ public class ConnectionUtilisateur extends HttpServlet {
 
 			if (utilisateur != null) {
 				session.setAttribute("connectedUserId", utilisateur.getNoUtilisateur());
+				doGet(request, response);
 			} else {
 				redirectWithError(request, response);
 			}
-			doGet(request, response);
+			
 		}
 	}
 }

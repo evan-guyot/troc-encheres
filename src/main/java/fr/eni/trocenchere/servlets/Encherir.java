@@ -51,14 +51,6 @@ public class Encherir extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/jsp/EncherirPage.jsp").forward(request, response);
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
@@ -69,8 +61,6 @@ public class Encherir extends HttpServlet {
 		LocalDateTime nouvelleDateEnchere = LocalDateTime.now();
 		StringBuilder stringBuilder = new StringBuilder();
 
-		
-		
 		
 		if((articleCourrantPost.getEnchere()!=null && articleCourrantPost.getEnchere().getMontantEnchere() < nouveauMontant) ||  (articleCourrantPost.getEnchere()==null && articleCourrantPost.getMiseAPrix()< nouveauMontant)) 
 		{

@@ -17,6 +17,12 @@ public class CreationProfileServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if(request.getAttribute("ErrorMess") != null) 
+		{
+			String errorMess =  (String) request.getAttribute("ErrorMess");
+			request.setAttribute("ErrorMess", errorMess);
+		}
+		
 		request.getRequestDispatcher("/WEB-INF/jsp/NewProfile.jsp").forward(request, response);
 	}
 
@@ -25,15 +31,28 @@ public class CreationProfileServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		
 		boolean emailDejaUtilise = utilisateurManager.verifEmail(request.getParameter("mail"));
 		boolean pseudoDejaUtilise = utilisateurManager.verifPseudo(request.getParameter("pseudo"));
-		if (!(emailDejaUtilise || pseudoDejaUtilise) && Pattern.matches("[A-Za-z0-9]+", request.getParameter("pseudo"))
-				&& (request.getParameter("mdp").contains(request.getParameter("confirmMdp")))) {
+		Utilisateur nouveauProfile = new Utilisateur(request.getParameter("pseudo"),
+				request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("mail"),
+				request.getParameter("tel"), request.getParameter("rue"), request.getParameter("codepostal"),
+				request.getParameter("ville"), request.getParameter("mdp"));
+		StringBuilder validationFormulaire = nouveauProfile.isValid();
+		if (emailDejaUtilise)
+		{
+			validationFormulaire.append("Email deja utilisé.<br />"); 
+		}
+		if (pseudoDejaUtilise)
+		{
+			validationFormulaire.append("Pseudo deja utilisé.<br />"); 
+		}
+		if(!request.getParameter("mdp").contains(request.getParameter("confirmMdp")))
+		{
+			validationFormulaire.append("Le mot de passe n'est pas le même dans confirmation.<br />"); 
+		}
+		if (validationFormulaire.length() < 1) {
 			try {
-				Utilisateur nouveauProfile = new Utilisateur(request.getParameter("pseudo"),
-						request.getParameter("nom"), request.getParameter("prenom"), request.getParameter("mail"),
-						request.getParameter("tel"), request.getParameter("rue"), request.getParameter("codepostal"),
-						request.getParameter("ville"), request.getParameter("mdp"));
 				utilisateurManager.creationProfile(nouveauProfile);
 				response.sendRedirect(request.getContextPath()+"/");
 			} catch (Exception e) 
@@ -42,9 +61,8 @@ public class CreationProfileServlet extends HttpServlet {
 				response.sendRedirect("CreationProfileServlet");
 			}
 		}else {
-			request.setAttribute("emailDejaPrit",true);
-			request.setAttribute("pseudoDejaPrit",true);
-			response.sendRedirect(request.getContextPath()+"/");
+			request.setAttribute("ErrorMess", validationFormulaire.toString());
+			doGet(request, response);
 		}
 	}
 }

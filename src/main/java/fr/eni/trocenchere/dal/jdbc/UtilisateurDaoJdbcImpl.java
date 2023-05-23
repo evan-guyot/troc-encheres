@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.trocenchere.dal.ConnectionProvider;
 import fr.eni.trocenchere.bo.Utilisateur;
@@ -13,15 +15,15 @@ import fr.eni.trocenchere.dal.UtilisateurDAO;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	private static final String LOGIN_REQ = "SELECT * from UTILISATEURS where (pseudo = ? and mot_de_passe = ?) or (email = ? and mot_de_passe = ?)";
-	private static final String NEW_PROFILE_REQ = "INSERT into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String NEW_PROFILE_REQ = "INSERT into UTILISATEURS values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
-
+	private static final String SELECT_ALL_USER ="select * from UTILISATEURS";
 	
 	private static final String NOUVEAU_SOLDE = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 
 	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
-    private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
+    private static final String UPDATE_USER_BY_ID = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? , actif=? WHERE no_utilisateur=?";
     private static final String DELETE_USER_BY_ID = "DELETE from UTILISATEURS where no_utilisateur=?";
 
 
@@ -43,7 +45,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
                 pstmt.setString(8, utilisateur.getVille());
                 pstmt.setString(9, utilisateur.getMotDePasse());
                 pstmt.setInt(10, utilisateur.getCredit());
-                pstmt.setBoolean(11, utilisateur.isAdministrateur());
+                pstmt.setBoolean(11, false);
+                pstmt.setBoolean(12, true);
 
 				pstmt.executeUpdate();
 				pstmt.close();
@@ -72,7 +75,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
             pstmt.setString(7, utilisateur.getCodePostal());
             pstmt.setString(8, utilisateur.getVille());
             pstmt.setString(9, utilisateur.getMotDePasse());
-            pstmt.setInt(10, id);
+            pstmt.setBoolean(10, utilisateur.isActif());
+            pstmt.setInt(11, id);
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -100,7 +104,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"),rs.getBoolean("actif"));
 				}
 				stm.close();
 				cnx.commit();
@@ -136,7 +140,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
 							rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
-							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+							rs.getString("ville"), rs.getInt("credit"), rs.getBoolean("administrateur"),rs.getBoolean("actif"));
 				}
 				stm.close();
 				cnx.commit();
@@ -217,7 +221,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 							rs.getString("telephone"), rs.getString("rue"), rs.getString("code_postal"),
 							rs.getString("ville"), rs.getString("mot_de_passe"),
     						rs.getInt("credit"),
-    						rs.getBoolean("administrateur")
+    						rs.getBoolean("administrateur"),rs.getBoolean("actif")
     						);
                 }
 
@@ -295,5 +299,41 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
         }
 		return false;
 	}
+
+	@Override
+	public List<Utilisateur> selectAllUser() throws SQLException {
+	    List<Utilisateur> utilisateurs = new ArrayList<>();
+
+	    try (Connection cnx = ConnectionProvider.connection();
+	         Statement stmt = cnx.createStatement();
+	         ResultSet rs = stmt.executeQuery(SELECT_ALL_USER)) {
+
+	        while (rs.next()) {
+	            Utilisateur utilisateur = new Utilisateur(
+	                    rs.getInt("no_utilisateur"),
+	                    rs.getString("pseudo"),
+	                    rs.getString("nom"),
+	                    rs.getString("prenom"),
+	                    rs.getString("email"),
+	                    rs.getString("telephone"),
+	                    rs.getString("rue"),
+	                    rs.getString("code_postal"),
+	                    rs.getString("ville"),
+	                    rs.getInt("credit"),
+	                    rs.getBoolean("administrateur"),
+	                    rs.getBoolean("actif")
+	            );
+
+	            utilisateurs.add(utilisateur);
+	        }
+	    } catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+
+	    return utilisateurs;
+	}
+
+
 
 }

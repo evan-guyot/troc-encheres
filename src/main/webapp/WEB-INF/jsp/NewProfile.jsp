@@ -17,6 +17,9 @@
 			style="padding: 30px;">
 			<div style="display: flex; font-size: 30px; justify-content: center;">Création
 				du profil</div>
+				<%if(request.getAttribute("ErrorMess")!=null){ %>
+			<div class="alert alert-danger" role="alert"><%=request.getAttribute("ErrorMess") %></div>
+				<% } %>
 			<form method="post" action="CreationProfileServlet">
 				<div class="formulaire">
 
@@ -33,7 +36,7 @@
 						</div>
 						<div class="ligneForm">
 
-							<input placeholder="Téléphone" type="text" name="tel"
+							<input placeholder="Téléphone" type="tel" name="tel"
 								class="form-control">
 						</div>
 						<div class="ligneForm">
@@ -76,7 +79,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="d-flex" style="padding-left:120px; padding-right:120px; gap:24px;">
+				<div class="d-flex"
+					style="padding-left: 120px; padding-right: 120px; gap: 24px;">
 
 					<button type="submit" class="w-50 btn btn-lg btn-primary">Créer</button>
 					<a href="ConnectionUtilisateur"
@@ -103,8 +107,8 @@ body {
 }
 
 .formulaire {
-	    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .grandeDiv {
