@@ -87,7 +87,8 @@
 
 						</div>
 						<div class="col-12 col-md-6">
-							<button class="btn btn-primary w-100 mt-4" type="submit">Rechercher</button>
+							<button class="btn btn-secondary mt-4" id="clear_filter" type="button">Effacer les filtres</button>
+							<button class="btn btn-primary w-50 mt-4" type="submit">Rechercher</button>
 						</div>
 					</div>
 				</form>
@@ -127,5 +128,15 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const button_clear_filters = document.getElementById("clear_filter");
+		const filtre_article = document.getElementById("filtreArticle");
+		const filtre_categorie = document.getElementById("filtreCategorie");
+
+		button_clear_filters.addEventListener("click", (e) => {
+			filtre_article.value = "";
+			filtre_categorie.value = 0;
+		});
+	</script>
 </body>
 </html>
