@@ -42,7 +42,9 @@ public class VendreArticle extends HttpServlet {
 			if(request.getAttribute("erreursFormulaire")!=null) {
 				request.setAttribute("erreursFormulaire", request.getAttribute("erreursFormulaire"));
 			}
-			
+			if(request.getAttribute("validationMessage")!=null) {
+				request.setAttribute("validationMessage", request.getAttribute("validationMessage"));
+			}
 			request.getRequestDispatcher("/WEB-INF/jsp/VenteArticle.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/");
@@ -95,10 +97,10 @@ public class VendreArticle extends HttpServlet {
 					nouvelArticle, 
 					(int) request.getSession().getAttribute("connectedUserId"), 
 					Integer.parseInt(request.getParameter("articleCategorie")));
-			response.sendRedirect(request.getContextPath() + "/");
+			request.setAttribute("validationMessage", "🎉 Votre article à bien été ajouté ! 🎉");
 		}else {
 			request.setAttribute("erreursFormulaire",sbErreurs.toString());
-			doGet(request, response);
 		}
+		doGet(request, response);
 	}
 }
