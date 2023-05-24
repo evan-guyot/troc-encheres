@@ -19,7 +19,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
 	private static final String SELECT_ALL_USER ="select * from UTILISATEURS";
-	
+	private static final String SELECT_ALL_POTENTIAL_DELETABLE_USER = "select DISTINCT u.* from UTILISATEURS u, ARTICLES_VENDUS a, ENCHERES e WHERE u.no_utilisateur not in (select av.no_utilisateur from ARTICLES_VENDUS av) AND u.no_utilisateur not in (select ee.no_utilisateur from ENCHERES ee)";
 	private static final String NOUVEAU_SOLDE = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 
 	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
@@ -263,8 +263,23 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-
-	public Boolean deleteUserById(String password, int id) throws SQLException {
+	public void deleteUserById(int id) throws Exception {
+		
+			try (Connection cnx = ConnectionProvider.connection(); PreparedStatement stm = cnx.prepareStatement(DELETE_USER_BY_ID)) 
+			{
+			    stm.setInt(1, id);
+			    stm.executeUpdate();
+			} catch (Exception e) 
+			{
+			    e.printStackTrace();
+			    
+			    throw e;
+			}
+		
+	}
+	
+	
+	public Boolean deleteUserByIdWithPassword(String password, int id) throws SQLException {
 		Utilisateur utilisateur = null;
 
 		try (Connection cnx = ConnectionProvider.connection();
@@ -334,6 +349,39 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	    return utilisateurs;
 	}
 
+	@Override
+	public List<Utilisateur> selectAllUserPotentialDeletable() throws SQLException {
+	    List<Utilisateur> utilisateurs = new ArrayList<>();
+
+	    try (Connection cnx = ConnectionProvider.connection();
+	         Statement stmt = cnx.createStatement();
+	         ResultSet rs = stmt.executeQuery(SELECT_ALL_POTENTIAL_DELETABLE_USER)) {
+
+	        while (rs.next()) {
+	            Utilisateur utilisateur = new Utilisateur(
+	                    rs.getInt("no_utilisateur"),
+	                    rs.getString("pseudo"),
+	                    rs.getString("nom"),
+	                    rs.getString("prenom"),
+	                    rs.getString("email"),
+	                    rs.getString("telephone"),
+	                    rs.getString("rue"),
+	                    rs.getString("code_postal"),
+	                    rs.getString("ville"),
+	                    rs.getInt("credit"),
+	                    rs.getBoolean("administrateur"),
+	                    rs.getBoolean("actif")
+	            );
+
+	            utilisateurs.add(utilisateur);
+	        }
+	    } catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+
+	    return utilisateurs;
+	}
 
 
 }

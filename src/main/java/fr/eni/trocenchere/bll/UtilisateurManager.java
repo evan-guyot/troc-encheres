@@ -35,11 +35,22 @@ public class UtilisateurManager {
 		}
 	}
 	
-	public Boolean deleteUserById(String mdp, int id){
+	public void deleteUserById(int id){
+		try {
+			daoUtilisateur.deleteUserById(id);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	
+	public Boolean deleteUserByIdWithPassword(String mdp, int id){
 		try {
 			validationUserId(id);
 			validationUserPassword(mdp);
-			return daoUtilisateur.deleteUserById(mdp, id);
+			return daoUtilisateur.deleteUserByIdWithPassword(mdp, id);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -94,7 +105,16 @@ public class UtilisateurManager {
 
 		return result;
 	}
-	
+	public List<Utilisateur> selectAllUserPotentialDeletable(){
+		List<Utilisateur> utilisateurs = null;
+	try {
+		utilisateurs = daoUtilisateur.selectAllUserPotentialDeletable();
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	return utilisateurs;
+	}
 	
 	public List<Utilisateur> selectAllUser()
 	{
