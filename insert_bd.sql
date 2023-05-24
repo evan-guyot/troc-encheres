@@ -1,18 +1,18 @@
-INSERT INTO UTILISATEURS VALUES ('TomDu44', 'Gentereau', 'Tom', 'tgentereau@yahoo.com', '0215568457','rue des baobabs','85140','Potatoville','tom44',400, 0);
-INSERT INTO UTILISATEURS VALUES ('JeanneLaBg', 'Bonbeurre', 'Jeanne', 'jbonbeurre@ygmail.com', '0285749654','allée des gens heureux','75420','Babouinland','jeannette',2500, 0);
-INSERT INTO UTILISATEURS VALUES ('Totoche', 'Charlier', 'Christophe', 'ccharlier@yahoo.com', '068754842','rue tabaga','13540','Taratata','tom44',400, 0);
+INSERT INTO UTILISATEURS VALUES ('TomDu44', 'Gentereau', 'Tom', 'tgentereau@yahoo.com', '0215568457','rue des baobabs','85140','Potatoville','tom44',400, 0, 1);
+INSERT INTO UTILISATEURS VALUES ('JeanneLaBg', 'Bonbeurre', 'Jeanne', 'jbonbeurre@ygmail.com', '0285749654','allÃ©e des gens heureux','75420','Babouinland','jeannette',2500, 0, 1);
+INSERT INTO UTILISATEURS VALUES ('Totoche', 'Charlier', 'Christophe', 'ccharlier@yahoo.com', '068754842','rue tabaga','13540','Taratata','tom44',400, 0, 1);
 
 INSERT INTO CATEGORIES VALUES ('Jouets');
-INSERT INTO CATEGORIES VALUES ('Véhicules');
-INSERT INTO CATEGORIES VALUES ('Vêtements');
+INSERT INTO CATEGORIES VALUES ('VÃ©hicules');
+INSERT INTO CATEGORIES VALUES ('VÃªtements');
 INSERT INTO CATEGORIES VALUES ('Meubles');
 INSERT INTO CATEGORIES VALUES ('Autres');
 
-INSERT INTO ARTICLES_VENDUS VALUES ('Trottinette qui va vite','Super trot de 2015 en moyen état qui va encore méga viiiite !!', '19/05/2023','26/05/2023',300,150,2,1);
+INSERT INTO ARTICLES_VENDUS VALUES ('Trottinette qui va vite','Super trot de 2015 en moyen Ã©tat qui va encore mÃ©ga viiiite !!', '19/05/2023','26/05/2023',300,150,2,1);
 INSERT INTO ARTICLES_VENDUS VALUES ('Barbie en mode sexy','Ma super barbie troo kawai UwU toute rose et mignonne que j ai depuis 6ans', '19/05/2023','01/06/2023',25,5,2,1);
-INSERT INTO ARTICLES_VENDUS VALUES ('Comode', 'Je vends la commode de ma belle mère (une femme pas très commode cependant) bon état et un peu poussiéreuse (tout autant que ma belle mère cette fois ci)','16/05/2023','15/06/2023',400,105,3,4);
-INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Hulk','Mon pull térifiant Hulk, ca donne trop de charisme pour draguer des minettes','03/06/2023','15/06/2023',25,8,1,2)
-INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Cars Rouge','Mon pull trop cool de Cars, Edition spécial super boost acheté a DisneyLand Paris','06/05/2023','17/05/2023',30,5,1,2)
+INSERT INTO ARTICLES_VENDUS VALUES ('Comode', 'Je vends la commode de ma belle mÃ¨re (une femme pas trÃ¨s commode cependant) bon Ã©tat et un peu poussiÃ©reuse (tout autant que ma belle mÃ¨re cette fois ci)','16/05/2023','15/06/2023',400,105,3,4);
+INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Hulk','Mon pull tÃ©rifiant Hulk, ca donne trop de charisme pour draguer des minettes','03/06/2023','15/06/2023',25,8,1,2)
+INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Cars Rouge','Mon pull trop cool de Cars, Edition spÃ©cial super boost achetÃ© a DisneyLand Paris','06/05/2023','17/05/2023',30,5,1,2)
 
 INSERT INTO RETRAITS VALUES (1,'rue de la tartinade','69140', 'Lyon');
 INSERT INTO RETRAITS VALUES (2,'rue de la tartinade','69140', 'Lyon');

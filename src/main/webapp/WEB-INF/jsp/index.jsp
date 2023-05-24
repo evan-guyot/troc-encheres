@@ -4,16 +4,13 @@
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
 <%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ENI - Encheres</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%
@@ -34,41 +31,42 @@
             </h1>
 			</div>
 			<div class="col-6">
-				<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
-				 justify-content-center"
-					role="button" aria-pressed="true" style="width: fit-content;
+				<div class="mt-3 float-right">
+					<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
+				 justify-content-center" role="button" aria-pressed="true"style="width: fit-content;
     float: right;">Se connecter/S'inscrire</a>
+				</div>
 			</div>
 			<div class="col-12">
 				<h2 class="text-center">Liste des enchères</h2>
 			</div>
 			<div class="col-12">
 				<form action="<%=request.getContextPath() + "/"%>" method="POST"
-					class="mt-5">
+					class="mt-5 mb-5">
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-label">
-								<label for="nomArticle">Filtres :</label>
+								<label for="nomArticle" class="d-block">Filtres :</label>
 
 								<%
 								if (nomArticle != null) {
 								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle" class="w-100"
 									placeholder="le nom de l'article contient"
 									value="<%=nomArticle%>">
 
 								<%
 								} else {
 								%>
-								<input type="text" name="filtreArticle" id="filtreArticle"
+								<input type="text" name="filtreArticle" id="filtreArticle" class="w-100"
 									placeholder="le nom de l'article contient">
 								<%
 								}
 								%>
 							</div>
 							<div class="form-label">
-								<label for="categorie">Catégories :</label> <select
-									name="filtreCategorie" id="filtreCategorie">
+								<label for="categorie" class="d-block">Catégories :</label> <select
+									name="filtreCategorie" id="filtreCategorie" class="w-100">
 									<option value="0">Toutes les catégories</option>
 									<%
 									for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
@@ -90,7 +88,8 @@
 
 						</div>
 						<div class="col-12 col-md-6">
-							<button class="btn btn-primary" type="submit">Rechercher</button>
+							<button class="btn btn-secondary mt-4" id="clear_filter" type="button">Effacer les filtres</button>
+							<button class="btn btn-primary w-50 mt-4" type="submit">Rechercher</button>
 						</div>
 					</div>
 				</form>
@@ -100,8 +99,8 @@
 					<%
 					for (Article article : (List<Article>) request.getAttribute("articles")) {
 					%>
-					<li class="col-12 col-md-3">
-						<div class="card">
+					<li class="col-12 col-md-4 col-lg-3">
+						<div class="card mb-5">
 							<img class="card-img-top" src="https://picsum.photos/200/300"
 								alt="Card image cap">
 							<div class="card-body">
@@ -121,7 +120,6 @@
 										<span><%=article.getUtilisateur().getPseudo()%></span>
 								</a></li>
 							</ul>
-							
 						</div>
 					</li>
 					<%
@@ -131,5 +129,15 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const button_clear_filters = document.getElementById("clear_filter");
+		const filtre_article = document.getElementById("filtreArticle");
+		const filtre_categorie = document.getElementById("filtreCategorie");
+
+		button_clear_filters.addEventListener("click", (e) => {
+			filtre_article.value = "";
+			filtre_categorie.value = 0;
+		});
+	</script>
 </body>
 </html>
