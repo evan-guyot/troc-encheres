@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
 	<%
@@ -16,7 +17,8 @@
 	%>
 	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
 		<div class="col-md-6">
-			<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+			<div
+				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col-auto d-none d-lg-block">
 					<img class="tailleImage" src="https://picsum.photos/200/300"
 						alt="Card image cap">
@@ -74,12 +76,15 @@
 							<span><%=article.getUtilisateur().getPseudo()%></span>
 						</a>
 					</div>
-					<% if(request.getSession().getAttribute("connectedUserId") != null && (int) request.getSession().getAttribute("connectedUserId") != article.getUtilisateur().getNoUtilisateur() ){ %>
+					<%
+					if (request.getSession().getAttribute("connectedUserId") != null
+							&& (int) request.getSession().getAttribute("connectedUserId") != article.getUtilisateur().getNoUtilisateur()) {
+					%>
 					<div class="dpf">
 						<div class="bold">Ma proposition:</div>
-						<input type="number" class="form-control inputNumber" id="number" name="nouveauMontant"
-							aria-describedby="number"
-							value="<%=article.getEnchere()!= null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
+						<input type="number" class="form-control inputNumber" id="number"
+							name="nouveauMontant" aria-describedby="number"
+							value="<%=article.getEnchere() != null ? article.getEnchere().getMontantEnchere() : article.getMiseAPrix()%>" />
 					</div>
 					<%
 					}
@@ -93,16 +98,21 @@
 
 						<input type="hidden" name="noArticle"
 							value="<%=article.getNoArticle()%>" />
-							<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
-							<input type="submit" class="btn btn-light" value="Encherir" />
-							<% } %>
+						<%
+						if (request.getSession().getAttribute("connectedUserId") != null
+								&& (int) request.getSession().getAttribute("connectedUserId") != article.getUtilisateur().getNoUtilisateur()) {
+						%>
+						<input type="submit" class="btn btn-light" value="Encherir" />
+						<%
+						}
+						%>
 
-							<a
-							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Retour</a>
+						<a href="<%=request.getContextPath() + "/"%>"
+							class="btn btn-light">Retour</a>
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 	</form>
 </body>
 <style>

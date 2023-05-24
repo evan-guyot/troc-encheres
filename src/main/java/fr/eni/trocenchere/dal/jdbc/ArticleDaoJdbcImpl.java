@@ -38,6 +38,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "OR e.no_enchere is null " + "AND a.no_article = ?";
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_categorie = ? WHERE no_article = ?";
+	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
 	public List<Article> getArticles(int idCategorie, String caractereCompris, String radioFilterParameter, Integer id)
@@ -236,5 +237,18 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+
+	@Override
+	public void deleteArticleById(int idArticle) throws Exception {
+		try (Connection cnx = ConnectionProvider.connection();
+				PreparedStatement stm = cnx.prepareStatement(DELETE_ARTICLE)) {
+			stm.setInt(1, idArticle);
+			stm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
 	}
 }

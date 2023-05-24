@@ -59,4 +59,12 @@ public class ArticleManager {
 		
 	}
 
+	public void deleteById(int idArticle) {
+		try {
+			daoRetrait.deleteRetraitById(idArticle);
+			daoArticle.deleteArticleById(idArticle);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
