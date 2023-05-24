@@ -12,6 +12,7 @@ import fr.eni.trocenchere.bll.EnchereManager;
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Enchere;
+import fr.eni.trocenchere.bo.Utilisateur;
 
 
 @WebServlet("/FinEnchere")
@@ -31,6 +32,10 @@ public class FinEnchere extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		int utilisateurID = (int)request.getSession().getAttribute("connectedUserId");
+		Utilisateur utilisateur = utilisateurManager.getUserById(utilisateurID);
+		request.setAttribute("utilisateur", utilisateur);
 
 		int articleId;
 		if (request.getParameter("id") == null) {

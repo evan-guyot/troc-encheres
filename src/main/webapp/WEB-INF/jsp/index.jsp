@@ -25,13 +25,13 @@
 	%>
 	<div class="container">
 		<div class="row">
-			<div class="col-6">
+			<div class="col-5">
 				<h1>
-                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
-            </h1>
+    	            <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
+	            </h1>
 			</div>
-			<div class="col-6">
-				<div class="mt-3 float-right">
+			<div class="col-7">
+				<div class="mt-2 float-right">
 					<a href="ConnectionUtilisateur" class="btn btn-primary active mt-1 d-flex
 				 justify-content-center" role="button" aria-pressed="true"style="width: fit-content;
     float: right;">Se connecter/S'inscrire</a>
@@ -96,35 +96,49 @@
 			</div>
 			<div class="col-12">
 				<ul class="list-unstyled row">
-					<%
-					for (Article article : (List<Article>) request.getAttribute("articles")) {
-					%>
-					<li class="col-12 col-md-4 col-lg-3">
-						<div class="card mb-5">
-							<img class="card-img-top" src="https://picsum.photos/200/300"
-								alt="Card image cap">
-							<div class="card-body">
-								<h2 class="card-title fw-bold"><%=article.getNom()%>
-								</h2>
-								<p class="card-text"><%=article.getDescription()%>
-								</p>
+					<c:forEach var="article" items="${articles}" >
+						<li class="col-12 col-sm-4 col-md-4 col-lg-3">
+							<div class="card mb-5">
+								<img class="card-img-top" src="https://picsum.photos/200/200"
+									 alt="Card image cap">
+								<div class="card-body">
+									<h2 class="card-title fw-bold">
+										<c:out value="${article.getNom()}"/>
+									</h2>
+									<p class="card-text">
+										<c:out value="${article.getDescription()}"/>
+									</p>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">
+										<span class="fw-bold">Prix : </span>
+										<c:choose>
+											<c:when test="${article.getEnchere() != null}">
+												<p style="color: blue; font-weight: 500;" class="card-text">
+													<c:out value="${article.getEnchere().getMontantEnchere()}"/>
+												</p>
+											</c:when>
+											<c:otherwise>
+												<p style="color: blue; font-weight: 500;" class="card-text">
+													<c:out value="${article.getMiseAPrix()}"/>
+												</p>
+											</c:otherwise>
+										</c:choose>
+									</li>
+									<li class="list-group-item">
+										<span class="fw-bold">Fin enchères : </span>
+										<c:out value="${article.getDateFinEnchere()}"/>
+									</li>
+									<li class="list-group-item">
+										<span class="fw-bold">Vendeur : </span>
+										<a href="<c:out value="${request.getContextPath()}utilisateur?id=${article.getUtilisateur().getNoUtilisateur()}"/>">
+											<span><c:out value="${article.getUtilisateur().getPseudo()}"/></span>
+										</a>
+									</li>
+								</ul>
 							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> <%=article.getMiseAPrix()%></li>
-								<li class="list-group-item"><span class="fw-bold">Fin
-										enchères : </span><%=article.getDateFinEnchere()%></li>
-								<li class="list-group-item"><span class="fw-bold">Vendeur
-										: </span> <a
-									href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
-										<span><%=article.getUtilisateur().getPseudo()%></span>
-								</a></li>
-							</ul>
-						</div>
-					</li>
-					<%
-					}
-					%>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

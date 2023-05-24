@@ -26,6 +26,7 @@
 <body>
 	<%
 	Utilisateur utilisateur = (Utilisateur) request.getAttribute("currentUser");
+	Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 	List<Categorie> categories = (List<Categorie>) request.getAttribute("categories");
 	%>
 	<main class="container">
@@ -326,13 +327,13 @@
 	%>
 </body>
 <script>
-	
+
 <%if (request.getAttribute("validationMessage") != null) {%>
 	$(document).ready(function() {
 		$("#myModal").modal('show');
 	});
 <%}%>
-	
+
 </script>
 <style>
 body {

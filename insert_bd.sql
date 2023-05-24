@@ -1,5 +1,5 @@
 INSERT INTO UTILISATEURS VALUES ('TomDu44', 'Gentereau', 'Tom', 'tgentereau@yahoo.com', '0215568457','rue des baobabs','85140','Potatoville','tom44',6000, 0, 1);
-INSERT INTO UTILISATEURS VALUES ('JeanneLaBg', 'Bonbeurre', 'Jeanne', 'jbonbeurre@ygmail.com', '0285749654','allée des gens heureux','75420','Babouinland','jeannette',2500, 0, 1);
+INSERT INTO UTILISATEURS VALUES ('JeanneLaBg', 'Bonbeurre', 'Jeanne', 'jbonbeurre@ygmail.com', '0285749654','allée des gens heureux','75420','Babouinland','jeannette',2500, 1, 1);
 INSERT INTO UTILISATEURS VALUES ('Totoche', 'Charlier', 'Christophe', 'ccharlier@yahoo.com', '068754842','rue tabaga','13540','Taratata','tom44',453, 0, 1);
 INSERT INTO UTILISATEURS VALUES ('Pokemaster', 'Dupont', 'Martin', 'Martin.Dupont.md@gmail.com', '0685412374', '44 rue du du pneu', '29740', 'Plouhinec', 'admin123', 654123, 1, 1);
 INSERT INTO UTILISATEURS VALUES('Therock', 'Dwain', 'Jonson', 'dwainjonson@eni.fr', '0606060606', 'place de la croix bonneaux', '44100', 'nantes', 'motDePasseSuperDur', 3954, 0, 1);

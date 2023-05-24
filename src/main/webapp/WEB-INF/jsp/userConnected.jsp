@@ -3,6 +3,7 @@
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur" %>
 <%
     Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
+	Utilisateur utilisateurConnecte = (Utilisateur) request.getAttribute("utilisateurConnecte");
     Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
     Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 %>
@@ -17,21 +18,31 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-5">
             <h1>
                 <a class="text-secondary text-decoration-none"
                    href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
             </h1>
         </div>
-
-        <div class="col-6">
-        	<div class="mt-3 float-right">
-        		<a
-							href="<%=request.getContextPath() + "/"%>" class="btn btn-light">Accueil</a>
-				<a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">Voir mon profil</a>
-           		<a href="DeconnectionUtilisateur" class=" btn btn-dark" role="button" aria-pressed="true">Se déconnecter</a>
-           	</div>
-        </div>
+        <div class="col-7">
+	        <div class="mt-2 float-right">
+	        	 <%
+					if (utilisateurConnecte.isAdministrateur()) {
+				%>
+					<a href="PanelAdministration" class="btn btn-warning "
+						role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
+				<%
+					}
+				%>
+				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
+	            <a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">
+	            	Voir mon profil
+	           	</a>
+	            <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">
+	               Se déconnecter
+	            </a>
+	        </div>
+		</div>
         <div class="col-12">
             <h2 class="text-center">Utilisateur</h2>
         </div>
@@ -39,7 +50,7 @@
             <div class="card mt-5">
                 <div class="row no-gutters">
                     <div class="col-sm-3">
-                        <img class="card-img" src="https://picsum.photos/200/300"
+                        <img class="card-img" src="https://picsum.photos/200/200"
                              alt="user profil img">
                     </div>
                     <div class="col-sm-9">
@@ -52,55 +63,59 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="form-label">
-                                            <label for="nom" class="d-block">Nom</label>
-                                            <input class="w-100" type="text" id="nom" name="nom" value="<c:out value="${utilisateur.getNom()}" />" required>
+                                            <label for="nom" class="d-block font-weight-bold">Nom : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="nom" name="nom" value="<c:out value="${utilisateur.getNom()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="prenom" class="d-block">Prenom</label>
-                                            <input class="w-100" type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.getPrenom()}" />" required>
+                                            <label for="prenom" class="d-block font-weight-bold">Prenom : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.getPrenom()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="pseudo" class="d-block">Pseudo</label>
-                                            <input class="w-100" type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.getPseudo()}" />" required>
+                                            <label for="pseudo" class="d-block font-weight-bold">Pseudo : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.getPseudo()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="rue" class="d-block">Rue</label>
-                                            <input class="w-100" type="text" id="rue" name="rue" value="<c:out value="${utilisateur.getRue()}" />" required>
+                                            <label for="rue" class="d-block font-weight-bold">Rue : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="rue" name="rue" value="<c:out value="${utilisateur.getRue()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="ville" class="d-block">Ville</label>
-                                            <input class="w-100" type="text" id="ville" name="ville" value="<c:out value="${utilisateur.getVille()}" />" required>
+                                            <label for="ville" class="d-block font-weight-bold">Ville : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="ville" name="ville" value="<c:out value="${utilisateur.getVille()}" />" required>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-label">
-                                            <label for="codepostal" class="d-block">code postale</label>
-                                            <input class="w-100" type="text" id="codepostal" name="codepostal" value="<c:out value="${utilisateur.getCodePostal()}" />" required>
+                                            <label for="codepostal" class="d-block font-weight-bold">code postale : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="codepostal" name="codepostal" value="<c:out value="${utilisateur.getCodePostal()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="tel" class="d-block">telephone</label>
-                                            <input class="w-100" type="text" id="tel" name="tel" value="<c:out value="${utilisateur.getTelephone()}" />" required>
+                                            <label for="tel" class="d-block font-weight-bold">telephone : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="text" id="tel" name="tel" value="<c:out value="${utilisateur.getTelephone()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="mail" class="d-block">email</label>
-                                            <input class="w-100" type="email" id="mail" name="mail" value="<c:out value="${utilisateur.getEmail()}" />" required>
+                                            <label for="mail" class="d-block font-weight-bold">email : </label>
+                                            <input readonly class="w-100 form-control-plaintext" type="email" id="mail" name="mail" value="<c:out value="${utilisateur.getEmail()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="mdp" class="d-block">mot de passe</label> <input
-                                                 class="w-100" type="password" id="mdp" name="mdp">
+                                            <label for="mdp" class="d-block font-weight-bold">mot de passe : </label> 
+                                            <input readonly class="w-100 form-control-plaintext" type="password" id="mdp" name="mdp">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-2">
-                                    <button type="submit" class="btn btn-primary">
+                                
+                                    <button type="button" class="btn btn-secondary" id="updateAccount">
                                         modifier mon compte
+                                    </button>
+                                    <button type="submit" class="btn btn-primary d-none" id="submitAccount">
+                                        sauvegarder les modifications
                                     </button>
                                     <button type="button" class="btn btn-primary"
                                             data-toggle="modal" data-target="#modal">supprimer
@@ -113,21 +128,30 @@
                         } else {
                         %>
                         <div class="card-body">
-                            <h2 class="card-title"><%=utilisateur.getPrenom()%>
-                                <%=utilisateur.getNom()%>
+                            <h2 class="card-title">
+                                <c:out value="${utilisateur.getPrenom()}" /> <c:out value="${utilisateur.getNom()}" />
                             </h2>
                             <p class="card-text">
-                                <span>Pseudo : </span><span><%=utilisateur.getPseudo()%></span>
+                                <span class="d-block font-weight-bold">Pseudo : </span>
+                                <span><c:out value="${utilisateur.getPseudo()}" /></span>
                             </p>
                             <p class="card-text">
-                                <span>Adresse : </span><span><%=utilisateur.getRue()%> <%=utilisateur.getVille()%>
-										<%=utilisateur.getCodePostal()%></span>
+                                <span class="d-block font-weight-bold">Adresse : </span>
+                                <span>
+                                    <c:out value="${utilisateur.getRue()}" /> <c:out value="${utilisateur.getVille()}" /> <c:out value="${utilisateur.getCodePostal()}" />
+                                </span>
                             </p>
                             <p class="card-text">
-                                <span>Tel : </span><span><%=utilisateur.getTelephone()%></span>
+                                <span class="d-block font-weight-bold">Tel : </span>
+                                <span>
+                                    <c:out value="${utilisateur.getTelephone()}" />
+                                </span>
                             </p>
                             <p class="card-text">
-                                <span>Email : </span><span><%=utilisateur.getEmail()%></span>
+                                <span class="d-block font-weight-bold">Email : </span>
+                                <span>
+                                    <c:out value="${utilisateur.getEmail()}" />
+                                </span>
                             </p>
                         </div>
                         <%
@@ -206,4 +230,20 @@
 <%
     }
 %>
+<script>
+	const updateAccount = document.getElementById("updateAccount");
+	const submitAccount = document.getElementById("submitAccount");
+	const inputArray = [...document.querySelectorAll(".form-label input")]
+	
+	updateAccount.addEventListener("click", (e)=>{
+	    inputArray.forEach((elem) => {
+	        elem.removeAttribute("readonly");
+	        elem.classList.remove("form-control-plaintext");
+	        elem.classList.add("form-control");
+	    })
+	    e.target.classList.add("d-none");
+	    submitAccount.classList.add("d-inline-block");
+	    submitAccount.classList.remove("d-none");
+	})
+</script>
 </html>

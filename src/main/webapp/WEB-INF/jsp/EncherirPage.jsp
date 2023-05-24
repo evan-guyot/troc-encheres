@@ -4,6 +4,13 @@
 <%@ page import="fr.eni.trocenchere.bo.Categorie"%>
 <%@ page import="fr.eni.trocenchere.bo.Enchere"%>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
+<%
+    Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
+    Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
+    Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+    Article article = (Article) request.getAttribute("articleCourrant");
+%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,21 +19,50 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<%
-	Article article = (Article) request.getAttribute("articleCourrant");
-	%>
-	<form class="row mb-2 grandeDiv" method="post" action="Encherir">
-		<div class="col-md-6">
+	<div class="container">
+		<div class="row">
+			<div class="col-5">
+	            <h1>
+	                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">
+	                    ENI - Encheres
+	                </a>
+	            </h1>
+	        </div>
+	        <div class="col-7">
+		        <div class="mt-2 float-right">
+		        	 <%
+						if (utilisateur.isAdministrateur()) {
+					%>
+						<a href="PanelAdministration" class="btn btn-warning "
+							role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
+					<%
+						}
+					%>
+					<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
+		            <a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">
+		            	Voir mon profil
+		           	</a>
+		            <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">
+		               Se déconnecter
+		            </a>
+		        </div>
+			</div>
+			<div class="col-12">
+	            <h2 class="text-center">Enchérir</h2>
+	        </div>
+		</div>
+		<form class="row mb-2" method="post" action="Encherir">
+		<div class="col-md-8 mx-auto">
 			<div
 				class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col-auto d-none d-lg-block">
-					<img class="tailleImage" src="https://picsum.photos/200/300"
+					<img class="tailleImage" src="https://picsum.photos/200/200"
 						alt="Card image cap">
 				</div>
-				<div class="col p-4 d-flex flex-column position-static">
+				<div class="col py-4 d-flex flex-column position-static">
 					<h3 class="mb-3">
 						Détail de vente pour :
-						<%=article.getNom()%></h3>
+						<%=article.getNom()%> <c:out value="${utilisateur.getPrenom()}" /></h3>
 
 					<div class="dpf">
 						<div class="bold">Description:</div>
@@ -49,7 +85,7 @@
 						<%
 						} else {
 						%>
-						<p class="card-text">Pas d'ench�re faite � cette heure</p>
+						<p class="card-text">Pas d'enchère faite à cette heure</p>
 						<%
 						}
 						%>
@@ -114,6 +150,7 @@
 			</div>
 		</div>
 	</form>
+	</div>
 </body>
 <style>
 .dpf {
