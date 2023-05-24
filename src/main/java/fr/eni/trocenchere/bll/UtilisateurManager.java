@@ -69,8 +69,7 @@ public class UtilisateurManager {
 		validationUserId(id);
 		try {
 			return daoUtilisateur.getUserById(id);
-		} catch (SQLException e) {
-			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

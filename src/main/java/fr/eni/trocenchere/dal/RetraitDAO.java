@@ -4,4 +4,6 @@ import fr.eni.trocenchere.bo.Retrait;
 
 public interface RetraitDAO {
 	public void insertRetrait(Retrait retrait, int noArticle) throws Exception;
+
+	public void updateRetrait(Retrait retrait, int noArticle) throws Exception;
 }

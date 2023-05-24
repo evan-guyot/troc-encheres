@@ -150,10 +150,10 @@ public class Article {
 		StringBuilder errors = new StringBuilder();
 
 		if(nom.trim().length() < 3) {
-			errors.append("Le nom de votre article est trop court! Soyez plus précis.<br />");
+			errors.append("Le nom de votre article doit être plus long! Soyez plus précis.<br />");
 		}
 		if(nom.length() > 29) {
-			errors.append("Le nom de votre article doit être plus long! Vous êtes un peu trop bavard.<br />");
+			errors.append("Le nom de votre article est trop court! Vous êtes un peu trop bavard.<br />");
 		}
 		if(description.trim().length() < 10) {
 			errors.append("Votre description est trop courte! Ne gardez pas votre langue dans votre poche.<br />");
