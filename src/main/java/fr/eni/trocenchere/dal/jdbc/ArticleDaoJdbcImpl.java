@@ -38,7 +38,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "OR e.no_enchere is null " + "AND a.no_article = ?";
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private static final String CHANGE_FOREIGNKEY_ARTI_CATE = "UPDATE ARTICLES_VENDUS SET no_categorie = 5 where no_article = ?";
+	private static final String CHANGE_FOREIGNKEY_ARTI_CATE = "UPDATE ARTICLES_VENDUS SET no_categorie = 1 where no_article = ?";
 	
 	@Override
 	public List<Article> getArticles(int idCategorie, String caractereCompris) throws Exception {

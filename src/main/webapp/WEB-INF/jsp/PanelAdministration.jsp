@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Panel Admin</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
 				<tr>
 					<th>Pseudo</th>
 					<th>Nom</th>
-					<th>Prénom</th>
+					<th>PrÃ©nom</th>
 					
 					<th>Supprimer</th>
 				</tr>
@@ -62,14 +62,14 @@
 		</table>
 	</div>
 	<h2 class="card-header d-flex justify-content-center m-3">Administrer
-		les catégories</h2>
+		les catÃ©gories</h2>
 	<div class="container d-flex flex-row justify-content-between">
 		<div class="card" style="width: 40%; height: 50%;">
-			<h5 class="card-header">Ajouter une catégorie</h5>
+			<h5 class="card-header">Ajouter une catÃ©gorie</h5>
 			<form class="card-body d-flex flex-row justify-content-around" method="post" action="PanelAdministration" name="ajoutCateg">
 				<div class="ligneForm">
 				<input type="hidden" name="formName" value="ajoutCateg" />
-					<input placeholder="Nouvelle catégorie" type="text" name="newCateg" class="form-control">
+					<input placeholder="Nouvelle catÃ©gorie" type="text" name="newCateg" class="form-control">
 				</div>
 				<input type="submit" class="btn btn-primary" value=" Ajouter " /> 
 			</form>
@@ -86,7 +86,7 @@
 			<tbody>
 				<%
 				for (Categorie categorie : categories) {
-					if(categorie.getNoCategorie() != 5){
+					if(categorie.getNoCategorie() != 1){
 				%>
 				
 				<tr>

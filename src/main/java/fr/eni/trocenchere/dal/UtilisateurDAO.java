@@ -13,7 +13,7 @@ public interface UtilisateurDAO {
 	public List<Utilisateur> selectAllUser()throws SQLException;
 	public Utilisateur getUserById(int id) throws SQLException;
 	public void nouveauSolde(Utilisateur user)throws SQLException;
-	public List<Utilisateur> selectAllUserPotentialDeleted() throws SQLException;
+	public List<Utilisateur> selectAllUserPotentialDeletable() throws SQLException;
 	public void deleteUserById(int id) throws Exception;
 	public Boolean deleteUserByIdWithPassword(String password, int id) throws SQLException;
 	public Utilisateur updateUserById(Utilisateur utilisateur, int id) throws SQLException;

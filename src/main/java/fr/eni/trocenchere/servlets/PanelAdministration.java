@@ -39,7 +39,7 @@ public class PanelAdministration extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		listUtilisateurSupprimable = utilisateurManager.selectAllUserPotentialDeleted();
+		listUtilisateurSupprimable = utilisateurManager.selectAllUserPotentialDeletable();
 		listCategorie = categorieManager.getCategories();
 		listUtilisateur = utilisateurManager.selectAllUser();
 		request.setAttribute("utilisateurs", listUtilisateur);

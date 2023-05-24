@@ -19,7 +19,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private static final String VERIF_EMAIL = "select * from UTILISATEURS where email = ?";
 	private static final String VERIF_PSEUDO = "select * from UTILISATEURS where pseudo = ?";
 	private static final String SELECT_ALL_USER ="select * from UTILISATEURS";
-	private static final String SELECT_ALL_POTENTIAL_DELETED_USER = "select DISTINCT u.* from UTILISATEURS u, ARTICLES_VENDUS a, ENCHERES e WHERE u.no_utilisateur not in (select av.no_utilisateur from ARTICLES_VENDUS av) AND u.no_utilisateur not in (select ee.no_utilisateur from ENCHERES ee)";
+	private static final String SELECT_ALL_POTENTIAL_DELETABLE_USER = "select DISTINCT u.* from UTILISATEURS u, ARTICLES_VENDUS a, ENCHERES e WHERE u.no_utilisateur not in (select av.no_utilisateur from ARTICLES_VENDUS av) AND u.no_utilisateur not in (select ee.no_utilisateur from ENCHERES ee)";
 	private static final String NOUVEAU_SOLDE = "UPDATE UTILISATEURS SET credit = ? WHERE no_utilisateur = ?";
 
 	private static final String GET_USER_BY_ID = "SELECT * from UTILISATEURS where no_utilisateur=?";
@@ -350,12 +350,12 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public List<Utilisateur> selectAllUserPotentialDeleted() throws SQLException {
+	public List<Utilisateur> selectAllUserPotentialDeletable() throws SQLException {
 	    List<Utilisateur> utilisateurs = new ArrayList<>();
 
 	    try (Connection cnx = ConnectionProvider.connection();
 	         Statement stmt = cnx.createStatement();
-	         ResultSet rs = stmt.executeQuery(SELECT_ALL_POTENTIAL_DELETED_USER)) {
+	         ResultSet rs = stmt.executeQuery(SELECT_ALL_POTENTIAL_DELETABLE_USER)) {
 
 	        while (rs.next()) {
 	            Utilisateur utilisateur = new Utilisateur(

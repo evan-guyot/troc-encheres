@@ -105,10 +105,10 @@ public class UtilisateurManager {
 
 		return result;
 	}
-	public List<Utilisateur> selectAllUserPotentialDeleted(){
+	public List<Utilisateur> selectAllUserPotentialDeletable(){
 		List<Utilisateur> utilisateurs = null;
 	try {
-		utilisateurs = daoUtilisateur.selectAllUserPotentialDeleted();
+		utilisateurs = daoUtilisateur.selectAllUserPotentialDeletable();
 	} catch (SQLException e) {
 		
 		e.printStackTrace();
