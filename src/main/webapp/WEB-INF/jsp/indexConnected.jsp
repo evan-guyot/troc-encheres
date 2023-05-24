@@ -17,19 +17,23 @@
 <body>
 	<div class="container">
 		<%
-        int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+		int idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 		Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
-        int noCategorie = 0;
+		int noCategorie = 0;
 
-        String radioFilterParameter = (String) request.getAttribute("radioFilterParameter") != null ? (String) request.getAttribute("radioFilterParameter") : "";
-        Boolean selectFilterParameter = (Boolean) request.getAttribute("selectFilterParameter") != null ? (Boolean) request.getAttribute("selectFilterParameter") : true;
+		String radioFilterParameter = (String) request.getAttribute("radioFilterParameter") != null
+				? (String) request.getAttribute("radioFilterParameter")
+				: "";
+		Boolean selectFilterParameter = (Boolean) request.getAttribute("selectFilterParameter") != null
+				? (Boolean) request.getAttribute("selectFilterParameter")
+				: true;
 
-        if (request.getAttribute("filtreCategorie") != null) {
-            noCategorie = (int) request.getAttribute("filtreCategorie");
-        }
+		if (request.getAttribute("filtreCategorie") != null) {
+			noCategorie = (int) request.getAttribute("filtreCategorie");
+		}
 
-        String nomArticle = (String) request.getAttribute("filtreArticle");
-    %>
+		String nomArticle = (String) request.getAttribute("filtreArticle");
+		%>
 		<div class="row">
 			<div class="col-6">
 				<h1>
@@ -68,20 +72,20 @@
 									<label for="nomArticle">Filtres :</label>
 
 									<%
-                                    if (nomArticle != null) {
-                                %>
+									if (nomArticle != null) {
+									%>
 									<input type="text" name="filtreArticle" id="filtreArticle"
 										placeholder="le nom de l'article contient"
 										value="<%=nomArticle%>" class="w-100">
 
 									<%
-                                } else {
-                                %>
+									} else {
+									%>
 									<input type="text" name="filtreArticle" id="filtreArticle"
 										placeholder="le nom de l'article contient" class="w-100">
 									<%
-                                    }
-                                %>
+									}
+									%>
 								</div>
 
 								<div class="form-label w-100 order-3 order-md-2">
@@ -89,22 +93,22 @@
 										class="w-100" name="filtreCategorie" id="filtreCategorie">
 										<option value="0">Toutes les catégories</option>
 										<%
-                                        for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
-                                            if (noCategorie == categorie.getNoCategorie()) {
-                                    %>
+										for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
+											if (noCategorie == categorie.getNoCategorie()) {
+										%>
 
 										<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%>
 										</option>
 										<%
-                                    } else {
-                                    %>
+										} else {
+										%>
 
 										<option value="<%=categorie.getNoCategorie()%>"><%=categorie.getLibelle()%>
 										</option>
 										<%
-                                            }
-                                        }
-                                    %>
+										}
+										}
+										%>
 									</select>
 								</div>
 
@@ -114,21 +118,21 @@
 											<div class="mt-3 radio_group radio_group_achat">
 												<label for="1">Achat</label> <input type="radio"
 													class="radio_select" id="1" name="select" value="1"
-													<%= selectFilterParameter ? "checked" : ""%>>
+													<%=selectFilterParameter ? "checked" : ""%>>
 
 												<div class="form-label">
 													<label class="radio_elem" for="enchere_ouvertes">enchères
 														ouvertes</label> <input class="radio_elem" type="radio"
 														id="enchere_ouvertes" name="paramFilter"
 														value="enchere_ouvertes"
-														<%= radioFilterParameter.equalsIgnoreCase("enchere_ouvertes") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("enchere_ouvertes") ? "checked" : ""%>>
 												</div>
 
 												<div class="form-label">
 													<label class="radio_elem" for="mes_encheres">mes
 														enchères</label> <input class="radio_elem" type="radio"
 														id="mes_encheres" name="paramFilter" value="mes_encheres"
-														<%= radioFilterParameter.equalsIgnoreCase("mes_encheres") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("mes_encheres") ? "checked" : ""%>>
 												</div>
 
 												<div class="form-label">
@@ -136,7 +140,7 @@
 														enchères remportées</label> <input class="radio_elem" type="radio"
 														id="mes_encheres_remportes" name="paramFilter"
 														value="mes_encheres_remportes"
-														<%= radioFilterParameter.equalsIgnoreCase("mes_encheres_remportes") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("mes_encheres_remportes") ? "checked" : ""%>>
 												</div>
 											</div>
 										</div>
@@ -144,14 +148,14 @@
 											<div class="mt-3 radio_group radio_group_ventes">
 												<label for="2">Mes ventes</label> <input type="radio"
 													class="radio_select" id="2" name="select" value="2"
-													<%= selectFilterParameter ? "" : "checked"%>>
+													<%=selectFilterParameter ? "" : "checked"%>>
 
 												<div class="form-label">
 													<label class="radio_elem" for="mes_ventes_en_cours">mes
 														ventes en cours</label> <input class="radio_elem" type="radio"
 														id="mes_ventes_en_cours" name="paramFilter"
 														value="mes_ventes_en_cours"
-														<%= radioFilterParameter.equalsIgnoreCase("mes_ventes_en_cours") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("mes_ventes_en_cours") ? "checked" : ""%>>
 												</div>
 
 												<div class="form-label">
@@ -159,7 +163,7 @@
 														ventes non débutées</label> <input class="radio_elem" type="radio"
 														id="ventes_non_debutes" name="paramFilter"
 														value="ventes_non_debutes"
-														<%= radioFilterParameter.equalsIgnoreCase("ventes_non_debutes") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("ventes_non_debutes") ? "checked" : ""%>>
 												</div>
 
 												<div class="form-label">
@@ -167,7 +171,7 @@
 														ventes terminées</label> <input class="radio_elem" type="radio"
 														id="ventes_terminees" name="paramFilter"
 														value="ventes_terminees"
-														<%= radioFilterParameter.equalsIgnoreCase("ventes_terminees") ? "checked" : ""%>>
+														<%=radioFilterParameter.equalsIgnoreCase("ventes_terminees") ? "checked" : ""%>>
 												</div>
 											</div>
 										</div>
@@ -187,8 +191,8 @@
 				<ul class="list-unstyled row">
 
 					<%
-                    for (Article article : (List<Article>) request.getAttribute("articles")) {
-                %>
+					for (Article article : (List<Article>) request.getAttribute("articles")) {
+					%>
 					<li class="col-12 col-md-4 col-lg-3">
 						<div class="card mb-5">
 							<img class="card-img-top" src="https://picsum.photos/200/300"
@@ -202,17 +206,18 @@
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> <% if (article.getEnchere() != null) {
-                                %><p
+										: </span> <%
+ if (article.getEnchere() != null) {
+ %><p
 										style="color: blue; font-weight: 500;" class="card-text">
 										<%=article.getEnchere().getMontantEnchere()%>
 									</p> <%
-                                 } else {%>
+ } else {
+ %>
 									<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%>
-									</p>
-									<%
-                                }
-                            %></li>
+									</p> <%
+ }
+ %></li>
 								<li class="list-group-item"><span class="fw-bold">Fin
 										enchères : </span><%=article.getDateFinEnchere()%></li>
 								<li class="list-group-item"><span class="fw-bold">Vendeur
@@ -223,36 +228,39 @@
 							</ul>
 							<div class="card-body">
 								<%
-                            if(article.getUtilisateur().getNoUtilisateur() != (int) request.getSession().getAttribute("connectedUserId") ){
-                                if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
-                            %>
+								if (article.getUtilisateur().getNoUtilisateur() != (int) request.getSession().getAttribute("connectedUserId")) {
+									if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
+								%>
 								<a href="Encherir?id=<%=article.getNoArticle()%>"
 									class="Encherir btn btn-primary">Enchérir</a>
 								<%
-                            } else {
-                            %>
+								} else {
+								%>
 								<a href="FinEnchere?id=<%=article.getNoArticle()%>"
 									class="Encherir btn btn-primary">Fiche article</a>
 								<%
-                                }}else{
-                                	%>
+								}
+								} else {
+								%>
 								<a href="Encherir?id=<%=article.getNoArticle()%>"
 									class="Encherir btn btn-primary">Voir Article</a>
-                                	<%
-                                }
-                            if(article.getUtilisateur().getNoUtilisateur() == (int) request.getSession().getAttribute("connectedUserId") && article.getDateDebutEnchere().isAfter(LocalDate.now())){
-                            	
-                            %>
-								<a class="btn btn-outline-primary" href="#" role="button">Modifier</a>
 								<%
-                            
-                            }%>
+								}
+								if (article.getUtilisateur().getNoUtilisateur() == (int) request.getSession().getAttribute("connectedUserId")
+										&& article.getDateDebutEnchere().isAfter(LocalDate.now())) {
+								%>
+								<a class="btn btn-outline-primary"
+									href="<%="ModifierVente?id=" + article.getNoArticle()%>"
+									role="button">Modifier</a> 
+								<%
+								}
+								%>
 							</div>
 						</div>
 					</li>
 					<%
-                    }
-                %>
+					}
+					%>
 				</ul>
 			</div>
 		</div>
