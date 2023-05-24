@@ -59,7 +59,7 @@ public class ArticleManager {
 		
 	}
 
-	public void deleteById(int idArticle) {
+	public void deleteArticleById(int idArticle) {
 		try {
 			daoRetrait.deleteRetraitById(idArticle);
 			daoArticle.deleteArticleById(idArticle);

@@ -30,7 +30,7 @@ public class AnnulerVente extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		articleManager.deleteById(Integer.parseInt(request.getParameter("articleId")));
+		articleManager.deleteArticleById(Integer.parseInt(request.getParameter("articleId")));
 		
 		doGet(request, response);
 	}
