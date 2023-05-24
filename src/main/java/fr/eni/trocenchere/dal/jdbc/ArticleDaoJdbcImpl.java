@@ -39,11 +39,16 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_categorie = ? WHERE no_article = ?";
 
+
+	
+	private static final String CHANGE_FOREIGNKEY_ARTI_CATE = "UPDATE ARTICLES_VENDUS SET no_categorie = 1 where no_article = ?";
+
 	@Override
 	public List<Article> getArticles(int idCategorie, String caractereCompris, String radioFilterParameter, Integer id)
 			throws Exception {
 		List<Article> listArticle = new ArrayList<Article>();
 		StringBuilder requete = new StringBuilder(GET_ARTICLES);
+
 
 		if (idCategorie != 0) {
 			requete.append(" AND c.no_categorie = " + idCategorie);
@@ -236,5 +241,24 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+
+	@Override
+	public void changeForeignKeyArtiCate(int id) throws Exception 
+	{
+		try (Connection cnx = ConnectionProvider.connection(); PreparedStatement pstmt = cnx.prepareStatement(CHANGE_FOREIGNKEY_ARTI_CATE);) {
+			
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            cnx.commit();
+
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+		
 	}
 }
