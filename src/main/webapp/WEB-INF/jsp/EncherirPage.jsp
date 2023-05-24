@@ -74,7 +74,7 @@
 							<span><%=article.getUtilisateur().getPseudo()%></span>
 						</a>
 					</div>
-					<% if(request.getSession().getAttribute("connectedUserId") != null){ %>
+					<% if(request.getSession().getAttribute("connectedUserId") != null && (int) request.getSession().getAttribute("connectedUserId") != article.getUtilisateur().getNoUtilisateur() ){ %>
 					<div class="dpf">
 						<div class="bold">Ma proposition:</div>
 						<input type="number" class="form-control inputNumber" id="number" name="nouveauMontant"

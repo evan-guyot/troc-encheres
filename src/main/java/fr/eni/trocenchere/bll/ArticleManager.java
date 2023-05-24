@@ -49,4 +49,14 @@ public class ArticleManager {
 		}
 	}
 
+	public void updateArticle(Article article, int idCategorie) {
+		try {
+			daoArticle.updateArticle(article, idCategorie);
+			daoRetrait.updateRetrait(article.getRetrait(), article.getNoArticle());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }

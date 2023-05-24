@@ -14,6 +14,7 @@ import fr.eni.trocenchere.bll.CategorieManager;
 import fr.eni.trocenchere.bll.UtilisateurManager;
 import fr.eni.trocenchere.bo.Article;
 import fr.eni.trocenchere.bo.Categorie;
+import fr.eni.trocenchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class Index
