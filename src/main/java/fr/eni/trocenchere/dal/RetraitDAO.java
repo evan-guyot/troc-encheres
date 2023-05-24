@@ -6,4 +6,6 @@ public interface RetraitDAO {
 	public void insertRetrait(Retrait retrait, int noArticle) throws Exception;
 
 	public void updateRetrait(Retrait retrait, int noArticle) throws Exception;
+
+	public void deleteRetraitById(int idArticle) throws Exception;
 }

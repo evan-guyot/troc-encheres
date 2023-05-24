@@ -44,9 +44,11 @@ public class ModifierVente extends HttpServlet {
 					if (article.getDateDebutEnchere().isAfter(LocalDate.now())) {
 						if (erreursFormulaire != null) {
 							request.setAttribute("erreursFormulaire", erreursFormulaire);
+							erreursFormulaire = null;
 						}
 						if (validationMessage != null) {
 							request.setAttribute("validationMessage", validationMessage);
+							validationMessage = null;
 						}
 						request.setAttribute("currentUser", utilisateurManager.getUserById(currentUserId));
 						request.setAttribute("categories", categorieManager.getCategories());
@@ -72,8 +74,6 @@ public class ModifierVente extends HttpServlet {
 		StringBuilder sbErreurs = new StringBuilder();
 		LocalDate dateDebEnchere;
 		LocalDate dateFinEnchere;
-		erreursFormulaire = null;
-		validationMessage = null;
 
 		if (request.getParameter("dateDebEnchere").length() == 0) {
 			sbErreurs.append("La date de début d'enchères est invalide.<br />");

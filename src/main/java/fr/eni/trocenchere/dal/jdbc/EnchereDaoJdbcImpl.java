@@ -25,6 +25,8 @@ public class EnchereDaoJdbcImpl implements EnchereDAO{
 	        stm.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
 	       
 	        stm.executeUpdate();
+            stm.close();
+            cnx.commit(); 
 	    } catch (Exception e) {
 	    	
 	        e.printStackTrace();

@@ -29,30 +29,32 @@
 	List<Categorie> categories = (List<Categorie>) request.getAttribute("categories");
 	%>
 	<main class="container">
-	
-        <div class="col-6">
-            <h1>
-                <a class="text-secondary text-decoration-none" href="<%=request.getContextPath() + "/"%>">
-                    ENI - Encheres
-                </a>
-            </h1>
-        </div>
-        <div class="col-6">
-            <%
-				if (utilisateur.isAdministrateur()) {
-				%>
-				<a href="PanelAdministration" class="btn btn-warning "
-					role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
-				<%
-				}
-				%>
-				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
-                <a href="utilisateur?id=<%=request.getSession().getAttribute("connectedUserId")%>" class="btn btn-primary" role="button" aria-pressed="true">Voir
-                    mon profil</a>
-                <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">Se
-                    déconnecter</a>
 
-        </div>
+		<div class="col-6">
+			<h1>
+				<a class="text-secondary text-decoration-none"
+					href="<%=request.getContextPath() + "/"%>"> ENI - Encheres </a>
+			</h1>
+		</div>
+		<div class="col-6">
+			<%
+			if (utilisateur.isAdministrateur()) {
+			%>
+			<a href="PanelAdministration" class="btn btn-warning " role="button"
+				aria-pressed="true"
+				style="color: white !important; background-color: orange">Administration</a>
+			<%
+			}
+			%>
+			<a class="btn btn-success" role="button" aria-pressed="true"
+				href="VendreArticle">Vendre un article</a> <a
+				href="utilisateur?id=<%=request.getSession().getAttribute("connectedUserId")%>"
+				class="btn btn-primary" role="button" aria-pressed="true">Voir
+				mon profil</a> <a href="DeconnectionUtilisateur"
+				class=" btn btn-secondary" role="button" aria-pressed="true">Se
+				déconnecter</a>
+
+		</div>
 		<div class="mt-4">
 			<div class="col-lg-9" style="margin: 5vh auto;">
 				<%
@@ -270,7 +272,11 @@
 								value="<%=article.getRetrait().getVille()%>">
 						</div>
 					</div>
-					<button class="w-100 btn btn-primary btn-lg" type="submit">Modifier</button>
+					<div style="display:flex;justify-content:space-around">
+						<button class="w-25 btn btn-primary btn-lg" type="submit">Modifier</button>
+						<button class="w-25 btn btn-danger btn-lg" formaction="AnnulerVente" type="submit">Annuler
+							la vente</button>
+					</div>
 				</form>
 
 				<%

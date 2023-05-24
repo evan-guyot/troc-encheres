@@ -38,6 +38,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "OR e.no_enchere is null " + "AND a.no_article = ?";
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_categorie = ? WHERE no_article = ?";
+	private static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 
 	
@@ -244,21 +245,28 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
+	public void deleteArticleById(int idArticle) throws Exception {
+		try (Connection cnx = ConnectionProvider.connection();
+				PreparedStatement stm = cnx.prepareStatement(DELETE_ARTICLE)) {
+			stm.setInt(1, idArticle);
+			stm.executeUpdate();
+      stm.close();
+      cnx.commit(); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
 	public void changeForeignKeyArtiCate(int id) throws Exception 
 	{
-		try (Connection cnx = ConnectionProvider.connection(); PreparedStatement pstmt = cnx.prepareStatement(CHANGE_FOREIGNKEY_ARTI_CATE);) {
-			
+		try (Connection cnx = ConnectionProvider.connection(); 
+         PreparedStatement pstmt = cnx.prepareStatement(CHANGE_FOREIGNKEY_ARTI_CATE)) {			
             pstmt.setInt(1, id);
-
             pstmt.executeUpdate();
             pstmt.close();
-            cnx.commit();
-
-            
+            cnx.commit();            
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-		
 	}
 }
