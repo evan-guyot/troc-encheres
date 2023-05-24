@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="fr.eni.trocenchere.bo.Utilisateur"%>
+         pageEncoding="UTF-8" %>
+<%@ page import="fr.eni.trocenchere.bo.Utilisateur" %>
 <%
-Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
+    Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 %>
 <%
 Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
@@ -10,9 +10,9 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ENI - Encheres</title>
-<link rel="stylesheet"
+    <meta charset="UTF-8">
+    <title>ENI - Encheres</title>
+    <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -57,27 +57,22 @@ Boolean hasBeenUpdated = (Boolean) request.getAttribute("hasBeenUpdated");
 								<p class="card-text">
 									<span>Adresse : </span><span><%=utilisateur.getRue()%> <%=utilisateur.getVille()%>
 										<%=utilisateur.getCodePostal()%></span>
-								</p>
-								<p class="card-text">
-									<span>Tel : </span><span><%=utilisateur.getTelephone()%></span>
-								</p>
-								<p class="card-text">
-									<span>Email : </span><span><%=utilisateur.getEmail()%></span>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+                            </p>
+                            <p class="card-text">
+                                <span>Tel : </span><span><%=utilisateur.getTelephone()%></span>
+                            </p>
+                            <p class="card-text">
+                                <span>Email : </span><span><%=utilisateur.getEmail()%></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </html>
