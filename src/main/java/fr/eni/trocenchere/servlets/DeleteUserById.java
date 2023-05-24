@@ -23,7 +23,7 @@ public class DeleteUserById extends HttpServlet {
     }
 		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean isDeleted = utilisateurManager.deleteUserById(request.getParameter("passwordDelete"), Integer.parseInt(request.getParameter("userId")));
+		Boolean isDeleted = utilisateurManager.deleteUserByIdWithPassword(request.getParameter("passwordDelete"), Integer.parseInt(request.getParameter("userId")));
 		
 		/*TODO = utiliser un attribut pour afficher un message à l'uilisateur sur le status de la suppression de son compte*/
 		request.setAttribute("hasBeenDeleted", isDeleted);

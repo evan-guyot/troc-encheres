@@ -17,6 +17,23 @@ public class Article {
 	private Enchere enchere;
 	private Retrait retrait;
 
+	
+	
+	
+	
+	public Article(int noArticle, String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
+			int miseAPrix, int prixVente, boolean etatVente) {
+		super();
+		this.noArticle = noArticle;
+		this.nom = nom;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+	}
+
 	public Article(String nom, String description, LocalDate dateDebutEnchere, LocalDate dateFinEnchere,
 			int miseAPrix, int prixVente, boolean etatVente, Utilisateur utilisateur, Categorie categorie, Enchere enchere, Retrait retrait) {
 		this.nom = nom;
