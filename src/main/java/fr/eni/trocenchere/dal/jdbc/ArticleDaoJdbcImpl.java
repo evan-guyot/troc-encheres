@@ -38,6 +38,8 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			+ "OR e.no_enchere is null " + "AND a.no_article = ?";
 	private static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	
+	private static final String CHANGE_FOREIGNKEY_ARTI_CATE = "UPDATE ARTICLES_VENDUS SET no_categorie = 5 where no_article = ?";
+	
 	@Override
 	public List<Article> getArticles(int idCategorie, String caractereCompris) throws Exception {
 		List<Article> listArticle = new ArrayList<Article>();
@@ -184,5 +186,24 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 		} else {
 			return " WHERE ";
 		}
+	}
+
+	@Override
+	public void changeForeignKeyArtiCate(int id) throws Exception 
+	{
+		try (Connection cnx = ConnectionProvider.connection(); PreparedStatement pstmt = cnx.prepareStatement(CHANGE_FOREIGNKEY_ARTI_CATE);) {
+			
+            pstmt.setInt(1, id);
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            cnx.commit();
+
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+		
 	}
 }

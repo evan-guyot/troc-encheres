@@ -49,5 +49,12 @@ public class ArticleManager {
 			e.printStackTrace();
 		}
 	}
+	public void changeForeignKeyArtiCate(int id) {
+		try {
+			daoArticle.changeForeignKeyArtiCate(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
