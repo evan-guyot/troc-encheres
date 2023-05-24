@@ -2,11 +2,12 @@ INSERT INTO UTILISATEURS VALUES ('TomDu44', 'Gentereau', 'Tom', 'tgentereau@yaho
 INSERT INTO UTILISATEURS VALUES ('JeanneLaBg', 'Bonbeurre', 'Jeanne', 'jbonbeurre@ygmail.com', '0285749654','allée des gens heureux','75420','Babouinland','jeannette',2500, 0, 1);
 INSERT INTO UTILISATEURS VALUES ('Totoche', 'Charlier', 'Christophe', 'ccharlier@yahoo.com', '068754842','rue tabaga','13540','Taratata','tom44',400, 0, 1);
 
+INSERT INTO CATEGORIES VALUES ('Autres');
 INSERT INTO CATEGORIES VALUES ('Jouets');
 INSERT INTO CATEGORIES VALUES ('Véhicules');
 INSERT INTO CATEGORIES VALUES ('Vêtements');
 INSERT INTO CATEGORIES VALUES ('Meubles');
-INSERT INTO CATEGORIES VALUES ('Autres');
+
 
 INSERT INTO ARTICLES_VENDUS VALUES ('Trottinette qui va vite','Super trot de 2015 en moyen état qui va encore méga viiiite !!', '19/05/2023','26/05/2023',300,150,2,1);
 INSERT INTO ARTICLES_VENDUS VALUES ('Barbie en mode sexy','Ma super barbie troo kawai UwU toute rose et mignonne que j ai depuis 6ans', '19/05/2023','01/06/2023',25,5,2,1);
