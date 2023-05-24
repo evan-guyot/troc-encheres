@@ -5,7 +5,7 @@
 <%@ page import="fr.eni.trocenchere.bo.Enchere" %>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur" %>
 <%
-    Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
+Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
 %>
 <!DOCTYPE html>

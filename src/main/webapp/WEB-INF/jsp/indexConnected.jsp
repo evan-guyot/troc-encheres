@@ -72,33 +72,30 @@
                         <div class="d-flex flex-wrap">
                             <div class="form-label w-100 order-2 order-md-1">
                                 <label for="nomArticle">Filtres :</label>
-
-									<%
-									if (nomArticle != null) {
-									%>
-									<input type="text" name="filtreArticle" id="filtreArticle"
-										placeholder="le nom de l'article contient"
-										value="<%=nomArticle%>" class="w-100">
-
-									<%
-									} else {
-									%>
-									<input type="text" name="filtreArticle" id="filtreArticle"
-										placeholder="le nom de l'article contient" class="w-100">
-									<%
-									}
-									%>
+								<c:set var="filtreArticle" scope="session" value="${filtreArticle}"/>
+								<c:out value="${filtreArticle}"/>
+								<c:choose>
+									<c:when test="${filtreArticle != null}">
+										<input type="text" name="filtreArticle" id="filtreArticle"
+											   placeholder="le nom de l'article contient"
+											   value="<c:out value="${filtreArticle}"/>" class="w-100">
+									</c:when>
+									<c:otherwise>
+										<input type="text" name="filtreArticle" id="filtreArticle"
+											   placeholder="le nom de l'article contient" class="w-100">
+									</c:otherwise>
+								</c:choose>
 								</div>
 
                             <div class="form-label w-100 order-3 order-md-2">
                                 <label for="categorie">Catégories :</label>
 
-								<c:set var = "noCategorie" scope="session" value="${filtreCategorie}"/>
+								<c:set var = "filtreCategorie" scope="session" value="${filtreCategorie}"/>
                                 <select class="w-100" name="filtreCategorie" id="filtreCategorie">
                                 	<option value="0">Toutes les catégories</option>
 	                                <c:forEach var="categorie"  items="${categories}" >
 	                                    <c:choose>
-										    <c:when test="${noCategorie == categorie.getNoCategorie()}">
+										    <c:when test="${filtreCategorie == categorie.getNoCategorie()}">
 										        <option value="<c:out value='${categorie.getNoCategorie()}'/>" selected>
 		                                    		<c:out value="${categorie.getLibelle()}"/>
 		                                    	</option>
@@ -231,45 +228,30 @@
                                 </li>
 	                        </ul>
 	                        <div class="card-body">
-	                        	<c:choose>
-								    <c:when test="${article.getDateFinEnchere().isAfter(LocalDate.now())}">
-								        <a href="Encherir?id=<c:out value="${article.getNoArticle()}"/>" class="Encherir btn btn-primary">Enchérir</a>
-								    </c:when>
-								    <c:otherwise>
-								        <a href="FinEnchere?id=<c:out value="${article.getNoArticle()}"/>" class="Encherir btn btn-primary">Fiche article</a>
-								    </c:otherwise>
+								<c:set var="connectedUser" scope="session" value="${connectedUserId}"/>
+								<c:choose>
+									<c:when test="${article.getUtilisateur().getNoUtilisateur() != connectedUser}">
+										<c:choose>
+											<c:when test="${article.getDateFinEnchere().isAfter(LocalDate.now())}">
+												<a href="Encherir?id=<c:out value="${article.getNoArticle()}"/>"
+												   class="Encherir btn btn-primary">Enchérir</a>
+											</c:when>
+											<c:otherwise>
+												<a href="FinEnchere?id=<c:out value="${article.getNoArticle()}"/>"
+												   class="Encherir btn btn-primary">Fiche article</a>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<a href="Encherir?id=<c:out value="${article.getNoArticle()}"/>"
+										   class="Encherir btn btn-primary">Voir Article</a>
+									</c:otherwise>
 								</c:choose>
-
-                                <div class="card-body">
-                                    <%
-                                        if (article.getUtilisateur().getNoUtilisateur() != (int) request.getSession().getAttribute("connectedUserId")) {
-                                            if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
-                                    %>
-                                    <a href="Encherir?id=<%=article.getNoArticle()%>"
-                                       class="Encherir btn btn-primary">Enchérir</a>
-                                    <%
-                                    } else {
-                                    %>
-                                    <a href="FinEnchere?id=<%=article.getNoArticle()%>"
-                                       class="Encherir btn btn-primary">Fiche article</a>
-                                    <%
-                                        }
-                                    } else {
-                                    %>
-                                    <a href="Encherir?id=<%=article.getNoArticle()%>"
-                                       class="Encherir btn btn-primary">Voir Article</a>
-                                    <%
-                                        }
-                                        if (article.getUtilisateur().getNoUtilisateur() == (int) request.getSession().getAttribute("connectedUserId")
-                                                && article.getDateDebutEnchere().isAfter(LocalDate.now())) {
-                                    %>
-                                    <a class="btn btn-outline-primary"
-                                       href="<%="ModifierVente?id=" + article.getNoArticle()%>"
-                                       role="button">Modifier</a>
-                                    <%
-                                        }
-                                    %>
-                                </div>
+								<c:if test="${article.getUtilisateur().getNoUtilisateur() == connectedUserId && article.getDateDebutEnchere().isAfter(LocalDate.now())}">
+									<a class="btn btn-outline-primary"
+									   href="<c:out value="ModifierVente?id=${article.getNoArticle()}"/>"
+									   role="button">Modifier</a>
+								</c:if>
 	                        </div>
 	                    </div>
 	                </li>
