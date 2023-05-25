@@ -4,9 +4,13 @@
 <%@ page import="fr.eni.trocenchere.bo.Categorie" %>
 <%@ page import="fr.eni.trocenchere.bo.Enchere" %>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="article" scope="session" value="${articleCourrant}"/>
+<c:set var="connectedUserId" scope="session" value="${connectedUserId}"/>
 <%
 Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");
+Article article = (Article) request.getAttribute("articleCourrant");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,14 +31,14 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 	        <div class="mt-2 float-right">
 	        	 <%
 					if (utilisateur.isAdministrateur()) {
-				%>
+                %>
 					<a href="PanelAdministration" class="btn btn-warning "
 						role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
 				<%
 					}
 				%>
 				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
-	            <a href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">
+	            <a href="<c:out value="utilisateur?id=${connectedUserId}" />" class="btn btn-primary" role="button" aria-pressed="true">
 	            	Voir mon profil
 	           	</a>
 	            <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">
@@ -43,95 +47,88 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 	        </div>
 		</div>
     	<div class="col-12">
-    	<% Article article = (Article) request.getAttribute("articleCourrant"); %>
 	    <h1 style="text-align: center;">Enchère remporté pour
-	        <%
-	            if (article.getEnchere() != null) {
-	        %>
-	
-	        <span style="color: blue; font-weight: 500;"><%=article.getEnchere().getMontantEnchere()%></span>
-	        Pokédolar par
-	        <%=article.getEnchere().getUtilisateur().getPseudo()%>
-	
-	        <%
-	            } else {
-	        %>
-	        Personne n'a voulu de cette objet
-	        <%
-	            }
-	        %>
+            <c:choose>
+                <c:when test="${article.getEnchere() != null}">
+                    <span style="color: blue; font-weight: 500;">
+                        <c:out value="${article.getEnchere().getMontantEnchere()}" />
+                    </span>
+                    Pokédolar par
+                    <c:out value="${article.getEnchere().getUtilisateur().getPseudo()}" />
+                </c:when>
+                <c:otherwise>
+                    Personne n'a voulu de cette objet
+                </c:otherwise>
+            </c:choose>
 	    </h1>
     </div>
         <div class="col-md-8 mx-auto mt-5">
-            <div
-                    class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col-auto d-none d-lg-block">
                     <img class="tailleImage" src="https://picsum.photos/200/200"
                          alt="Card image cap">
                 </div>
-                <div class="col p-4 d-flex flex-column position-static">
+                <div class="col py-4 d-flex flex-column position-static">
                     <h3 class="mb-3">
-                        Détail de vente pour:
-                        <%=article.getNom()%>
+                        Détail de vente pour : <c:out value="${article.getNom()}" />
                     </h3>
-
                     <div class="dpf">
                         <div class="bold">Description:</div>
-                        <p class="card-text"><%=article.getDescription()%>
-                        </p>
+                        <p class="card-text"><c:out value="${article.getDescription()}" /></p>
                     </div>
                     <div class="dpf">
                         <div class="bold">Catégorie:</div>
-                        <p class="card-text"><%=article.getCategorie().getLibelle()%>
-                        </p>
+                        <p class="card-text"><c:out value="${article.getCategorie().getLibelle()}" /></p>
                     </div>
                     <div class="dpf">
                         <div class="bold">Meilleure offre:</div>
-
-                        <%
-                            if (article.getEnchere() != null) {
-                        %>
-                        <p class="card-text">
-                            <span style="color: blue; font-weight: 500;"><%=article.getEnchere().getMontantEnchere()%></span>
-                            Pokédolar par
-                            <%=article.getEnchere().getUtilisateur().getPseudo()%>
-                        </p>
-                        <%
-                        } else {
-                        %>
-                        <p class="card-text">Pas d'enchère faite à cette heure</p>
-                        <%
-                            }
-                        %>
-
+                        <c:choose>
+                            <c:when test="${article.getEnchere() != null}">
+                                <p class="card-text">
+									<span style="color: blue; font-weight: 500;">
+										<c:out value="${article.getEnchere().getMontantEnchere()}" />
+									</span>
+                                    <span>
+										Pokédolar par
+									</span>
+                                    <span>
+										<c:out value="${article.getEnchere().getUtilisateur().getPseudo()}" />
+									</span>
+                                </p>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="card-text">Pas d'enchère faite à cette heure</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="dpf">
                         <div class="bold">Mise à prix:</div>
-                        <p class="card-text"><%=article.getMiseAPrix()%>
+                        <p class="card-text">
+                            <c:out value="${article.getMiseAPrix()}" />
                         </p>
                     </div>
                     <div class="dpf">
                         <div class="bold">Fin de l'enchère:</div>
-                        <p class="card-text"><%=article.getDateFinEnchere()%>
+                        <p class="card-text">
+                            <c:out value="${article.getDateFinEnchere()}" />
                         </p>
                     </div>
                     <div class="dpf">
                         <div class="bold">Retrait:</div>
-                        <p class="card-text"><%=article.getRetrait().getRue()%>
-                            <%=article.getRetrait().getCodePostal()%>
-                            <%=article.getRetrait().getVille()%>
+                        <p class="card-text">
+                            <c:out value="${article.getRetrait().getRue()}" />
+                            <c:out value="${article.getRetrait().getCodePostal()}" />
+                            <c:out value="${article.getRetrait().getVille()}" />
                         </p>
                     </div>
                     <div class="dpf">
                         <div class="bold">Vendeur:</div>
-                        <a
-                                href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
-                            <span><%=article.getUtilisateur().getPseudo()%></span>
+                        <a href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
+							<span>
+								<c:out value="${article.getUtilisateur().getPseudo()}" />
+							</span>
                         </a>
-
-
                     </div>
-
                 </div>
             </div>
             <a href="/TrocEncheres/" style="margin-left: 25%;" class="btn btn-light w-50">Retour</a>
@@ -146,35 +143,8 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
         gap: 10px;
     }
 
-    .grandeDiv {
-        display: flex;
-        justify-content: center;
-        margin: 50px;
-    }
-
-    .btnn {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-top: 20px;
-    }
-
     .bold {
         font-weight: bold;
-    }
-
-    .messageErr {
-        font-style: italic;
-        color: red;
-        font-weight: 800;
-    }
-
-    .inputNumber {
-        height: 30px;
-        width: auto;
-    }
-
     }
 </style>
 </html>
