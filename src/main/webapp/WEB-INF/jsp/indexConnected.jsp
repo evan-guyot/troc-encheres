@@ -119,8 +119,8 @@
 													<%=selectFilterParameter ? "checked" : ""%>>
 
 												<div class="form-label">
-													<label class="radio_elem" for="enchere_ouvertes">enchères
-														ouvertes</label> <input class="radio_elem" type="radio"
+													<label class="radio_elem" for="enchere_ouvertes">enchères ouvertes</label>
+													<input class="radio_elem" type="radio"
 														id="enchere_ouvertes" name="paramFilter"
 														value="enchere_ouvertes"
 														<%=radioFilterParameter.equalsIgnoreCase("enchere_ouvertes") ? "checked" : ""%>>
@@ -284,6 +284,9 @@
     const filtre_article = document.getElementById("filtreArticle");
     const filtre_categorie = document.getElementById("filtreCategorie");
     const first_input = document.getElementById("1");
+    const second_input = document.getElementById("2");
+    const enchere_ouvertes = document.getElementById("enchere_ouvertes");
+    const mes_ventes_en_cours = document.getElementById("mes_ventes_en_cours");
 
     function uncheck(elems) {
         elems.map(elem => {
@@ -294,6 +297,7 @@
     button_clear_filters.addEventListener("click", () => {
         uncheck([...radio_group_ventes, ...radio_group_achat]);
         first_input.checked = true;
+		enchere_ouvertes.checked = true;
         filtre_article.value = "";
         filtre_categorie.value = 0;
     });
@@ -307,5 +311,8 @@
             }
         });
     })
+
+	first_input.addEventListener("change", ()=> { enchere_ouvertes.checked = true; })
+	second_input.addEventListener("change", ()=> { mes_ventes_en_cours.checked = true; })
 </script>
 </html>

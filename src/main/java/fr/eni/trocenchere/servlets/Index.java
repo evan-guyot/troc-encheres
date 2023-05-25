@@ -40,8 +40,15 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String basisRadioFilterParameter = null;
+    	if((String) request.getAttribute("radioFilterParameter") == null) {
+    		basisRadioFilterParameter = "enchere_ouvertes";
+    		request.setAttribute("radioFilterParameter", basisRadioFilterParameter);	
+    	} else {
+    		basisRadioFilterParameter = (String) request.getAttribute("radioFilterParameter");
+    	}
 
-        listArticles = articleManager.getArticles(paramCategorie, paramNomArticle, (String) request.getAttribute("radioFilterParameter"), (Integer) request.getSession().getAttribute("connectedUserId"));
+        listArticles = articleManager.getArticles(paramCategorie, paramNomArticle, basisRadioFilterParameter, (Integer) request.getSession().getAttribute("connectedUserId"));
         listCategories = categorieManager.getCategories();
 
     	request.setAttribute("filtreCategorie", paramCategorie);
@@ -54,7 +61,8 @@ public class Index extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
         } else {
             Utilisateur utilisateur = utilisateurManager.getUserById((int) request.getSession().getAttribute("connectedUserId"));
-			request.setAttribute("utilisateur", utilisateur);request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
+			request.setAttribute("utilisateur", utilisateur);
+			request.getRequestDispatcher("/WEB-INF/jsp/indexConnected.jsp").forward(request, response);
         }
     }
 
