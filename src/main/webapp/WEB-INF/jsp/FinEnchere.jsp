@@ -131,7 +131,16 @@ Article article = (Article) request.getAttribute("articleCourrant");
                     </div>
                 </div>
             </div>
-            <a href="/TrocEncheres/" style="margin-left: 25%;" class="btn btn-light w-50">Retour</a>
+            <div class="mx-auto">
+            	<form method="post" action="FinEnchere">
+            	<input type="hidden" value="<%= article.getNoArticle() %>" name="idArticleForCollecte">
+            		<%if(!(Boolean)request.getAttribute("collectee")){ %>
+		            <input type="submit" class="btn btn-primary w-25" value=" Retrait article "/>
+		            <% } %>
+		            <a href="/TrocEncheres/" class="btn btn-light w-25">Retour</a>
+	            </form>
+            </div>
+           
         </div>
     </div>
 </div>

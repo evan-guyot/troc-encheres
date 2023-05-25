@@ -77,7 +77,7 @@ public class Encherir extends HttpServlet {
 					acheteur.setCredit(acheteur.getCredit() - nouveauMontant);
 					utilisateurManager.nouveauSolde(acheteur);
 					//crediter dernier enchérisseur si c'est pas le vendeur
-					articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getPrixVente());
+					articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getEnchere().getMontantEnchere());
 					utilisateurManager.nouveauSolde(articleCourrantPost.getUtilisateur());
 					
 					

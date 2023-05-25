@@ -68,6 +68,15 @@ public class ArticleManager {
 		}
 		
 	}
+	
+	public void updateCollectedRetrait(int noArticle) 
+	{
+		try {
+			daoRetrait.updateCollectedRetrait(noArticle);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	} 
 
 	public void deleteArticleById(int idArticle) {
 		try {

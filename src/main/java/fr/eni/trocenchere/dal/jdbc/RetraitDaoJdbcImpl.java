@@ -8,9 +8,10 @@ import fr.eni.trocenchere.dal.ConnectionProvider;
 import fr.eni.trocenchere.dal.RetraitDAO;
 
 public class RetraitDaoJdbcImpl implements RetraitDAO {
-	private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS VALUES (?, ?, ?, ?)";
-	private final static String UPDATE_RETRAIT = "UPDATE RETRAITS SET rue = ?, code_postal = ?, ville = ? WHERE no_article = ?";
+	private final static String INSERT_RETRAIT = "INSERT INTO RETRAITS VALUES (?, ?, ?, ?, ?)";
+	private final static String UPDATE_RETRAIT = "UPDATE RETRAITS SET rue = ?, code_postal = ?, ville = ?  WHERE no_article = ?";
 	private final static String DELETE_RETRAIT = "DELETE FROM RETRAITS WHERE no_article = ?";
+	private final static String UPDATE_COLLECTE_RETRAIT = "UPDATE RETRAITS SET collecte = ?  WHERE no_article = ?";
 	
 	@Override 
 	public void insertRetrait(Retrait retrait, int noArticle) throws Exception {
@@ -21,6 +22,7 @@ public class RetraitDaoJdbcImpl implements RetraitDAO {
 			stm.setString(2, retrait.getRue());
 			stm.setString(3, retrait.getCodePostal());
 			stm.setString(4, retrait.getVille());
+			stm.setBoolean(5, false);
 
 			stm.executeUpdate();
 		} catch (Exception e) {
@@ -28,6 +30,25 @@ public class RetraitDaoJdbcImpl implements RetraitDAO {
 			throw e;
 		}
 	}
+	
+	@Override
+	public void updateCollectedRetrait(int noArticle) throws Exception {
+		try (Connection cnx = ConnectionProvider.connection();
+				PreparedStatement stm = cnx.prepareStatement(UPDATE_COLLECTE_RETRAIT)) {
+			
+			stm.setBoolean(1, true);
+			
+			
+			stm.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	
+	
+	
 
 	@Override
 	public void updateRetrait(Retrait retrait, int noArticle) throws Exception {
@@ -38,7 +59,8 @@ public class RetraitDaoJdbcImpl implements RetraitDAO {
 			stm.setString(2, retrait.getCodePostal());
 			stm.setString(3, retrait.getVille());
 			stm.setInt(4, noArticle);
-
+			
+			
 			stm.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
