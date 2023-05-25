@@ -26,14 +26,14 @@ INSERT INTO ARTICLES_VENDUS VALUES ('Coffret Stargate-SG1','Edition collector de
 INSERT INTO ARTICLES_VENDUS VALUES ('Tondeuse à gazon Harribot','Tondeuse pour gazon de la marque Harribot, bon état, vendu avec le plein', '22/05/2023','13/06/2023', 55, 150, 8, 7);
 INSERT INTO ARTICLES_VENDUS VALUES ('Vélo de ville rouge','Vélo de ville de couleur rouge, c est un vélo taille adulte, les pneux sont neuf', '24/05/2023','15/06/2023', 125, 150, 3, 3);
 
-INSERT INTO RETRAITS VALUES (1,'rue de la tartinade','69140', 'Lyon');
-INSERT INTO RETRAITS VALUES (2,'rue de la tartinade','69140', 'Lyon');
-INSERT INTO RETRAITS VALUES (3,'rue de la moissonerie','50470', 'Cherbourg');
-INSERT INTO RETRAITS VALUES (4,'rue des baobabs','05140', 'Potatoville');
-INSERT INTO RETRAITS VALUES (5,'rue des baobabs','5140', 'Potatoville');
-INSERT INTO RETRAITS VALUES (6,'rue haricots','29740', 'Plouhinec');
-INSERT INTO RETRAITS VALUES (7,'Place des troubadours','44300', 'Nantes');
-INSERT INTO RETRAITS VALUES (8,'Parking ENI edition','44300', 'Nantes');
+INSERT INTO RETRAITS VALUES (1,'rue de la tartinade','69140', 'Lyon', 0);
+INSERT INTO RETRAITS VALUES (2,'rue de la tartinade','69140', 'Lyon', 0);
+INSERT INTO RETRAITS VALUES (3,'rue de la moissonerie','50470', 'Cherbourg', 0);
+INSERT INTO RETRAITS VALUES (4,'rue des baobabs','05140', 'Potatoville', 0);
+INSERT INTO RETRAITS VALUES (5,'rue des baobabs','5140', 'Potatoville', 0);
+INSERT INTO RETRAITS VALUES (6,'rue haricots','29740', 'Plouhinec', 0);
+INSERT INTO RETRAITS VALUES (7,'Place des troubadours','44300', 'Nantes', 0);
+INSERT INTO RETRAITS VALUES (8,'Parking ENI edition','44300', 'Nantes', 0);
 
 INSERT INTO ENCHERES VALUES (CONVERT(datetime, '2023-05-22 10:34:23', 120), 305,1,3);
 INSERT INTO ENCHERES VALUES (CONVERT(datetime, '2023-05-22 19:38:59', 120) ,326,1,3);
