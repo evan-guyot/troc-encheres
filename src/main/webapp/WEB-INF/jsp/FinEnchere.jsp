@@ -16,36 +16,50 @@ Article article = (Article) request.getAttribute("articleCourrant");
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+            crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
-    <div class="row mb-2">
-    	<div class="col-5">
+<nav class="navbar navbar-expand-lg bg-body-secondary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div class="navbar-brand">
             <h1>
-                <a class="text-secondary text-decoration-none"
-                   href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
+                <a class="nav-link active"
+                   href="<%=request.getContextPath() + "/"%>"> ENI - Encheres </a>
             </h1>
         </div>
-        <div class="col-7">
-	        <div class="mt-2 float-right">
-	        	 <%
-					if (utilisateur.isAdministrateur()) {
-                %>
-					<a href="PanelAdministration" class="btn btn-warning "
-						role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
-				<%
-					}
-				%>
-				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
-	            <a href="<c:out value="utilisateur?id=${connectedUserId}" />" class="btn btn-primary" role="button" aria-pressed="true">
-	            	Voir mon profil
-	           	</a>
-	            <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">
-	               Se déconnecter
-	            </a>
-	        </div>
-		</div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="VendreArticle">Vendre un article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="utilisateur?id=<%=idConnectedUser%>">Voir mon profil</a>
+                </li>
+                <% if (utilisateur.isAdministrateur()) { %>
+                <li class="nav-item">
+                    <a href="PanelAdministration" class="nav-link">
+                        Administration
+                    </a>
+                </li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-link" href="DeconnectionUtilisateur">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row mb-2">
     	<div class="col-12">
 	    <h1 style="text-align: center;">Enchère remporté pour
             <c:choose>
