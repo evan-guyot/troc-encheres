@@ -4,7 +4,16 @@ public class Retrait {
 	private String rue;
 	private String codePostal;
 	private String ville;
+	private Boolean collecte;
 	
+	
+	public Retrait(String rue, String codePostal, String ville, Boolean collecte) {
+		super();
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.collecte = collecte;
+	}
 	public Retrait(String rue, String codePostal, String ville) {
 		this.rue = rue;
 		this.codePostal = codePostal;
@@ -28,5 +37,12 @@ public class Retrait {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
+	public Boolean getCollecte() {
+		return collecte;
+	}
+	public void setCollecte(Boolean collecte) {
+		this.collecte = collecte;
+	}
+	
 	
 }

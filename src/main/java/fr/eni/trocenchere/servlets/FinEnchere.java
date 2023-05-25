@@ -47,13 +47,27 @@ public class FinEnchere extends HttpServlet {
 		articleCourrant = articleManager.getArticleById(articleId);
 		
 		request.setAttribute("articleCourrant", articleCourrant);
+		if(articleCourrant.getRetrait().getCollecte())
+		{
+			request.setAttribute("collectee", true);
+		}
+		else {
+			request.setAttribute("collectee", false);
+		}
 
 		request.getRequestDispatcher("/WEB-INF/jsp/FinEnchere.jsp").forward(request, response);
 	}
 
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		int idart = Integer.parseInt(request.getParameter("idArticleForCollecte")) ;
+		articleManager.updateCollectedRetrait(idart);
+		Article articleCourrantPost = articleManager.getArticleById(idart);
 		
+		articleCourrantPost.getUtilisateur().setCredit(articleCourrantPost.getUtilisateur().getCredit() + articleCourrantPost.getEnchere().getMontantEnchere());
+		utilisateurManager.nouveauSolde(articleCourrantPost.getUtilisateur());
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 
 }
