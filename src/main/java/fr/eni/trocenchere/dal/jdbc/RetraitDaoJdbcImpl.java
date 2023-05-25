@@ -37,6 +37,7 @@ public class RetraitDaoJdbcImpl implements RetraitDAO {
 				PreparedStatement stm = cnx.prepareStatement(UPDATE_COLLECTE_RETRAIT)) {
 			
 			stm.setBoolean(1, true);
+			stm.setInt(2, noArticle);
 			
 			
 			stm.executeUpdate();
