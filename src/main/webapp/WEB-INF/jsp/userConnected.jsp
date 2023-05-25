@@ -80,14 +80,14 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 											<div class="form-label">
 												<label for="nom" class="d-block fw-bold">Nom
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="nom" name="nom"
-													readonlyvalue="<c:out value="${utilisateur.getNom()}" />" required>
+													readonly value="<c:out value="${utilisateur.getNom()}" />" required>
 											</div>
 
 											<div class="form-label">
 												<label for="prenom" class="d-block fw-bold">Prénom
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="prenom"
 													name="prenom"
-													readonlyvalue="<c:out value="${utilisateur.getPrenom()}" />"
+													readonly value="<c:out value="${utilisateur.getPrenom()}" />"
 													required>
 											</div>
 
@@ -95,49 +95,49 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 												<label for="pseudo" class="d-block fw-bold">Pseudo
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="pseudo"
 													name="pseudo"
-													readonlyvalue="<c:out value="${utilisateur.getPseudo()}" />"
+													readonly value="<c:out value="${utilisateur.getPseudo()}" />"
 													required>
 											</div>
 
 											<div class="form-label">
 												<label for="rue" class="d-block fw-bold">Rue
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="rue" name="rue"
-													readonlyvalue="<c:out value="${utilisateur.getRue()}" />" required>
+													readonly value="<c:out value="${utilisateur.getRue()}" />" required>
 											</div>
 
 											<div class="form-label">
 												<label for="ville" class="d-block fw-bold">Ville
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="ville" name="ville"
-													readonlyvalue="<c:out value="${utilisateur.getVille()}" />"
+													readonly value="<c:out value="${utilisateur.getVille()}" />"
 													required>
 											</div>
 										</div>
 										<div class="col-12 col-md-6">
 											<div class="form-label">
 												<label for="codepostal" class="d-block fw-bold">Code
-													postal :</label> <input class="w-100form-control-plaintext" type="text" id="codepostal"
+													postal :</label> <input class="w-100 form-control-plaintext" type="text" id="codepostal"
 													name="codepostal"
-													readonlyvalue="<c:out value="${utilisateur.getCodePostal()}" />"
+													readonly value="<c:out value="${utilisateur.getCodePostal()}" />"
 													required>
 											</div>
 
 											<div class="form-label">
 												<label for="tel" class="d-block fw-bold">Télephone
 													:</label> <input class="w-100 form-control-plaintext" type="text" id="tel" name="tel"
-													readonlyvalue="<c:out value="${utilisateur.getTelephone()}" />"
+													readonly value="<c:out value="${utilisateur.getTelephone()}" />"
 													required>
 											</div>
 
 											<div class="form-label">
 												<label for="mail" class="d-block fw-bold">E-mail
 													:</label> <input class="w-100 form-control-plaintext" type="email" id="mail" name="mail"
-													readonlyvalue="<c:out value="${utilisateur.getEmail()}" />"
+													readonly value="<c:out value="${utilisateur.getEmail()}" />"
 													required>
 											</div>
 
 											<div class="form-label">
 												<label for="mdp" class="d-block fw-bold">Mot
-													de passe :</label> <input class="w-100form-control-plaintext" type="password" id="mdp"
+													de passe :</label> <input class="w-100 form-control-plaintext" type="password" id="mdp"
 													name="mdp">
 
 											</div>
