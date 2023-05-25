@@ -12,6 +12,9 @@
 	rel="stylesheet"
 	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 	crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>Panel Admin</title>
 </head>
@@ -22,12 +25,43 @@
 	List<Utilisateur> utilisateurs = (List<Utilisateur>) request.getAttribute("utilisateurs");
 	List<Utilisateur> utilisateursSupprimable = (List<Utilisateur>) request.getAttribute("utilisateursSupprimable");
 	%>
+	<nav class="navbar navbar-expand-lg bg-body-secondary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div class="navbar-brand">
+            <h1>
+                <a class="nav-link active"
+                   href="<%=request.getContextPath() + "/"%>"> ENI - Encheres </a>
+            </h1>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="VendreArticle">Vendre un article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="utilisateur?id=<%=request.getSession().getAttribute("connectedUserId")%>">Voir mon profil</a>
+                </li>                
+                <li class="nav-item">
+                    <a href="PanelAdministration" class="nav-link">
+                        Administration
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="DeconnectionUtilisateur">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 	
 	<div class="d-flex flex-row justify-content-center align-items-center">
 		<h2 class="card-header d-flex justify-content-center m-3">Administrer
 			les utilisateurs</h2>
-		<a href="<%=request.getContextPath() + "/"%>"
-			class="btn btn-secondary">Accueil</a>
 	</div>
 
 	<div class="container">
