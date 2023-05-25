@@ -52,7 +52,8 @@
 				<%
 					}
 				%>
-				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a><a
+				<a class="btn btn-success"  role="button" aria-pressed="true"  href="VendreArticle">Vendre un article</a>
+					 <a
 				 href="utilisateur?id=<%=request.getSession().getAttribute("connectedUserId")%>" class="btn btn-primary" role="button" aria-pressed="true">Voir
 					mon profil</a>
 				<a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">Se
@@ -173,9 +174,11 @@
 										value="<c:out value='${utilisateur.getVille()}'/>">
 							</div>
 						</div>
-						<a href="/TrocEncheres/" class="w-50 btn btn-secondary btn-lg float-start">retour</a>
-						<button class="w-50 btn btn-primary btn-lg" type="submit">Mettre
-							en enchère</button>
+						<div class="d-flex justify-content-around">
+							<a href="/TrocEncheres/" class="w-25 btn btn-secondary btn-lg float-start">retour</a>
+							<button class="w-25 btn btn-primary btn-lg" type="submit">Mettre
+								en enchère</button>
+						</div>
 					</form>
 					<%
 					} else {
@@ -280,7 +283,7 @@
 									   value="<c:out value='${article.getRetrait().getVille()}'/>">
 							</div>
 						</div>
-						<div style="display:flex;justify-content:space-around">
+						<div class="d-flex justify-content-around">
 						<a href="/TrocEncheres/" class="w-25 btn btn-secondary btn-lg float-start">retour</a>
 						<button class="w-25 btn btn-primary btn-lg" type="submit">Modifier</button>
 						<button class="w-25 btn btn-danger btn-lg" formaction="AnnulerVente" type="submit">Annuler
