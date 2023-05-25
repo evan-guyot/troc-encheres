@@ -72,7 +72,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="form-label w-100 order-2 order-md-1">
                                 <label for="nomArticle">Filtres :</label>
-								<c:set var="filtreArticle" scope="session" value="${filtreArticle}"/>
+								<c:set var="filtreArticle" scope="page" value="${filtreArticle}"/>
 								<c:out value="${filtreArticle}"/>
 								<c:choose>
 									<c:when test="${filtreArticle != null}">
@@ -90,7 +90,7 @@
                             <div class="form-label w-100 order-3 order-md-2">
                                 <label for="categorie">Catégories :</label>
 
-								<c:set var = "filtreCategorie" scope="session" value="${filtreCategorie}"/>
+								<c:set var = "filtreCategorie" scope="page" value="${filtreCategorie}"/>
                                 <select class="w-100" name="filtreCategorie" id="filtreCategorie">
                                 	<option value="0">Toutes les catégories</option>
 	                                <c:forEach var="categorie"  items="${categories}" >
@@ -228,7 +228,7 @@
                                 </li>
 	                        </ul>
 	                        <div class="card-body">
-								<c:set var="connectedUser" scope="session" value="${connectedUserId}"/>
+								<c:set var="connectedUser" scope="page" value="${connectedUserId}"/>
 								<c:choose>
 									<c:when test="${article.getUtilisateur().getNoUtilisateur() != connectedUser}">
 										<c:choose>

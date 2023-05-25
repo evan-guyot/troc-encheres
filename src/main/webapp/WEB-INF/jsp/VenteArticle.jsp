@@ -6,8 +6,9 @@
 <%@ page import="fr.eni.trocenchere.bo.Article"%>
 <%@ page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="categories" scope="session" value="${categories}"/>
-<c:set var = "article" scope="session" value="${article}"/>
+<c:set var="categories" scope="page" value="${categories}"/>
+<c:set var="article" scope="page" value="${article}"/>
+<c:set var="currentUser" scope="page" value="${currentUser}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,7 +153,7 @@
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="rueRetrait"
 									   name="rueRetrait" placeholder="Rue"
-									   value="<%=utilisateur.getRue()%>">
+									   value="<c:out value='${utilisateur.getRue()}'/>">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -161,7 +162,7 @@
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="codePostalRetrait"
 									   name="codePostalRetrait" placeholder="Code Postal"
-									   value="<%=utilisateur.getCodePostal()%>">
+										value="<c:out value='${utilisateur.getCodePostal()}'/>">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -169,7 +170,7 @@
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="villeRetrait"
 									   name="villeRetrait" placeholder="Ville"
-									   value="<%=utilisateur.getVille()%>">
+										value="<c:out value='${utilisateur.getVille()}'/>">
 							</div>
 						</div>
 						<a href="/TrocEncheres/" class="w-50 btn btn-secondary btn-lg float-start">retour</a>

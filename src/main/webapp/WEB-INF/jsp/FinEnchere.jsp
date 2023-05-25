@@ -5,8 +5,8 @@
 <%@ page import="fr.eni.trocenchere.bo.Enchere" %>
 <%@ page import="fr.eni.trocenchere.bo.Utilisateur" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="article" scope="session" value="${articleCourrant}"/>
-<c:set var="connectedUserId" scope="session" value="${connectedUserId}"/>
+<c:set var="article" scope="page" value="${articleCourrant}"/>
+<c:set var="connectedUserId" scope="page" value="${connectedUserId}"/>
 <%
 Utilisateur utilisateur = (Utilisateur) request.getAttribute("utilisateur");
 Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUserId");

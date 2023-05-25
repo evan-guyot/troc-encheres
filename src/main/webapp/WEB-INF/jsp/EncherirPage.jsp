@@ -11,10 +11,10 @@
     Article article = (Article) request.getAttribute("articleCourrant");
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="utilisateur" scope="session" value="${utilisateur}"/>
-<c:set var="article" scope="session" value="${articleCourrant}"/>
-<c:set var="connectedUserId" scope="session" value="${connectedUserId}"/>
-<c:set var="messageErreur" scope="session" value="${messageErreur}"/>
+<c:set var="utilisateur" scope="page" value="${utilisateur}"/>
+<c:set var="article" scope="page" value="${articleCourrant}"/>
+<c:set var="connectedUserId" scope="page" value="${connectedUserId}"/>
+<c:set var="messageErreur" scope="page" value="${messageErreur}"/>
 <!DOCTYPE html>
 <html>
 <head>
