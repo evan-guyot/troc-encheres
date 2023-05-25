@@ -6,7 +6,7 @@ INSERT INTO UTILISATEURS VALUES('Therock', 'Dwain', 'Jonson', 'dwainjonson@eni.f
 INSERT INTO UTILISATEURS VALUES('RubisScube', 'Ofraiz', 'Charlotte', 'CharloOf@Orange.fr', '0698654186', 'rue du temple', '44100', 'nantes', 'sdfdsgg', 8542, 0, 1);
 INSERT INTO UTILISATEURS VALUES('xXFortniteXx', 'Frejus', 'Jimmy', 'Jimmy@voila.fr', '0698943186', 'Impasse du souterrain', '93200', 'Paris', 'XxsqueezieX', 268, 0, 1);
 INSERT INTO UTILISATEURS VALUES('AcdcRockanRoll', 'Perrat', 'Axel', 'AxelP@gmail.com', '0794563786', 'rue du moulin bleu', '64200', 'Toulouse', 'a45sqz4f', 7954, 0, 1);
-INSERT INTO UTILISATEURS VALUES('Fafarouche', 'Kiwito', 'Giles', 'asperge78@gmail.com', '0648513354', '5 Boulevard des tribunes', '94231', 'Marseille', '123', 84561, 1, 1);
+INSERT INTO UTILISATEURS VALUES('Fafarouche', 'Kiwito', 'Giles', 'asperge78@gmail.com', '0648513354', '5 Boulevard des tribunes', '94231', 'Marseille', '123', 84561, 0, 1);
 
 INSERT INTO CATEGORIES VALUES ('Autres');
 INSERT INTO CATEGORIES VALUES ('Jouets');
@@ -23,7 +23,7 @@ INSERT INTO ARTICLES_VENDUS VALUES ('Commode', 'Je vends la commode de ma belle 
 INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Hulk','Mon pull térrifiant Hulk, porté 2 fois','03/06/2023','15/06/2023',25,8,1,4);
 INSERT INTO ARTICLES_VENDUS VAlUES ('Chaussettes verte','Chaussettes neuves jamais portées','06/05/2023','17/05/2023',30,5,1,4);
 INSERT INTO ARTICLES_VENDUS VALUES ('Coffret Stargate-SG1','Edition collector des plus beaux films de la saga, 12 DVD, plus de 250h plus 5 hors séries', '19/05/2023','28/06/2023', 45, 150, 5, 8);
-INSERT INTO ARTICLES_VENDUS VALUES ('Tondeuse à gazon Harribot','Tondeuse pour gazon de la marque Harribot, bon état, vendu avec le plein', '22/05/2023','13/06/2023', 55, 150, 8, 7);
+INSERT INTO ARTICLES_VENDUS VALUES ('Tondeuse à gazon Haribo','Tondeuse pour gazon de la marque Haribo, bon état, vendu avec le plein', '22/05/2023','13/06/2023', 55, 150, 8, 7);
 INSERT INTO ARTICLES_VENDUS VALUES ('Vélo de ville rouge','Vélo de ville de couleur rouge, c est un vélo taille adulte, les pneux sont neuf', '24/05/2023','15/06/2023', 125, 150, 3, 3);
 
 INSERT INTO RETRAITS VALUES (1,'rue de la tartinade','69140', 'Lyon', 0);
