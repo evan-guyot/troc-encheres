@@ -24,7 +24,7 @@ INSERT INTO ARTICLES_VENDUS VAlUES ('Pull en laine Hulk','Mon pull térrifiant H
 INSERT INTO ARTICLES_VENDUS VAlUES ('Chaussettes verte','Chaussettes neuves jamais portées','06/05/2023','17/05/2023',30,5,1,4);
 INSERT INTO ARTICLES_VENDUS VALUES ('Coffret Stargate-SG1','Edition collector des plus beaux films de la saga, 12 DVD, plus de 250h plus 5 hors séries', '19/05/2023','28/06/2023', 45, 150, 5, 8);
 INSERT INTO ARTICLES_VENDUS VALUES ('Tondeuse à gazon Harribot','Tondeuse pour gazon de la marque Harribot, bon état, vendu avec le plein', '22/05/2023','13/06/2023', 55, 150, 8, 7);
-INSERT INTO ARTICLES_VENDUS VALUES ('Vélo de ville rouge','Vélo de ville de couleur rouge, c est un vélo taille adulte, les pneux sont neuf', '24/05/2023','15/06/2023', 125, 150, 3, 7);
+INSERT INTO ARTICLES_VENDUS VALUES ('Vélo de ville rouge','Vélo de ville de couleur rouge, c est un vélo taille adulte, les pneux sont neuf', '24/05/2023','15/06/2023', 125, 150, 3, 3);
 
 INSERT INTO RETRAITS VALUES (1,'rue de la tartinade','69140', 'Lyon');
 INSERT INTO RETRAITS VALUES (2,'rue de la tartinade','69140', 'Lyon');
