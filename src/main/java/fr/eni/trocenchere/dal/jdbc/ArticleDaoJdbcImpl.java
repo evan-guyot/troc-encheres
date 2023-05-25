@@ -256,6 +256,7 @@ public class ArticleDaoJdbcImpl implements ArticleDAO {
 			e.printStackTrace();
 			throw e;
 		}
+	}
 
 	public void changeForeignKeyArtiCate(int id) throws Exception 
 	{

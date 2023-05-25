@@ -63,49 +63,55 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
                                         <div class="form-label">
-                                            <label for="nom" class="d-block font-weight-bold">Nom : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="nom" name="nom" value="<c:out value="${utilisateur.getNom()}" />" required>
+                                            <label for="nom" class="d-block font-weight-bold">Nom :</label>
+                                            <input class="w-100" type="text" id="nom" name="nom" value="<c:out value="${utilisateur.getNom()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="prenom" class="d-block font-weight-bold">Prenom : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.getPrenom()}" />" required>
+                                            <label for="prenom" class="d-block font-weight-bold">Prénom :</label>
+                                            <input class="w-100" type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.getPrenom()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="pseudo" class="d-block font-weight-bold">Pseudo : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.getPseudo()}" />" required>
+                                            <label for="pseudo" class="d-block font-weight-bold">Pseudo :</label>
+                                            <input class="w-100" type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.getPseudo()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="rue" class="d-block font-weight-bold">Rue : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="rue" name="rue" value="<c:out value="${utilisateur.getRue()}" />" required>
+                                            <label for="rue" class="d-block font-weight-bold">Rue :</label>
+                                            <input class="w-100" type="text" id="rue" name="rue" value="<c:out value="${utilisateur.getRue()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="ville" class="d-block font-weight-bold">Ville : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="ville" name="ville" value="<c:out value="${utilisateur.getVille()}" />" required>
+                                            <label for="ville" class="d-block font-weight-bold">Ville :</label>
+                                            <input class="w-100" type="text" id="ville" name="ville" value="<c:out value="${utilisateur.getVille()}" />" required>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-label">
-                                            <label for="codepostal" class="d-block font-weight-bold">code postale : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="codepostal" name="codepostal" value="<c:out value="${utilisateur.getCodePostal()}" />" required>
+                                            <label for="codepostal" class="d-block font-weight-bold">Code postal :</label>
+                                            <input class="w-100" type="text" id="codepostal" name="codepostal" value="<c:out value="${utilisateur.getCodePostal()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="tel" class="d-block font-weight-bold">telephone : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="text" id="tel" name="tel" value="<c:out value="${utilisateur.getTelephone()}" />" required>
+                                            <label for="tel" class="d-block font-weight-bold">Télephone :</label>
+                                            <input class="w-100" type="text" id="tel" name="tel" value="<c:out value="${utilisateur.getTelephone()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="mail" class="d-block font-weight-bold">email : </label>
-                                            <input readonly class="w-100 form-control-plaintext" type="email" id="mail" name="mail" value="<c:out value="${utilisateur.getEmail()}" />" required>
+                                            <label for="mail" class="d-block font-weight-bold">E-mail :</label>
+                                            <input class="w-100" type="email" id="mail" name="mail" value="<c:out value="${utilisateur.getEmail()}" />" required>
                                         </div>
 
                                         <div class="form-label">
-                                            <label for="mdp" class="d-block font-weight-bold">mot de passe : </label> 
-                                            <input readonly class="w-100 form-control-plaintext" type="password" id="mdp" name="mdp">
+                                            <label for="mdp" class="d-block font-weight-bold">Mot de passe :</label> <input
+                                                 class="w-100" type="password" id="mdp" name="mdp">
+
+                                        </div>
+                                        
+                                        <div class="form-label">
+                                            <p class="w-100" class="d-block" style="font-weight:bold">Crédits :</p> 
+                                            <p class="w-100" class="d-block"><c:out value="${utilisateur.getCredit()}"></c:out><span style="font-weight:bold"> P$</span></p> 
                                         </div>
                                     </div>
                                 </div>
