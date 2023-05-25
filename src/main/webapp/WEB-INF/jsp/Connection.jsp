@@ -27,14 +27,12 @@ form>* {
 	<main class="form-signin w-50 m-auto">
 		<form action="ConnectionUtilisateur" method="post">
 			<h1 class="h3 mb-3 fw-normal">Connectez-vous</h1>
-			<div class="form-floating text-left">
-				<label for="identifiant">Pseudo ou adresse mail</label>
+			<div class="form-floating text-left">				
 				<input type="text" class="form-control" id="identifiant"
 					name="identifiant" placeholder="Pseudo ou adresse mail" /><label
 					for="identifiant" class="form-label">Pseudo ou adresse mail</label>
 			</div>
 			<div class="form-floating text-left">
-				<label for="motDePasse">Mot de passe</label>
 				<input type="password" class="form-control" id="motDePasse"
 					name="motDePasse" placeholder="Password" /><label for="motDePasse"
 					class="form-label">Mot de passe</label>

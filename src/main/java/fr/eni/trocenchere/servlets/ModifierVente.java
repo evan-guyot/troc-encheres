@@ -53,6 +53,8 @@ public class ModifierVente extends HttpServlet {
 						request.setAttribute("currentUser", utilisateurManager.getUserById(currentUserId));
 						request.setAttribute("categories", categorieManager.getCategories());
 						request.setAttribute("article", articleManager.getArticleById(idArticle));
+						
+						System.out.println( articleManager.getArticleById(idArticle).getRetrait().toString());
 
 						request.getRequestDispatcher("/WEB-INF/jsp/VenteArticle.jsp").forward(request, response);
 					} else {
