@@ -49,7 +49,7 @@
 						<%
 						} else {
 						%>
-						<p class="card-text">Pas d'ench�re faite � cette heure</p>
+						<p class="card-text">Pas d'enchère faite à cette heure</p>
 						<%
 						}
 						%>

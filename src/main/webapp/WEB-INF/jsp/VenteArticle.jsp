@@ -93,7 +93,7 @@
 							:</label>
 						<textarea class="form-control" aria-label="With textarea"
 							id="articleDescription" name="articleDescription"
-							placeholder="Décrivez votre article" value="" required></textarea>
+							placeholder="Décrivez votre article" required></textarea>
 						<div class="invalid-feedback">Valid last name is required.</div>
 					</div>
 					<div class="col-sm-6">
@@ -272,10 +272,10 @@
 								value="<%=article.getRetrait().getVille()%>">
 						</div>
 					</div>
-					<div style="display:flex;justify-content:space-around">
+					<div style="display: flex; justify-content: space-around">
 						<button class="w-25 btn btn-primary btn-lg" type="submit">Modifier</button>
-						<button class="w-25 btn btn-danger btn-lg" formaction="AnnulerVente" type="submit">Annuler
-							la vente</button>
+						<button class="w-25 btn btn-danger btn-lg"
+							formaction="AnnulerVente" type="submit">Annuler la vente</button>
 					</div>
 				</form>
 

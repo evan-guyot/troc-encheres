@@ -3,121 +3,117 @@
 <!DOCTYPE html>
 <html style="height: 100%">
 <head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 </head>
-<body style="height: 100%">
-	<div class="grandeDiv">
-		<div
-			class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-			style="padding: 30px;">
-			<div style="display: flex; font-size: 30px; justify-content: center;">Création
-				du profil</div>
-				<%if(request.getAttribute("ErrorMess")!=null){ %>
-			<div class="alert alert-danger" role="alert"><%=request.getAttribute("ErrorMess") %></div>
-				<% } %>
-			<form method="post" action="CreationProfileServlet">
-				<div class="formulaire">
+<body>
+	<main class="form-signin w-50 m-5 shadow-sm border p-4 mx-auto h-200">
+		<h3 class="mt-3 mx-auto" style="text-align: center !important ">Création
+			du profil</h3>
 
-					<div>
-						<div class="ligneForm">
+		<%
+		if (request.getAttribute("ErrorMess") != null) {
+		%>
+		<div class="alert alert-danger w-100" role="alert"><%=request.getAttribute("ErrorMess")%></div>
+		<%
+		}
+		%>
 
-							<input placeholder="Pseudo" type="text" name="pseudo"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
+		<form method="post" action="CreationProfileServlet" class="w-100">
 
-							<input placeholder="Prénom" type="text" name="prenom"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Téléphone" type="tel" name="tel"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Code Postal" type="text" name="codepostal"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Mot de passe" type="password" name="mdp"
-								class="form-control">
-						</div>
-					</div>
-
-					<div>
-						<div class="ligneForm">
-
-							<input placeholder="Nom" type="text" name="nom"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Email" type="text" name="mail"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Rue" type="text" name="rue"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Ville" type="text" name="ville"
-								class="form-control">
-						</div>
-						<div class="ligneForm">
-
-							<input placeholder="Confirmation" type="password"
-								name="confirmMdp" class="form-control">
-						</div>
-					</div>
+			<div class="input-grouped">
+				<div class="form-floating w-50 m-2">
+					<input type="text" class="form-control" id="pseudo" name="pseudo"
+						placeholder="Votre pseudo" /><label for="pseudo"
+						class="form-label">Votre Pseudo</label>
 				</div>
-				<div class="d-flex"
-					style="padding-left: 120px; padding-right: 120px; gap: 24px;">
-
-					<button type="submit" class="w-50 btn btn-lg btn-primary">Créer</button>
-					<a href="ConnectionUtilisateur"
-						class="w-50 btn btn-lg btn-secondary">Annuler</a>
-
+				<div class="form-floating w-50 m-2">
+					<input type="text" class="form-control" id="nom" name="nom"
+						placeholder="Votre nom" /><label for="nom" class="form-label">Votre
+						nom</label>
 				</div>
-			</form>
-		</div>
-	</div>
+			</div>
+
+			<div class="input-grouped">
+
+				<div class="form-floating w-50 m-2">
+					<input type="text" class="form-control" id="prenom" name="prenom"
+						placeholder="Votre prénom" /><label for="prenom"
+						class="form-label">Prénom</label>
+				</div>
+
+				<div class="form-floating w-50 m-2">
+					<input type="text" class="form-control" id="mail" name="mail"
+						placeholder="Votre mail" /><label for="mail"
+						class="form-label">Email</label>
+				</div>
+			</div>
+
+			<div class="input-grouped">
+				<div class="form-floating  w-50 m-2">
+					<input type="tel" class="form-control" id="tel" name="tel"
+						placeholder="Votre téléphone" /><label for="tel"
+						class="form-label">Votre numéro de téléphone</label>
+				</div>
+				<div class="form-floating  w-50 m-2">
+					<input type="text" class="form-control" id="rue" name="rue"
+						placeholder="Rue" /><label for="rue" class="form-label">Rue</label>
+				</div>
+
+
+			</div>
+			<div class="input-grouped">
+
+				<div class="form-floating  w-50 m-2">
+					<input type="text" class="form-control" id="codepostal"
+						name="codepostal" placeholder="Code Postal" /><label
+						for="codepostal" class="form-label">Code Postal</label>
+				</div>
+				<div class="form-floating  w-50 m-2">
+					<input type="text" class="form-control" id="ville" name="ville"
+						placeholder="Ville" /><label for="ville" class="form-label">Ville</label>
+				</div>
+
+			</div>
+			<div class="input-grouped">
+				<div class="form-floating w-50 m-2">
+					<input type="password" class="form-control" id="mdp" name="mdp"
+						placeholder="Mot de passe" /><label for="mdp" class="form-label">Mot
+						de passe</label>
+				</div>
+				<div class="form-floating w-50 m-2">
+					<input type="password" class="form-control" id="confirmMdp"
+						name="confirmMdp" placeholder="Confirmation mot de passe" /><label
+						for="confirmMdp" class="form-label">Confirmation mot de
+						passe</label>
+				</div>
+			</div><div class="input-grouped">
+<button type="submit" class="w-50 m-2 btn btn-lg btn-primary">Créer</button>
+<a href="ConnectionUtilisateur"
+							class="w-50 m-2 btn btn-lg btn-secondary">Annuler</a></div>
+			<!-- 
+					<div class="d-flex"
+						style="padding-left: 120px; padding-right: 120px; gap: 24px;">
+
+						
+						
+
+					</div>
+ -->
+		</form>
+	</main>
 </body>
+
 <style>
-body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.input-grouped {
+	display: flex !important;
+	flex-direction: row !important;
 }
 
-.btnn {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: center;
-	margin-top: 20px;
-}
 
-.formulaire {
-	display: flex;
-	justify-content: center;
-}
-
-.grandeDiv {
-	display: flex;
-	flex-direction: column;
-	gap: 50px;
-}
-
-.ligneForm {
-	display: flex;
-	margin: 20px;
-	justify-content: flex-end;
-	gap: 15px;
-}
 </style>
+
 </html>
