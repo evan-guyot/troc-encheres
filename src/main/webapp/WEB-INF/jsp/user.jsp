@@ -10,27 +10,38 @@
 <head>
     <meta charset="UTF-8">
     <title>ENI - Encheres</title>
-    <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+			crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-body-secondary" data-bs-theme="dark">
+	<div class="container-fluid">
+		<div class="navbar-brand">
+			<h1>
+				<a class="nav-link active"
+				   href="<%=request.getContextPath() + "/"%>"> ENI - Encheres </a>
+			</h1>
+		</div>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+				aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="ConnectionUtilisateur">Se connecter/S'inscrire</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-5">
-				<h1>
-					<a class="text-secondary text-decoration-none"
-						href="<%=request.getContextPath() + "/"%>">ENI - Encheres</a>
-				</h1>
-			</div>
-			<div class="col-7">
-				<a href="ConnectionUtilisateur"
-					class="btn btn-primary active mt-1 d-flex
-			 justify-content-center"
-					role="button" aria-pressed="true"
-					style="width: fit-content; float: right;">Se
-					connecter/S'inscrire</a>
-			</div>
-			<div class="col-12">
+			<div class="col-12 mt-5">
 				<h2 class="text-center">Utilisateur</h2>
 			</div>
 			<div class="col-12">
