@@ -35,80 +35,78 @@
 		String nomArticle = (String) request.getAttribute("filtreArticle");
 		%>
 		<div class="row">
-			<div class="col-6">
+			<div class="col-5">
 				<h1>
 					<a class="text-secondary text-decoration-none"
 						href="<%=request.getContextPath() + "/"%>"> ENI - Encheres </a>
 				</h1>
 			</div>
-			<div class="col-6">
-				<%
-				if (utilisateur.isAdministrateur()) {
+			<div class="col-7">
+	        <div class="mt-2 float-right">
+	        	 <%
+					if (utilisateur.isAdministrateur()) {
 				%>
-				<a href="PanelAdministration" class="btn btn-warning " role="button"
-					aria-pressed="true"
-					style="color: white !important; background-color: orange">Administration</a>
+					<a href="PanelAdministration" class="btn btn-warning "
+						role="button" aria-pressed="true" style="color:white!important;background-color:orange">Administration</a>
 				<%
-				}
+					}
 				%>
 				<a class="btn btn-success" role="button" aria-pressed="true"
 					href="VendreArticle">Vendre un article</a> <a
-					href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary"
-					role="button" aria-pressed="true">Voir mon profil</a> <a
-					href="DeconnectionUtilisateur" class=" btn btn-secondary"
-					role="button" aria-pressed="true">Se déconnecter</a>
-
-			</div>
-			<div class="col-12">
-				<h2 class="text-center">Liste des enchères</h2>
-			</div>
-			<div class="col-12">
-				<form action="<%=request.getContextPath() + "/"%>" method="POST"
-					class="mt-5 mb-5">
-					<div class="row">
-						<div class="col-12 col-md-6">
-							<div class="d-flex flex-wrap">
-								<div class="form-label w-100 order-2 order-md-1">
-									<label for="nomArticle">Filtres :</label>
-
-									<%
-									if (nomArticle != null) {
-									%>
-									<input type="text" name="filtreArticle" id="filtreArticle"
-										placeholder="le nom de l'article contient"
-										value="<%=nomArticle%>" class="w-100">
-
-									<%
-									} else {
-									%>
-									<input type="text" name="filtreArticle" id="filtreArticle"
-										placeholder="le nom de l'article contient" class="w-100">
-									<%
-									}
-									%>
+	             href="utilisateur?id=<%=idConnectedUser%>" class="btn btn-primary" role="button" aria-pressed="true">
+	            	Voir mon profil
+	           	</a>
+	            <a href="DeconnectionUtilisateur" class=" btn btn-secondary" role="button" aria-pressed="true">
+	               Se déconnecter
+	            </a>
+	        </div>
+		</div>
+        <div class="col-12">
+            <h2 class="text-center">Liste des enchères</h2>
+        </div>
+        <div class="col-12">
+            <form action="<%=request.getContextPath() + "/"%>" method="POST"
+                  class="mt-5 mb-5">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex flex-wrap">
+                            <div class="form-label w-100 order-2 order-md-1">
+                                <label for="nomArticle">Filtres :</label>
+								<c:set var="filtreArticle" scope="page" value="${filtreArticle}"/>
+								<c:out value="${filtreArticle}"/>
+								<c:choose>
+									<c:when test="${filtreArticle != null}">
+										<input type="text" name="filtreArticle" id="filtreArticle"
+											   placeholder="le nom de l'article contient"
+											   value="<c:out value="${filtreArticle}"/>" class="w-100">
+									</c:when>
+									<c:otherwise>
+										<input type="text" name="filtreArticle" id="filtreArticle"
+											   placeholder="le nom de l'article contient" class="w-100">
+									</c:otherwise>
+								</c:choose>
 								</div>
 
-								<div class="form-label w-100 order-3 order-md-2">
-									<label for="categorie">Catégories :</label> <select
-										class="w-100" name="filtreCategorie" id="filtreCategorie">
-										<option value="0">Toutes les catégories</option>
-										<%
-										for (Categorie categorie : (List<Categorie>) request.getAttribute("categories")) {
-											if (noCategorie == categorie.getNoCategorie()) {
-										%>
+                            <div class="form-label w-100 order-3 order-md-2">
+                                <label for="categorie">Catégories :</label>
 
-										<option value="<%=categorie.getNoCategorie()%>" selected><%=categorie.getLibelle()%>
-										</option>
-										<%
-										} else {
-										%>
-
-										<option value="<%=categorie.getNoCategorie()%>"><%=categorie.getLibelle()%>
-										</option>
-										<%
-										}
-										}
-										%>
+								<c:set var = "filtreCategorie" scope="page" value="${filtreCategorie}"/>
+                                <select class="w-100" name="filtreCategorie" id="filtreCategorie">
+                                	<option value="0">Toutes les catégories</option>
+	                                <c:forEach var="categorie"  items="${categories}" >
+	                                    <c:choose>
+										    <c:when test="${filtreCategorie == categorie.getNoCategorie()}">
+										        <option value="<c:out value='${categorie.getNoCategorie()}'/>" selected>
+		                                    		<c:out value="${categorie.getLibelle()}"/>
+		                                    	</option>
+										    </c:when>
+										    <c:otherwise>
+										        <option value="<c:out value='${categorie.getNoCategorie()}'/>">
+		                                    		<c:out value="${categorie.getLibelle()}"/>
+		                                   		</option>
+										    </c:otherwise>
+										</c:choose>
+									</c:forEach>
 									</select>
 								</div>
 
@@ -166,110 +164,108 @@
 														<%=radioFilterParameter.equalsIgnoreCase("ventes_non_debutes") ? "checked" : ""%>>
 												</div>
 
-												<div class="form-label">
-													<label class="radio_elem" for="ventes_terminees">mes
-														ventes terminées</label> <input class="radio_elem" type="radio"
-														id="ventes_terminees" name="paramFilter"
-														value="ventes_terminees"
-														<%=radioFilterParameter.equalsIgnoreCase("ventes_terminees") ? "checked" : ""%>>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<button class="btn btn-secondary mt-4" id="clear_filter"
-								type="button">Effacer les filtres</button>
-							<button class="btn btn-primary w-50 mt-4" type="submit">Rechercher</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="col-12">
-				<ul class="list-unstyled row">
-
-					<%
-					for (Article article : (List<Article>) request.getAttribute("articles")) {
-					%>
-					<li class="col-12 col-md-4 col-lg-3">
-						<div class="card mb-5">
-							<img class="card-img-top" src="https://picsum.photos/200/300"
-								alt="Card image cap">
-							<div class="card-body">
-								<h2 class="card-title fw-bold">
-									<%=article.getNom()%>
-								</h2>
-								<p class="card-text"><%=article.getDescription()%>
-								</p>
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><span class="fw-bold">Prix
-										: </span> <%
- if (article.getEnchere() != null) {
- %><p
-										style="color: blue; font-weight: 500;" class="card-text">
-										<%=article.getEnchere().getMontantEnchere()%>
-									</p> <%
- } else {
- %>
-									<p style="color: blue; font-weight: 500;" class="card-text"><%=article.getMiseAPrix()%>
-									</p> <%
- }
- %></li>
-								<li class="list-group-item"><span class="fw-bold">Fin
-										enchères : </span><%=article.getDateFinEnchere()%></li>
-								<li class="list-group-item"><span class="fw-bold">Vendeur
-										: </span> <a
-									href="<%=request.getContextPath() + "/utilisateur?id=" + article.getUtilisateur().getNoUtilisateur()%>">
-										<span><%=article.getUtilisateur().getPseudo()%></span>
-								</a></li>
-							</ul>
-							<div class="card-body">
-								<%
-								if (article.getUtilisateur().getNoUtilisateur() != (int) request.getSession().getAttribute("connectedUserId")) {
-									if (article.getDateFinEnchere().isAfter(LocalDate.now())) {
-								%>
-								<a href="Encherir?id=<%=article.getNoArticle()%>"
-									class="Encherir btn btn-primary">Enchérir</a>
-								<%
-								} else {
-								%>
-								<a href="FinEnchere?id=<%=article.getNoArticle()%>"
-									class="Encherir btn btn-primary">Fiche article</a>
-								<%
-								}
-								} else {
-								%>
-								<a href="Encherir?id=<%=article.getNoArticle()%>"
-									class="Encherir btn btn-primary">Voir Article</a>
-								<%
-								}
-								if (article.getUtilisateur().getNoUtilisateur() == (int) request.getSession().getAttribute("connectedUserId")
-										&& article.getDateDebutEnchere().isAfter(LocalDate.now())) {
-								%>
-								<a class="btn btn-outline-primary"
-									href="<%="ModifierVente?id=" + article.getNoArticle()%>"
-									role="button">Modifier</a> 
-								<%
-								}
-								%>
-							</div>
-						</div>
-					</li>
-					<%
-					}
-					%>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<style>
-.radio_elem {
-	pointer-events: none;
-	color: #999;
-}
+                                            <div class="form-label">
+                                                <label class="radio_elem" for="ventes_terminees">mes ventes
+                                                    terminées</label>
+                                                <input class="radio_elem" type="radio" id="ventes_terminees"
+                                                       name="paramFilter" value="ventes_terminees"
+                                                    <%= radioFilterParameter.equalsIgnoreCase("ventes_terminees") ? "checked" : ""%>>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <button class="btn btn-secondary mt-4" id="clear_filter" type="button">Effacer les filtres
+                        </button>
+                        <button class="btn btn-primary w-50 mt-4" type="submit">Rechercher</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <ul class="list-unstyled row">
+            	<c:forEach var="article" items="${articles}" >
+                    <li class="col-12 col-sm-4 col-md-4 col-lg-3">
+	                    <div class="card mb-5">
+	                        <img class="card-img-top" src="https://picsum.photos/200/200"
+	                             alt="Card image cap">
+	                        <div class="card-body">
+	                            <h2 class="card-title fw-bold">
+	                                <c:out value="${article.getNom()}"/>
+	                            </h2>
+	                            <p class="card-text">
+	                            	<c:out value="${article.getDescription()}"/>
+	                            </p>
+	                        </div>
+	                        <ul class="list-group list-group-flush">
+	                            <li class="list-group-item">
+	                            	<span class="fw-bold">Prix : </span>
+	                            	<c:choose>
+									    <c:when test="${article.getEnchere() != null}">
+									        <p style="color: blue; font-weight: 500;" class="card-text">
+			                                    <c:out value="${article.getEnchere().getMontantEnchere()}"/>
+			                                </p>
+									    </c:when>
+									    <c:otherwise>
+									        <p style="color: blue; font-weight: 500;" class="card-text">
+	                                    		<c:out value="${article.getMiseAPrix()}"/>
+	                                   		</p>
+									    </c:otherwise>
+									</c:choose>
+	                            </li>
+	                            <li class="list-group-item">
+	                            	<span class="fw-bold">Fin enchères : </span>
+	                            	<c:out value="${article.getDateFinEnchere()}"/>
+	                            </li>
+	                            <li class="list-group-item">
+	                                <span class="fw-bold">Vendeur : </span>
+	                                <a href="<c:out value="${request.getContextPath()}utilisateur?id=${article.getUtilisateur().getNoUtilisateur()}"/>">
+	                                    <span><c:out value="${article.getUtilisateur().getPseudo()}"/></span>
+	                                </a>
+                                </li>
+	                        </ul>
+	                        <div class="card-body">
+								<c:set var="connectedUser" scope="page" value="${connectedUserId}"/>
+								<c:choose>
+									<c:when test="${article.getUtilisateur().getNoUtilisateur() != connectedUser}">
+										<c:choose>
+											<c:when test="${article.getDateFinEnchere().isAfter(LocalDate.now())}">
+												<a href="Encherir?id=<c:out value="${article.getNoArticle()}"/>"
+												   class="Encherir btn btn-primary">Enchérir</a>
+											</c:when>
+											<c:otherwise>
+												<a href="FinEnchere?id=<c:out value="${article.getNoArticle()}"/>"
+												   class="Encherir btn btn-primary">Fiche article</a>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<a href="Encherir?id=<c:out value="${article.getNoArticle()}"/>"
+										   class="Encherir btn btn-primary">Voir Article</a>
+									</c:otherwise>
+								</c:choose>
+								<c:if test="${article.getUtilisateur().getNoUtilisateur() == connectedUserId && article.getDateDebutEnchere().isAfter(LocalDate.now())}">
+									<a class="btn btn-outline-primary"
+									   href="<c:out value="ModifierVente?id=${article.getNoArticle()}"/>"
+									   role="button">Modifier</a>
+								</c:if>
+	                        </div>
+	                    </div>
+	                </li>
+				</c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<style>
+    .radio_elem {
+        pointer-events: none;
+        color: #999;
+    }
 
 .radio_select:checked ~ .form-label input {
 	pointer-events: all;
@@ -312,5 +308,4 @@
         });
     })
 </script>
-</body>
 </html>

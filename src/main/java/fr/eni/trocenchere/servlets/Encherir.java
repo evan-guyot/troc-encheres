@@ -34,6 +34,10 @@ public class Encherir extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		int utilisateurID = (int)request.getSession().getAttribute("connectedUserId");
+		Utilisateur utilisateur = utilisateurManager.getUserById(utilisateurID);
+		request.setAttribute("utilisateur", utilisateur);
 
 		int articleId;
 		if (request.getParameter("id") == null) {

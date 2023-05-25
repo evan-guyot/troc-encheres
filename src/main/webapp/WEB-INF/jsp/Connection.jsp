@@ -23,15 +23,15 @@ form>* {
 	<main class="form-signin w-50 m-auto">
 		<form action="ConnectionUtilisateur" method="post">
 			<h1 class="h3 mb-3 fw-normal">Connectez-vous</h1>
-			<div class="form-floating">
+			<div class="form-floating text-left">
+				<label for="identifiant">Pseudo ou adresse mail</label>
 				<input type="text" class="form-control" id="identifiant"
-					name="identifiant" placeholder="Pseudo ou adresse mail"> <label
-					for="identifiant">Pseudo ou adresse mail</label>
+					name="identifiant" placeholder="Pseudo ou adresse mail">
 			</div>
-			<div class="form-floating">
+			<div class="form-floating text-left">
+				<label for="motDePasse">Mot de passe</label>
 				<input type="password" class="form-control" id="motDePasse"
-					name="motDePasse" placeholder="Password"> <label
-					for="motDePasse">Mot de passe</label>
+					name="motDePasse" placeholder="Password">
 			</div>
 			<%
 			if (!isCorrect) {
