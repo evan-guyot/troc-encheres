@@ -27,9 +27,9 @@ public class ShowUser extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int utilisateurID = Integer.parseInt(request.getParameter("id"));
 		Utilisateur utilisateur = utilisateurManager.getUserById(utilisateurID);
+			
 		hasBeenUpdated = false;
 		request.setAttribute("utilisateur", utilisateur);
 		request.setAttribute("hasBeenUpdated", hasBeenUpdated);
@@ -37,6 +37,9 @@ public class ShowUser extends HttpServlet {
 		if (request.getSession().getAttribute("connectedUserId") == null) {
 			request.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(request, response);
 		} else {
+			int utilisateurConnecteID = (int)request.getSession().getAttribute("connectedUserId");
+			Utilisateur utilisateurConnecte = utilisateurManager.getUserById(utilisateurConnecteID);
+			request.setAttribute("utilisateurConnecte", utilisateurConnecte);
 			request.getRequestDispatcher("/WEB-INF/jsp/userConnected.jsp").forward(request, response);
 		}
 	}
@@ -80,6 +83,8 @@ public class ShowUser extends HttpServlet {
 				response.sendRedirect(request.getContextPath()+"/DeconnectionUtilisateur");
 			} else {
 				hasBeenUpdated = true;
+				
+				request.setAttribute("utilisateurConnecte", updatedProfile);
 				request.setAttribute("utilisateur", updatedProfile);
 				request.setAttribute("hasBeenUpdated", hasBeenUpdated);
 				request.getRequestDispatcher("/WEB-INF/jsp/userConnected.jsp").forward(request, response);
