@@ -67,11 +67,11 @@ Article article = (Article) request.getAttribute("articleCourrant");
                     <span style="color: blue; font-weight: 500;">
                         <c:out value="${article.getEnchere().getMontantEnchere()}" />
                     </span>
-                    Pokédolar par
+                    Crédits par
                     <c:out value="${article.getEnchere().getUtilisateur().getPseudo()}" />
                 </c:when>
                 <c:otherwise>
-                    Personne n'a voulu de cette objet
+                    personne n'a voulu de cette objet
                 </c:otherwise>
             </c:choose>
 	    </h1>
@@ -103,7 +103,7 @@ Article article = (Article) request.getAttribute("articleCourrant");
 										<c:out value="${article.getEnchere().getMontantEnchere()}" />
 									</span>
                                     <span>
-										Pokédolar par
+										Crédits par
 									</span>
                                     <span>
 										<c:out value="${article.getEnchere().getUtilisateur().getPseudo()}" />

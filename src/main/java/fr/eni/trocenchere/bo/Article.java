@@ -162,7 +162,7 @@ public class Article {
 			errors.append("Votre description est trop longue! Vous êtes bavard commme une mouette ma parole.<br />");
 		}		
 		if(miseAPrix < 1) {
-			errors.append("Votre mise à prix doit être au minimum égale à 1 P$! Demandez plus de flouz.<br />");
+			errors.append("Votre mise à prix doit être au minimum égale à 1 Crédit! Demandez plus de flouz.<br />");
 		}
 		if(dateDebutEnchere.isBefore(LocalDate.now())) {
 			errors.append("Les enchères ne peuvent pas commencer avant aujourd'hui! Ne vivez pas dans le passé.<br />");			

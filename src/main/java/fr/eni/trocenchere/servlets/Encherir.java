@@ -97,7 +97,7 @@ public class Encherir extends HttpServlet {
 				stringBuilder.append(" Le créateur d'une enchère ne peux pas y participer ");
 			}
 		}else {
-			stringBuilder.append(" Vous ne pouvez pas enchérir sous " + articleCourrantPost.getEnchere().getMontantEnchere() + "Pokédollars");
+			stringBuilder.append(" Vous ne pouvez pas enchérir sous " + articleCourrantPost.getEnchere().getMontantEnchere() + "Créditss");
 		}
 		String messageErreur = stringBuilder.toString();
 		request.setAttribute("messageErreur", messageErreur);

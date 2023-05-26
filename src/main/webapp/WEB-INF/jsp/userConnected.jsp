@@ -45,7 +45,7 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 					<li class="nav-item"><a class="nav-link"
 						href="utilisateur?id=<%=idConnectedUser%>"> Voir mon profil </a></li>
 					<%
-					if (utilisateur.isAdministrateur()) {
+					if (utilisateurConnecte.isAdministrateur()) {
 					%>
 					<li class="nav-item"><a href="PanelAdministration"
 						class="nav-link"> Administration </a></li>
@@ -153,9 +153,9 @@ Integer idConnectedUser = (int) request.getSession().getAttribute("connectedUser
 											<div class="form-label">
 												<p class="w-100" class="d-block" style="font-weight: bold">Crédits
 													:</p>
-												<p class="w-100" class="d-block">
+												<p class="w-100" style="color:blue" class="d-block">
 													<c:out value="${utilisateur.getCredit()}"></c:out>
-													<span style="font-weight: bold"> P$</span>
+													<span style=" font-weight: bold"> Crédits</span>
 												</p>
 											</div>
 										</div>

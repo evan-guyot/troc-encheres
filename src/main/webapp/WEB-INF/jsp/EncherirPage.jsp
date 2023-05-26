@@ -97,7 +97,7 @@
 										<c:out value="${article.getEnchere().getMontantEnchere()}" />
 									</span>
 									<span>
-										Pokédolar par
+										Crédits par
 									</span>
 									<span>
 										<c:out value="${article.getEnchere().getUtilisateur().getPseudo()}" />
