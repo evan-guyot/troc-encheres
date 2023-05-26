@@ -139,7 +139,7 @@
 						<div class="form-group row"></div>
 						<div class="col-sm-3">
 							<label for="miseAPrixArticle" class="form-label">Mise à
-								prix (P$)</label> <input type="number" class="form-control"
+								prix (Crédits)</label> <input type="number" class="form-control"
 								id="miseAPrixArticle" name="miseAPrixArticle"
 								placeholder="Mise à prix" value="10" min="1" required />
 							<div class="invalid-feedback">Valid first name is required.
@@ -248,7 +248,7 @@
 						<div class="form-group row"></div>
 						<div class="col-sm-3">
 							<label for="miseAPrixArticle" class="form-label">Mise à
-								prix (P$)</label> <input type="number" class="form-control"
+								prix (Crédits)</label> <input type="number" class="form-control"
 								id="miseAPrixArticle" name="miseAPrixArticle"
 								placeholder="Mise à prix"
 								value="<c:out value='${article.getMiseAPrix()}'/>" min="1"
